@@ -26,20 +26,15 @@ export function FaqSection() {
 
       <div className="mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.45fr] lg:gap-16 items-start">
-          {/* العمود الأيسر: شارة زرقاء + عنوان مع خط منحني + نص وصفي */}
+          {/* العمود الأيسر: عنوان رئيسي مع خط منحني + نص وصفي */}
           <motion.div
-            initial={reduce ? false : { opacity: 0, y: 30 }}
-            whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+            initial={reduce ? false : { opacity: 0, y: 30, filter: "blur(3px)" }}
+            whileInView={reduce ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: false, amount: 0.15 }}
             transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-start lg:sticky lg:top-28"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/90 bg-white/95 px-4 py-1.5 text-[12px] font-bold text-blue-700 shadow-2xs backdrop-blur-md mb-3">
-              <span className="size-2 rounded-full bg-blue-600 animate-pulse" />
-              <span>{t.faq.eyebrow}</span>
-            </div>
-
-            <h2 className="font-display mt-2 text-h2 font-extrabold text-slate-950 text-balance leading-tight tracking-tight">
+            <h2 className="font-display text-h2 font-extrabold text-slate-950 text-balance leading-tight tracking-tight">
               <span>{t.faq.title}</span>
               <span className="block mt-1 relative w-fit text-blue-600">
                 <svg
@@ -71,8 +66,8 @@ export function FaqSection() {
               return (
                 <motion.div
                   key={item.q}
-                  initial={reduce ? false : { opacity: 0, y: 24 }}
-                  whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+                  initial={reduce ? false : { opacity: 0, y: 24, filter: "blur(3px)" }}
+                  whileInView={reduce ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
                   viewport={{ once: false, amount: 0.1 }}
                   transition={{ duration: 0.45, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
                   className={cn(

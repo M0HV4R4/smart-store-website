@@ -91,16 +91,15 @@ export function Hero() {
 
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-8">
         {/* ------------------------------- العناوين والنصوص ------------------------------- */}
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-          {/* شارة التعريف بالنظام */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/90 bg-white/95 px-4 py-1.5 text-[12.5px] font-bold text-blue-700 shadow-2xs backdrop-blur-md mb-4 animate-hero-fade">
-            <span className="size-2 rounded-full bg-blue-600 animate-pulse" />
-            <span>{t.hero.badge || (locale === "ar" ? "نظام إدارة المتاجر والخدمات المتكامل" : "Système de gestion commerciale tout-en-un")}</span>
-          </div>
-
-          <h1 className="font-display flex flex-col items-center text-hero font-extrabold text-balance text-slate-950 tracking-tight leading-[1.12] animate-hero-fade">
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 32, filter: "blur(4px)" }}
+          animate={reduce ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col items-center text-center max-w-4xl mx-auto"
+        >
+          <h1 className="font-display flex flex-col items-center text-hero font-extrabold text-balance text-slate-950 tracking-tight leading-[1.12]">
             <span>{t.hero.titleLine1}</span>
-            <span className="relative mt-1 inline-block text-blue-600">
+            <span className="relative mt-1.5 inline-block text-blue-600">
               <span>{t.hero.titleLine2}</span>
               <svg
                 aria-hidden="true"
@@ -118,12 +117,12 @@ export function Hero() {
             </span>
           </h1>
 
-          <p className="mt-4 max-w-2xl text-lead text-slate-600 text-pretty font-normal leading-relaxed animate-hero-fade animate-hero-delay-1">
+          <p className="mt-5 max-w-2xl text-lead text-slate-600 text-pretty font-normal leading-relaxed">
             {t.hero.subtitle}
           </p>
 
           {/* زر الإجراء الرئيسي CTA */}
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-4 animate-hero-fade animate-hero-delay-2">
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
             <Button
               href="#download"
               size="lg"
@@ -135,7 +134,7 @@ export function Hero() {
           </div>
 
           {/* توافق المنصات والشارات الداعمة */}
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-3.5 gap-y-2 animate-hero-fade animate-hero-delay-2">
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-3.5 gap-y-2">
             <span className="text-[12.5px] font-semibold text-slate-500">{t.hero.availableOn}</span>
             <span className="flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white/95 px-3 py-1 text-[12.5px] font-bold text-slate-800 shadow-2xs">
               <WindowsGlyph className="size-3.5 text-blue-600" /> {t.common.windows}
@@ -149,10 +148,10 @@ export function Hero() {
               {t.hero.trust}
             </span>
           </div>
-        </div>
+        </motion.div>
 
         {/* ------------------------- مسرح عرض المنتج الحقيقي smartstore.png ------------------------- */}
-        <div className="relative mx-auto mt-8 sm:mt-12 lg:mt-14 w-full max-w-[min(1380px,94vw)]">
+        <div className="relative mx-auto mt-10 sm:mt-14 lg:mt-16 w-full max-w-[min(1380px,94vw)]">
           <motion.div
             initial={reduce ? false : { opacity: 0, y: 70, scale: 0.94, filter: "blur(6px)" }}
             animate={reduce ? undefined : { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
@@ -175,19 +174,19 @@ export function Hero() {
             {/* إضاءة خلفية حية متدرجة الزرقة والصفاء */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -inset-6 sm:-inset-14 lg:-inset-20 -z-10 flex items-center justify-center animate-glow-slow"
+              className="pointer-events-none absolute -inset-6 sm:-inset-16 lg:-inset-24 -z-10 flex items-center justify-center animate-glow-slow"
             >
-              <div className="h-[380px] w-[640px] sm:h-[520px] sm:w-[1000px] lg:h-[620px] lg:w-[1240px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.20),rgba(6,182,212,0.09)_45%,transparent_72%)] blur-2xl sm:blur-3xl" />
+              <div className="h-[400px] w-[660px] sm:h-[540px] sm:w-[1040px] lg:h-[660px] lg:w-[1280px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.22),rgba(6,182,212,0.10)_45%,transparent_72%)] blur-2xl sm:blur-3xl" />
             </div>
 
             {/* أرضية المسرح وظل الانعكاس الناعم */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -bottom-4 sm:-bottom-6 lg:-bottom-8 left-1/2 -z-10 h-8 sm:h-12 lg:h-14 w-[92%] -translate-x-1/2 rounded-[100%] bg-slate-950/20 blur-md sm:blur-2xl"
+              className="pointer-events-none absolute -bottom-4 sm:-bottom-7 lg:-bottom-9 left-1/2 -z-10 h-8 sm:h-12 lg:h-14 w-[92%] -translate-x-1/2 rounded-[100%] bg-slate-950/20 blur-md sm:blur-2xl"
             />
 
             {/* إطار العرض الفاخر (SaaS Software Stage Frame) */}
-            <div className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-gradient-to-b from-white/95 via-blue-50/20 to-slate-100/40 p-1.5 sm:p-2.5 shadow-2xl shadow-blue-900/10 backdrop-blur-md">
+            <div className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-gradient-to-b from-white/95 via-blue-50/20 to-slate-100/40 p-1.5 sm:p-2.5 shadow-2xl shadow-blue-900/10 ring-1 ring-slate-900/5 backdrop-blur-md">
               <img
                 src={smartstoreImg}
                 alt={altText}

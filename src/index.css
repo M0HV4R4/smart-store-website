@@ -64,11 +64,12 @@ html {
 }
 
 body {
-  background-color: #ffffff;
+  background-color: #f8fafc;
   background-image: 
-    radial-gradient(at 50% 0%, rgba(37, 99, 235, 0.05) 0px, transparent 50%),
-    radial-gradient(at 95% 10%, rgba(6, 182, 212, 0.04) 0px, transparent 40%),
-    radial-gradient(at 5% 40%, rgba(37, 99, 235, 0.03) 0px, transparent 40%);
+    radial-gradient(ellipse 100% 55% at 50% -10%, rgba(37, 99, 235, 0.08) 0%, transparent 68%),
+    radial-gradient(ellipse 70% 45% at 95% 18%, rgba(14, 165, 233, 0.05) 0%, transparent 55%),
+    radial-gradient(ellipse 65% 45% at 5% 52%, rgba(37, 99, 235, 0.04) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 50% at 50% 98%, rgba(37, 99, 235, 0.06) 0%, transparent 60%);
   background-attachment: fixed;
   color: var(--color-text);
   font-family: "Almarai", "Poppins", ui-sans-serif, system-ui, sans-serif;

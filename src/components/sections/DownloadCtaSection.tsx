@@ -52,17 +52,12 @@ export function DownloadCtaSection() {
       <div className="relative z-10 mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
         {/* العناوين التمهيدية */}
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 30 }}
-          whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+          initial={reduce ? false : { opacity: 0, y: 30, filter: "blur(3px)" }}
+          whileInView={reduce ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: false, amount: 0.15 }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           className="mx-auto max-w-2xl text-center"
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/90 bg-white/95 px-4 py-1.5 text-[12px] font-bold text-blue-700 shadow-2xs backdrop-blur-md mb-3">
-            <span className="size-2 rounded-full bg-blue-600 animate-pulse" />
-            <span>{locale === "ar" ? "التحميل الفوري المجاني" : "Téléchargement Immédiat"}</span>
-          </div>
-
           <h2 className="font-display text-h2 font-extrabold text-slate-950 text-balance tracking-tight">
             <span>{locale === "ar" ? "تحميل برنامج" : "Télécharger"}</span>{" "}
             <span className="relative inline-block text-blue-600">
@@ -90,8 +85,8 @@ export function DownloadCtaSection() {
 
         {/* بطاقتي التحميل: بطاقة Windows وبطاقة Android APK */}
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 40 }}
-          whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+          initial={reduce ? false : { opacity: 0, y: 40, filter: "blur(3px)" }}
+          whileInView={reduce ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: false, amount: 0.15 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-7 sm:grid-cols-2"

@@ -23,17 +23,17 @@ export function HowItWorks() {
       ? { opacity: 1 }
       : {
           opacity: 0,
-          y: 70,
-          scale: 0.92,
-          rotateX: 6,
+          y: 45,
+          scale: 0.95,
+          filter: "blur(4px)",
         },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      rotateX: 0,
+      filter: "blur(0px)",
       transition: {
-        duration: 0.75,
+        duration: 0.7,
         ease: [0.16, 1, 0.3, 1],
       },
     },
@@ -62,20 +62,16 @@ export function HowItWorks() {
       </div>
 
       <div className="mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
-        {/* صف العناوين الرئيسي: شارة زرقاء + عنوان واضح + نص وصفي */}
+        {/* صف العناوين الرئيسي: عنوان واضح وبارز + نص وصفي */}
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 30 }}
-          whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+          initial={reduce ? false : { opacity: 0, y: 30, filter: "blur(3px)" }}
+          whileInView={reduce ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col justify-between gap-6 md:flex-row md:items-end"
         >
           <div className="max-w-xl">
-            <span className="inline-flex items-center gap-2 rounded-full bg-blue-50/90 px-3.5 py-1 text-[12.5px] font-bold text-blue-700 border border-blue-200/90 shadow-2xs">
-              <span className="size-2 rounded-full bg-blue-600 animate-pulse" />
-              {t.how.eyebrow}
-            </span>
-            <h2 className="font-display mt-3.5 text-h2 font-extrabold text-slate-950 tracking-tight leading-tight">
+            <h2 className="font-display text-h2 font-extrabold text-slate-950 tracking-tight leading-tight">
               {t.how.titleLine1}{" "}
               <span className="text-blue-600">{t.how.titleLine2}</span>
             </h2>

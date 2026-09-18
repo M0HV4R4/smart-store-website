@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-  ShieldCheck,
   Sparkles,
   ArrowUpRight,
   Headphones,
@@ -95,12 +94,7 @@ export function ContactSection() {
 
           {/* العناوين والشارات */}
           <div className="text-center max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/90 bg-blue-50/90 px-4 py-1.5 text-xs font-bold text-blue-700 shadow-2xs">
-              <ShieldCheck className="size-3.5 text-blue-600" />
-              <span>{isAr ? "الدعم والتواصل المباشر" : "Support & Contact Direct"}</span>
-            </div>
-
-            <h2 className="font-display mt-3.5 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-950 tracking-tight leading-snug">
+            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-950 tracking-tight leading-snug">
               {title}
             </h2>
 
