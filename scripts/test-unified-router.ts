@@ -6,6 +6,7 @@
 
 import routerHandler, { resolveRoutePath, apiRoutes } from "../api/_routes/router.js";
 import { setMockDb } from "../api/_lib/db.js";
+import { verifyCsrfOrigin } from "../api/_lib/security.js";
 import type { ApiRequest, ApiResponse } from "../api/_lib/types.js";
 
 let passed = 0;
@@ -128,6 +129,18 @@ async function runTests() {
     "Resolves path parameter ['download', 'windows'] -> /api/download/windows"
   );
   assert(
+    resolveRoutePath(createMockReq({ query: { path: "auth/login" } })) === "/api/auth/login",
+    "Resolves string rewrite parameter path='auth/login' -> /api/auth/login"
+  );
+  assert(
+    resolveRoutePath(createMockReq({ query: { path: "/auth/login/" } })) === "/api/auth/login",
+    "Resolves string rewrite parameter path='/auth/login/' -> /api/auth/login"
+  );
+  assert(
+    resolveRoutePath(createMockReq({ query: { path: "admin/analytics/summary" } })) === "/api/admin/analytics/summary",
+    "Resolves multi-segment rewrite path='admin/analytics/summary' -> /api/admin/analytics/summary"
+  );
+  assert(
     resolveRoutePath(createMockReq({ url: "/api/site/contact" })) === "/api/site/contact",
     "Resolves raw URL /api/site/contact -> /api/site/contact"
   );
@@ -228,9 +241,40 @@ async function runTests() {
     assert(req.query?.status === "active", "Preserves user query parameter 'status'");
   }
 
-  // 3g. 404 Route Not Found
+  // 3h. Stringified JSON Body Auto-Parsing
   {
-    const req = createMockReq({ query: { route: ["nonexistent", "endpoint"] } });
+    const req = createMockReq({
+      method: "POST",
+      query: { path: "auth/login" },
+      body: '{"identifier":"testadmin","password":"testpassword123"}',
+      headers: {
+        host: "smart-store-website.vercel.app",
+        origin: "https://smart-store-website.vercel.app",
+      },
+    });
+    const { res } = createMockRes();
+    await routerHandler(req, res);
+    assert(typeof req.body === "object" && req.body !== null, "routerHandler parses stringified JSON body into object");
+    assert((req.body as any)?.identifier === "testadmin", "req.body preserves parsed payload fields");
+  }
+
+  // 3i. x-forwarded-host CSRF Support
+  {
+    const req = createMockReq({
+      method: "POST",
+      url: "/api/auth/login",
+      headers: {
+        host: "10.0.0.1:3000",
+        "x-forwarded-host": "smart-store-website.vercel.app",
+        origin: "https://smart-store-website.vercel.app",
+      },
+    });
+    assert(verifyCsrfOrigin(req) === true, "verifyCsrfOrigin validates CSRF using x-forwarded-host");
+  }
+
+  // 3j. 404 Route Not Found
+  {
+    const req = createMockReq({ query: { path: "nonexistent/endpoint" } });
     const { res, getStatus, getBody } = createMockRes();
     await routerHandler(req, res);
     assert(getStatus() === 404, "Unknown API route returns 404 NOT_FOUND");

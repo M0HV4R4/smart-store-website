@@ -52,6 +52,23 @@ export default function AdminLoginPage() {
             ? "تعذر الاتصال بالخادم. يرجى التحقق من اتصال الإنترنت."
             : "Impossible de contacter le serveur. Vérifiez votre connexion internet.",
         );
+      } else if (
+        result.errorCode === "SERVER_ERROR" ||
+        result.errorCode === "DATABASE_UNAVAILABLE" ||
+        result.errorCode === "INTERNAL_SERVER_ERROR" ||
+        result.errorCode === "NOT_FOUND"
+      ) {
+        setErrorMessage(
+          isAr
+            ? "حدث خطأ في الخادم أو تعذر الوصول لخدمة الدخول. يرجى المحاولة لاحقاً."
+            : "Le service d'authentification est temporairement indisponible. Veuillez réessayer plus tard.",
+        );
+      } else if (result.errorCode === "CSRF_ERROR" || result.errorCode === "FORBIDDEN") {
+        setErrorMessage(
+          isAr
+            ? "فشل التحقق الأمني للجلسة. يرجى تحديث الصفحة والمحاولة مجدداً."
+            : "Échec de validation de sécurité. Veuillez actualiser la page et réessayer.",
+        );
       } else {
         setErrorMessage(dict.errorGeneric);
       }

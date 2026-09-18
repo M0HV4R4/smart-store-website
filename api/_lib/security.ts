@@ -43,16 +43,21 @@ export function verifyCsrfOrigin(req: ApiRequest): boolean {
 
   const originHeader = req.headers["origin"] as string | undefined;
   const refererHeader = req.headers["referer"] as string | undefined;
-  const hostHeader = req.headers["host"] as string | undefined;
+  const hostHeader =
+    (req.headers["x-forwarded-host"] as string | undefined) ||
+    (req.headers["host"] as string | undefined);
 
   if (!hostHeader) return false;
+
+  // Extract primary host (stripping port and any comma-separated proxy chains)
+  const expectedHost = hostHeader.split(",")[0].trim().toLowerCase();
 
   // Verify Origin header if present
   if (originHeader) {
     try {
       const originUrl = new URL(originHeader);
       // Origin host must match request host
-      return originUrl.host.toLowerCase() === hostHeader.toLowerCase();
+      return originUrl.host.toLowerCase() === expectedHost;
     } catch {
       return false;
     }
@@ -62,7 +67,7 @@ export function verifyCsrfOrigin(req: ApiRequest): boolean {
   if (refererHeader) {
     try {
       const refererUrl = new URL(refererHeader);
-      return refererUrl.host.toLowerCase() === hostHeader.toLowerCase();
+      return refererUrl.host.toLowerCase() === expectedHost;
     } catch {
       return false;
     }

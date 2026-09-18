@@ -109,10 +109,38 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           };
         }
 
+        // Handle 401 Invalid Credentials
+        if (response.status === 401) {
+          return {
+            success: false,
+            error: data?.error || "INVALID_CREDENTIALS",
+            errorCode: data?.code || "INVALID_CREDENTIALS",
+          };
+        }
+
+        // Handle 404 Route Not Found
+        if (response.status === 404) {
+          return {
+            success: false,
+            error: data?.error || "Route not found",
+            errorCode: data?.code || "NOT_FOUND",
+          };
+        }
+
+        // Handle 403 CSRF / Forbidden
+        if (response.status === 403) {
+          return {
+            success: false,
+            error: data?.error || "Forbidden",
+            errorCode: data?.code || "CSRF_ERROR",
+          };
+        }
+
+        // Handle 500 / 503 / other server errors
         return {
           success: false,
-          error: data?.error || "INVALID_CREDENTIALS",
-          errorCode: data?.code || "INVALID_CREDENTIALS",
+          error: data?.error || "Server error",
+          errorCode: data?.code || "SERVER_ERROR",
         };
       } catch (err) {
         console.error("Login network error:", err);

@@ -27,14 +27,15 @@
     }
   ],
   "functions": {
-    "api/[...route].ts": {
-      "includeFiles": "api/**"
-    },
     "api/index.ts": {
       "includeFiles": "api/**"
     }
   },
   "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api?path=$1"
+    },
     {
       "source": "/((?!api/).*)",
       "destination": "/index.html"

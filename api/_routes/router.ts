@@ -67,10 +67,11 @@ export const apiRoutes: Record<string, (req: ApiRequest, res: ApiResponse) => Pr
  * Resolves the canonical /api/... path from request query, headers, or URL
  */
 export function resolveRoutePath(req: ApiRequest): string {
-  // 1. Dynamic route parameter from Vercel catch-all (...route or ...path)
+  // 1. Dynamic route parameter from Vercel catch-all or rewrite (...route or ...path)
   const routeParam = req.query?.route || req.query?.path;
   if (routeParam) {
-    const segments = Array.isArray(routeParam) ? routeParam : [routeParam];
+    const rawSegments = Array.isArray(routeParam) ? routeParam : [routeParam];
+    const segments = rawSegments.flatMap((s) => (typeof s === "string" ? s.split("/") : []));
     const cleanSegments = segments.filter(Boolean);
     if (cleanSegments.length > 0) {
       return `/api/${cleanSegments.join("/")}`.replace(/\/+/g, "/").replace(/\/+$/, "");
@@ -109,6 +110,15 @@ export default async function routerHandler(req: ApiRequest, res: ApiResponse): 
     delete restQuery.route;
     delete restQuery.path;
     req.query = restQuery;
+  }
+
+  // Ensure req.body is parsed if delivered as a JSON string
+  if (typeof req.body === "string" && req.body.trim()) {
+    try {
+      req.body = JSON.parse(req.body);
+    } catch {
+      // Keep as string if not valid JSON
+    }
   }
 
   // Ensure req.cookies is populated
