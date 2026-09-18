@@ -1,16 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowDownToLine, CheckCircle2, Laptop, Shield, ShieldCheck, Smartphone } from "lucide-react";
+import { ArrowDownToLine, CheckCircle2, Laptop, Shield, Smartphone } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/utils/cn";
 import {
   getPublicDownloadsMeta,
   type PublicDownloadsMeta,
 } from "@/services/downloadService";
-import {
-  getPublicContact,
-  type PublicContactData,
-} from "@/services/siteService";
-import { WhatsAppLogo, FacebookLogo, InstagramLogo } from "@/components/icons/BrandIcons";
 import { WindowsGlyph, AndroidGlyph } from "./glyphs";
 
 export function DownloadCtaSection() {
@@ -21,9 +16,6 @@ export function DownloadCtaSection() {
   // Dynamic public download metadata state
   const [meta, setMeta] = useState<PublicDownloadsMeta | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-
-  // Dynamic public contact & support metadata
-  const [contactData, setContactData] = useState<PublicContactData | null>(null);
 
   useEffect(() => {
     let mounted = true;
@@ -39,16 +31,6 @@ export function DownloadCtaSection() {
           // Fail safely: leave meta as null so unavailable state is cleanly handled
           setIsLoading(false);
         }
-      });
-
-    getPublicContact()
-      .then((data) => {
-        if (mounted) {
-          setContactData(data);
-        }
-      })
-      .catch(() => {
-        // Fail safely: contact block stays hidden if unreachable
       });
 
     return () => {
@@ -91,14 +73,10 @@ export function DownloadCtaSection() {
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6",
           )}
         >
-          <span className="inline-block rounded-md bg-blue-50 border border-blue-200/60 px-3 py-1 text-[12.5px] font-medium text-blue-700">
-            {t.download.eyebrow}
-          </span>
-
-          <h2 className="font-display mt-3.5 text-h2 font-extrabold text-slate-950 text-balance">
-            <span>{t.download.title}</span>{" "}
+          <h2 className="font-display text-h2 font-extrabold text-slate-950 text-balance">
+            <span>{locale === "ar" ? "تحميل" : "Télécharger"}</span>{" "}
             <span className="relative inline-block text-blue-600">
-              <span>Smart Store v10</span>
+              <span>Smart Store</span>
               <svg
                 aria-hidden="true"
                 viewBox="0 0 100 12"
@@ -115,7 +93,7 @@ export function DownloadCtaSection() {
             </span>
           </h2>
 
-          <p className="mt-4 text-[15px] leading-relaxed text-slate-600 sm:text-[16px]">
+          <p className="mt-3.5 text-[15px] leading-relaxed text-slate-600 sm:text-[16px]">
             {t.download.subtitle}
           </p>
         </div>
@@ -296,85 +274,6 @@ export function DownloadCtaSection() {
           <Shield className="size-4 text-blue-600" />
           <span>{t.download.safeNotice}</span>
         </div>
-
-        {/* صندوق التواصل والدعم المباشر — Contact & Support Block */}
-        {contactData &&
-          (contactData.whatsapp.enabled ||
-            contactData.facebook.enabled ||
-            contactData.instagram.enabled) && (
-            <div
-              className={cn(
-                "mx-auto mt-12 max-w-4xl rounded-2xl border border-slate-200/90 bg-gradient-to-br from-slate-50/80 via-white to-blue-50/30 p-6 sm:p-8 shadow-sm transition-all duration-700 delay-400 ease-out",
-                inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6",
-              )}
-            >
-              <div className="flex flex-col items-center text-center sm:flex-row sm:items-center sm:justify-between sm:text-start gap-6">
-                <div className="max-w-xl">
-                  <span className="inline-flex items-center gap-1.5 rounded-md bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700 border border-blue-200/60">
-                    <ShieldCheck className="size-3.5" />
-                    <span>{t.contactSupport.badge}</span>
-                  </span>
-                  <h3 className="font-display mt-2.5 text-lg sm:text-xl font-bold text-slate-900">
-                    {(locale === "ar" ? contactData.title?.ar : contactData.title?.fr) ||
-                      t.contactSupport.defaultTitle}
-                  </h3>
-                  <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-slate-600">
-                    {(locale === "ar"
-                      ? contactData.description?.ar
-                      : contactData.description?.fr) || t.contactSupport.defaultDesc}
-                  </p>
-                  <div className="mt-2 text-[11.5px] text-slate-400">
-                    {t.contactSupport.offlineNotice}
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
-                  {contactData.whatsapp?.enabled &&
-                    (locale === "ar"
-                      ? contactData.whatsapp.urlAr
-                      : contactData.whatsapp.urlFr) && (
-                      <a
-                        href={
-                          locale === "ar"
-                            ? contactData.whatsapp.urlAr
-                            : contactData.whatsapp.urlFr
-                        }
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2.5 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-emerald-700 active:scale-[0.99] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
-                      >
-                        <WhatsAppLogo size={18} />
-                        <span>{t.contactSupport.whatsappCta}</span>
-                      </a>
-                    )}
-
-                  {contactData.facebook.enabled && contactData.facebook.url && (
-                    <a
-                      href={contactData.facebook.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={t.contactSupport.facebookAria}
-                      className="inline-flex size-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-sm transition-all hover:border-blue-300 hover:bg-blue-50 hover:text-blue-600 active:scale-[0.98] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    >
-                      <FacebookLogo size={18} />
-                    </a>
-                  )}
-
-                  {contactData.instagram.enabled && contactData.instagram.url && (
-                    <a
-                      href={contactData.instagram.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={t.contactSupport.instagramAria}
-                      className="inline-flex size-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-sm transition-all hover:border-rose-300 hover:bg-rose-50 hover:text-rose-600 active:scale-[0.98] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
-                    >
-                      <InstagramLogo size={18} />
-                    </a>
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
       </div>
     </section>
   );

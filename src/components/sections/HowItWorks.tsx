@@ -1,43 +1,50 @@
-import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, BarChart3, Boxes, Package, ShoppingCart } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
-import { cn } from "@/utils/cn";
+
+import type { Variants } from "framer-motion";
 
 export function HowItWorks() {
   const { t } = useI18n();
-  const [inView, setInView] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-        }
-      },
-      { threshold: 0.15 },
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-    return () => observer.disconnect();
-  }, []);
+  const reduce = useReducedMotion();
 
   const icons = [Package, Boxes, ShoppingCart, BarChart3];
 
+  const containerVariants: Variants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: reduce ? 0 : 0.11,
+      },
+    },
+  };
+
+  const cardVariants: Variants = {
+    hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 35, scale: 0.97 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.65,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
+
   return (
-    <section id="how" ref={sectionRef} className="relative bg-white py-14 sm:py-20">
+    <section id="how" className="relative bg-white py-14 sm:py-20 border-t border-slate-100">
       <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-6">
-        {/* Top Header Row matching the design: Left title with badge, Right description text */}
-        <div
-          className={cn(
-            "flex flex-col justify-between gap-6 transition-all duration-700 ease-out md:flex-row md:items-end",
-            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6",
-          )}
+        {/* Top Header Row: Left title with badge, Right description text */}
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 24 }}
+          whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col justify-between gap-6 md:flex-row md:items-end"
         >
           <div className="max-w-xl">
-            <span className="inline-block rounded-full bg-blue-50 px-3.5 py-1 text-[12.5px] font-semibold text-blue-700">
+            <span className="inline-block rounded-full bg-blue-50 px-3.5 py-1 text-[12.5px] font-semibold text-blue-700 border border-blue-100">
               {t.how.eyebrow}
             </span>
             <h2 className="font-display mt-3 text-h2 font-extrabold text-slate-950">
@@ -51,87 +58,81 @@ export function HowItWorks() {
               {t.how.subtitle}
             </p>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Cards Row matching the reference layout: 4 cards with slow staggered animation */}
-        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Cards Row: All 4 cards have consistent resting state and refined responsive hover motion */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {t.how.steps.map((step, idx) => {
             const Icon = icons[idx] || Package;
 
-            // Staggered delays: 0.2s, 0.45s, 0.7s, 0.95s with a slow 1.2s smooth easing
-            const delays = ["delay-[200ms]", "delay-[450ms]", "delay-[700ms]", "delay-[950ms]"];
-
-            const isTinted = idx === 1 || idx === 3;
-            const isFeatured = idx === 2;
-
             return (
-              <div
+              <motion.div
                 key={step.n}
-                className={cn(
-                  "group relative flex flex-col justify-between rounded-md p-6 transition-all duration-1000 ease-out hover:-translate-y-1 hover:shadow-md",
-                  delays[idx],
-                  inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10",
-                  isFeatured
-                    ? "border border-blue-200 bg-blue-50/60"
-                    : isTinted
-                      ? "border border-slate-200/80 bg-[#f8fafc]"
-                      : "border border-slate-200/80 bg-white",
-                )}
+                variants={cardVariants}
+                whileHover={
+                  reduce
+                    ? undefined
+                    : {
+                        y: -6,
+                        scale: 1.015,
+                        transition: { duration: 0.25, ease: "easeOut" },
+                      }
+                }
+                className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs hover:border-blue-400 hover:shadow-xl hover:shadow-blue-500/10 transition-colors transition-shadow duration-300 will-change-transform"
               >
                 <div>
                   {/* Top Bar with Icon & Arrow Indicator */}
                   <div className="flex items-center justify-between">
-                    <span
-                      className={cn(
-                        "grid size-11 place-items-center rounded-md transition-colors",
-                        isFeatured
-                          ? "bg-blue-600 text-white"
-                          : "bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white",
-                      )}
-                    >
+                    <span className="grid size-12 place-items-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/80 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105 group-hover:shadow-md group-hover:shadow-blue-500/20">
                       <Icon className="size-5" strokeWidth={1.9} />
                     </span>
 
-                    <span className="flex size-8 items-center justify-center rounded-md text-slate-400 group-hover:text-blue-600">
+                    <span className="flex size-8 items-center justify-center rounded-lg text-slate-400 transition-all duration-300 group-hover:text-blue-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:group-hover:-translate-x-0.5">
                       <ArrowUpRight className="size-4 rtl:-scale-x-100" />
                     </span>
                   </div>
 
                   {/* Step Number Badge */}
                   <div className="mt-6 flex items-baseline gap-1.5">
-                    <span className="font-display text-[30px] font-extrabold text-slate-950 tabular-nums leading-none">
+                    <span className="font-display text-[32px] font-extrabold text-slate-950 tabular-nums leading-none tracking-tight">
                       {step.n}
                     </span>
                   </div>
 
                   {/* Title */}
-                  <h3 className="font-display mt-2.5 text-[17px] font-bold text-slate-900">
+                  <h3 className="font-display mt-3 text-[18px] font-bold text-slate-900 group-hover:text-blue-600 transition-colors duration-200">
                     {step.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="mt-2 text-[13px] leading-relaxed text-slate-600">
+                  <p className="mt-2 text-[13.5px] leading-relaxed text-slate-600">
                     {step.desc}
                   </p>
                 </div>
 
                 {/* Highlights tags */}
                 {step.highlights && (
-                  <div className="mt-5 flex flex-wrap gap-1.5 pt-3.5 border-t border-slate-200/60">
+                  <div className="mt-6 flex flex-wrap gap-1.5 pt-4 border-t border-slate-100">
                     {step.highlights.map((tag, i) => (
                       <span
                         key={i}
-                        className="rounded-md bg-white/90 border border-slate-200 px-2 py-0.5 text-[11px] font-medium text-slate-700"
+                        className="rounded-lg bg-slate-50 border border-slate-200/70 px-2.5 py-1 text-[11.5px] font-medium text-slate-700 transition-colors group-hover:bg-blue-50/50 group-hover:border-blue-200/60 group-hover:text-blue-800"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
                 )}
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

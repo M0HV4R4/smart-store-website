@@ -336,14 +336,14 @@ export const fr: Dict = {
   faq: {
     eyebrow: "FAQ",
     title: "Questions fréquemment posées",
-    subtitle: "Découvrez tout ce qu'il faut savoir sur Smart Store v10 pour gérer votre commerce sereinement.",
+    subtitle: "Découvrez tout ce qu'il faut savoir sur Smart Store pour gérer votre commerce sereinement.",
     items: [
       {
-        q: "Qu'est-ce que Smart Store v10 ?",
-        a: "Smart Store v10 est un système complet de gestion de magasin et caisse enregistreuse (POS) aidant les commerçants à gérer articles, stocks, ventes, achats, clients et rapports depuis une interface intuitive.",
+        q: "Qu'est-ce que Smart Store ?",
+        a: "Smart Store est un système complet de gestion de magasin et caisse enregistreuse (POS) aidant les commerçants à gérer articles, stocks, ventes, achats, clients et rapports depuis une interface intuitive.",
       },
       {
-        q: "À qui s'adresse Smart Store v10 ?",
+        q: "À qui s'adresse Smart Store ?",
         a: "Il est conçu pour l'alimentation générale, le prêt-à-porter, les cosmétiques, les commerces de gros, les supérettes et toute entreprise désirant un contrôle rigoureux de ses ventes et bénéfices.",
       },
       {

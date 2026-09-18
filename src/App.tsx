@@ -11,6 +11,7 @@ import { Hero } from "@/components/sections/Hero";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { DownloadCtaSection } from "@/components/sections/DownloadCtaSection";
+import { ContactSection } from "@/components/sections/ContactSection";
 
 // Route-level code-splitting: Admin bundle is strictly isolated from public homepage
 const AdminLoginPage = lazy(() => import("@/components/admin/AdminLoginPage"));
@@ -46,6 +47,7 @@ function PublicMarketingPage() {
         <HowItWorks />
         <DownloadCtaSection />
         <FaqSection />
+        <ContactSection />
       </main>
 
       <Footer />

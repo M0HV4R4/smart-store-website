@@ -1,6 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Download } from "lucide-react";
-import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  useReducedMotion,
+  useScroll,
+} from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { Button } from "@/components/ui";
 import { WindowsGlyph, AndroidGlyph } from "./glyphs";
@@ -10,10 +17,18 @@ export function Hero() {
   const { t, locale } = useI18n();
   const reduce = useReducedMotion();
   const [isTouch, setIsTouch] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     setIsTouch("ontouchstart" in window || navigator.maxTouchPoints > 0);
   }, []);
+
+  // Subtle restrained parallax on scroll (desktop only)
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [0, -30]);
 
   // Subtle 3D tilt (Desktop only: rotateX ±1deg, rotateY ±1.5deg)
   const mouseX = useMotionValue(0);
@@ -45,15 +60,19 @@ export function Hero() {
       : "Interface Smart Store sur ordinateur et smartphone";
 
   return (
-    <section id="top" className="relative overflow-hidden bg-white pt-6 pb-12 sm:pt-8 sm:pb-16 lg:pt-10 lg:pb-20">
+    <section
+      id="top"
+      ref={heroRef}
+      className="relative overflow-hidden bg-white pt-5 pb-10 sm:pt-7 sm:pb-14 lg:pt-9 lg:pb-16"
+    >
       {/* دوائر خلفية أنيقة متحدة المركز */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center -z-0" aria-hidden="true">
-        <div className="size-[500px] rounded-full border border-slate-200/50" />
-        <div className="absolute size-[720px] rounded-full border border-slate-200/40" />
-        <div className="absolute size-[960px] rounded-full border border-slate-200/30" />
+        <div className="size-[520px] rounded-full border border-slate-200/50" />
+        <div className="absolute size-[760px] rounded-full border border-slate-200/40" />
+        <div className="absolute size-[1020px] rounded-full border border-slate-200/30" />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1200px] px-4 sm:px-6">
+      <div className="relative z-10 mx-auto w-full max-w-[1280px] px-4 sm:px-6">
         {/* ------------------------------- النص ------------------------------- */}
         <div className="flex flex-col items-center text-center">
           <h1 className="font-display flex flex-col items-center max-w-[22ch] text-hero font-extrabold text-balance text-slate-950 animate-hero-fade">
@@ -76,7 +95,7 @@ export function Hero() {
             </span>
           </h1>
 
-          <p className="mt-3.5 max-w-2xl text-lead text-slate-600 text-pretty animate-hero-fade animate-hero-delay-1">
+          <p className="mt-3 max-w-2xl text-lead text-slate-600 text-pretty animate-hero-fade animate-hero-delay-1">
             {t.hero.subtitle}
           </p>
 
@@ -87,7 +106,7 @@ export function Hero() {
           </div>
 
           {/* توافق المنصات */}
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 animate-hero-fade animate-hero-delay-2">
+          <div className="mt-3.5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 animate-hero-fade animate-hero-delay-2">
             <span className="text-[12.5px] font-medium text-slate-500">{t.hero.availableOn}</span>
             <span className="flex items-center gap-1.5 rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-[12.5px] font-semibold text-slate-800">
               <WindowsGlyph className="size-3.5 text-blue-600" /> {t.common.windows}
@@ -97,19 +116,19 @@ export function Hero() {
             </span>
           </div>
 
-          <p className="mt-2.5 text-[12px] font-medium text-slate-500 animate-hero-fade animate-hero-delay-2">
+          <p className="mt-2 text-[12px] font-medium text-slate-500 animate-hero-fade animate-hero-delay-2">
             {t.hero.trust}
           </p>
         </div>
 
         {/* ------------------------- عرض المنتج الحقيقي smartstore.png ------------------------- */}
-        <div className="relative mx-auto mt-8 sm:mt-12 w-full max-w-[1060px]">
+        {/* المساحة مقلصة والواجهة أكبر بكثير لتركز العين على المنتج كبطل للتصميم */}
+        <div className="relative mx-auto mt-5 sm:mt-7 lg:mt-8 w-full max-w-[1220px]">
           {/* Framer Motion entrance animation & depth wrapper */}
           <motion.div
-            initial={reduce ? false : { opacity: 0, y: 45, scale: 0.96 }}
-            whileInView={reduce ? undefined : { opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            initial={reduce ? false : { opacity: 0, y: 65, scale: 0.95 }}
+            animate={reduce ? undefined : { opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.95, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             style={
               reduce || isTouch
                 ? undefined
@@ -117,6 +136,7 @@ export function Hero() {
                     perspective: 1200,
                     rotateX,
                     rotateY,
+                    y: parallaxY,
                     transformStyle: "preserve-3d",
                   }
             }
@@ -127,24 +147,24 @@ export function Hero() {
             {/* إضاءة محيطية هادئة خلف المنتج (Radial Blue/Cyan ambient light) */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -inset-6 sm:-inset-12 -z-10 flex items-center justify-center"
+              className="pointer-events-none absolute -inset-6 sm:-inset-16 -z-10 flex items-center justify-center"
             >
-              <div className="h-[300px] w-[520px] sm:h-[460px] sm:w-[860px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.16),rgba(6,182,212,0.06)_50%,transparent_75%)] blur-2xl sm:blur-3xl" />
+              <div className="h-[320px] w-[560px] sm:h-[500px] sm:w-[980px] lg:h-[560px] lg:w-[1120px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.18),rgba(6,182,212,0.08)_45%,transparent_75%)] blur-2xl sm:blur-3xl" />
             </div>
 
             {/* ظل ناعم أسفل الأجهزة (Soft shadow beneath devices) */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -bottom-2 sm:-bottom-3 left-1/2 -z-10 h-6 sm:h-9 w-[86%] -translate-x-1/2 rounded-[100%] bg-slate-950/15 blur-md sm:blur-lg"
+              className="pointer-events-none absolute -bottom-2 sm:-bottom-4 left-1/2 -z-10 h-7 sm:h-11 w-[90%] -translate-x-1/2 rounded-[100%] bg-slate-950/20 blur-md sm:blur-xl"
             />
 
-            {/* الصورة الحقيقية للبرنامج مع الحفاظ التام على أبعادها الأصلية وبدون أي تأثير ثقيل فوقها */}
+            {/* الصورة الحقيقية للبرنامج مع الحفاظ التام على أبعادها الأصلية ودون اقتصاص */}
             <img
               src={smartstoreImg}
               alt={altText}
               width={2542}
               height={1419}
-              className="h-auto w-full max-w-full object-contain select-none pointer-events-none rtl:transform-none ltr:transform-none"
+              className="h-auto w-full max-w-full object-contain select-none pointer-events-none rtl:transform-none ltr:transform-none filter drop-shadow-sm"
               loading="eager"
               decoding="async"
             />
