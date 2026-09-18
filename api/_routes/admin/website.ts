@@ -1,20 +1,20 @@
-import { db } from "../../_lib/db";
+import { db } from "../../_lib/db.js";
 import {
   requireMethod,
   setCacheHeaders,
   sendSuccess,
   sendError,
   handleApiError,
-} from "../../_lib/response";
-import { requireAdmin } from "../../_lib/auth";
-import { verifyCsrfOrigin } from "../../_lib/security";
-import { validateData } from "../../_lib/validation";
+} from "../../_lib/response.js";
+import { requireAdmin } from "../../_lib/auth.js";
+import { verifyCsrfOrigin } from "../../_lib/security.js";
+import { validateData } from "../../_lib/validation.js";
 import {
   getWebsiteConfig,
   updateWebsiteConfig,
   websiteUpdateZodSchema,
-} from "../../_lib/website";
-import type { ApiRequest, ApiResponse } from "../../_lib/types";
+} from "../../_lib/website.js";
+import type { ApiRequest, ApiResponse } from "../../_lib/types.js";
 
 export default async function handler(req: ApiRequest, res: ApiResponse): Promise<void> {
   // 1. Enforce cache control

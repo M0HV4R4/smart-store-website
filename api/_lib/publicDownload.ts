@@ -1,13 +1,13 @@
 import { eq, and } from "drizzle-orm";
-import { db, schema } from "./db";
+import { db, schema } from "./db.js";
 import {
   requireMethod,
   setCacheHeaders,
   sendError,
   handleApiError,
-} from "./response";
-import { validateDownloadUrl } from "./security";
-import type { ApiRequest, ApiResponse } from "./types";
+} from "./response.js";
+import { validateDownloadUrl } from "./security.js";
+import type { ApiRequest, ApiResponse } from "./types.js";
 
 /**
  * Handles public download resolution, privacy-safe tracking event persistence,

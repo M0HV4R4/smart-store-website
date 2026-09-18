@@ -26,6 +26,14 @@
       ]
     }
   ],
+  "functions": {
+    "api/[...route].ts": {
+      "includeFiles": "api/**"
+    },
+    "api/index.ts": {
+      "includeFiles": "api/**"
+    }
+  },
   "rewrites": [
     {
       "source": "/((?!api/).*)",

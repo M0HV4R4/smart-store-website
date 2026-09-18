@@ -13,8 +13,8 @@ import path from "path";
 import { parseCookie } from "cookie";
 
 // Import unified API router
-import routerHandler from "../api/_routes/router";
-import type { ApiRequest, ApiResponse } from "../api/_lib/types";
+import routerHandler from "../api/_routes/router.js";
+import type { ApiRequest, ApiResponse } from "../api/_lib/types.js";
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 const rootDir = process.cwd();

@@ -1,13 +1,13 @@
 import { eq, or, and, desc, sql, ilike } from "drizzle-orm";
-import { db, schema } from "../../../_lib/db";
+import { db, schema } from "../../../_lib/db.js";
 import {
   requireMethod,
   setCacheHeaders,
   sendSuccess,
   handleApiError,
-} from "../../../_lib/response";
-import { requireAdmin } from "../../../_lib/auth";
-import type { ApiRequest, ApiResponse } from "../../../_lib/types";
+} from "../../../_lib/response.js";
+import { requireAdmin } from "../../../_lib/auth.js";
+import type { ApiRequest, ApiResponse } from "../../../_lib/types.js";
 
 const VALID_CATEGORIES = ["all", "auth", "releases", "downloads", "website", "security"] as const;
 type ActivityCategory = (typeof VALID_CATEGORIES)[number];

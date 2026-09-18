@@ -1,12 +1,12 @@
-import { db } from "../../_lib/db";
+import { db } from "../../_lib/db.js";
 import {
   requireMethod,
   setCacheHeaders,
   sendSuccess,
   handleApiError,
-} from "../../_lib/response";
-import { getPublicContactData } from "../../_lib/website";
-import type { ApiRequest, ApiResponse } from "../../_lib/types";
+} from "../../_lib/response.js";
+import { getPublicContactData } from "../../_lib/website.js";
+import type { ApiRequest, ApiResponse } from "../../_lib/types.js";
 
 export default async function handler(req: ApiRequest, res: ApiResponse): Promise<void> {
   // 1. Safe short-lived public caching (60s) with fast revalidation

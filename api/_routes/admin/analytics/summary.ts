@@ -1,18 +1,18 @@
-import { db } from "../../../_lib/db";
+import { db } from "../../../_lib/db.js";
 import {
   requireMethod,
   setCacheHeaders,
   sendSuccess,
   handleApiError,
-} from "../../../_lib/response";
-import { requireAdmin } from "../../../_lib/auth";
+} from "../../../_lib/response.js";
+import { requireAdmin } from "../../../_lib/auth.js";
 import {
   REPORTING_TIMEZONE,
   getAnalyticsSummary,
   computePlatformBreakdown,
   getCurrentActiveReleases,
-} from "../../../_lib/analytics";
-import type { ApiRequest, ApiResponse } from "../../../_lib/types";
+} from "../../../_lib/analytics.js";
+import type { ApiRequest, ApiResponse } from "../../../_lib/types.js";
 
 export default async function handler(req: ApiRequest, res: ApiResponse): Promise<void> {
   // 1. Prevent caching

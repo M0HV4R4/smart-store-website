@@ -1,7 +1,7 @@
 import { inArray } from "drizzle-orm";
-import { schema } from "./db";
-import { logAudit } from "./audit";
-import type { AuthContext } from "./types";
+import { schema } from "./db.js";
+import { logAudit } from "./audit.js";
+import type { AuthContext } from "./types.js";
 import { z } from "zod";
 
 // =============================================================================

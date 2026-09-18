@@ -4,9 +4,9 @@
  * and canonical endpoint execution across all API domains.
  */
 
-import routerHandler, { resolveRoutePath, apiRoutes } from "../api/_routes/router";
-import { setMockDb } from "../api/_lib/db";
-import type { ApiRequest, ApiResponse } from "../api/_lib/types";
+import routerHandler, { resolveRoutePath, apiRoutes } from "../api/_routes/router.js";
+import { setMockDb } from "../api/_lib/db.js";
+import type { ApiRequest, ApiResponse } from "../api/_lib/types.js";
 
 let passed = 0;
 let failed = 0;
@@ -49,7 +49,7 @@ function createMockRes(): {
   let bodyData: any = null;
   const headers: Record<string, string> = {};
 
-  const res = {
+  const res: any = {
     statusCode: 200,
     setHeader(name: string, value: string) {
       headers[name.toLowerCase()] = value;
@@ -57,8 +57,8 @@ function createMockRes(): {
     },
     status(code: number) {
       statusCode = code;
-      this.statusCode = code;
-      return this;
+      res.statusCode = code;
+      return res;
     },
     json(data: any) {
       bodyData = data;
@@ -223,9 +223,9 @@ async function runTests() {
     });
     const { res } = createMockRes();
     await routerHandler(req, res);
-    assert(!("route" in req.query), "Removes 'route' routing artifact from req.query");
-    assert(req.query.page === "2", "Preserves user query parameter 'page'");
-    assert(req.query.status === "active", "Preserves user query parameter 'status'");
+    assert(!("route" in (req.query || {})), "Removes 'route' routing artifact from req.query");
+    assert(req.query?.page === "2", "Preserves user query parameter 'page'");
+    assert(req.query?.status === "active", "Preserves user query parameter 'status'");
   }
 
   // 3g. 404 Route Not Found

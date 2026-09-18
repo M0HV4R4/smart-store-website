@@ -5,27 +5,27 @@
  */
 
 import { parseCookie } from "cookie";
-import type { ApiRequest, ApiResponse } from "../_lib/types";
+import type { ApiRequest, ApiResponse } from "../_lib/types.js";
 
 // Import canonical route handlers
-import loginHandler from "./auth/login";
-import logoutHandler from "./auth/logout";
-import sessionHandler from "./auth/session";
-import changePasswordHandler from "./auth/change-password";
-import releasesHandler from "./admin/releases";
-import downloadsHandler from "./admin/downloads";
-import analyticsHandler from "./admin/analytics/index";
-import analyticsSummaryHandler from "./admin/analytics/summary";
-import analyticsTimeseriesHandler from "./admin/analytics/timeseries";
-import analyticsReleasesHandler from "./admin/analytics/releases";
-import websiteHandler from "./admin/website";
-import securityHandler from "./admin/security/index";
-import securitySessionsHandler from "./admin/security/sessions";
-import activityHandler from "./admin/activity/index";
-import publicDownloadsMetaHandler from "./downloads";
-import winDownloadHandler from "./download/windows";
-import androidDownloadHandler from "./download/android";
-import contactHandler from "./site/contact";
+import loginHandler from "./auth/login.js";
+import logoutHandler from "./auth/logout.js";
+import sessionHandler from "./auth/session.js";
+import changePasswordHandler from "./auth/change-password.js";
+import releasesHandler from "./admin/releases.js";
+import downloadsHandler from "./admin/downloads.js";
+import analyticsHandler from "./admin/analytics/index.js";
+import analyticsSummaryHandler from "./admin/analytics/summary.js";
+import analyticsTimeseriesHandler from "./admin/analytics/timeseries.js";
+import analyticsReleasesHandler from "./admin/analytics/releases.js";
+import websiteHandler from "./admin/website.js";
+import securityHandler from "./admin/security/index.js";
+import securitySessionsHandler from "./admin/security/sessions.js";
+import activityHandler from "./admin/activity/index.js";
+import publicDownloadsMetaHandler from "./downloads.js";
+import winDownloadHandler from "./download/windows.js";
+import androidDownloadHandler from "./download/android.js";
+import contactHandler from "./site/contact.js";
 
 async function rootHealthHandler(_req: ApiRequest, res: ApiResponse): Promise<void> {
   res.statusCode = 200;

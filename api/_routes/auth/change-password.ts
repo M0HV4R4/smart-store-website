@@ -1,21 +1,21 @@
 import { eq } from "drizzle-orm";
-import { db, schema } from "../../_lib/db";
+import { db, schema } from "../../_lib/db.js";
 import {
   requireMethod,
   setCacheHeaders,
   sendSuccess,
   sendError,
   handleApiError,
-} from "../../_lib/response";
+} from "../../_lib/response.js";
 import {
   requireAdmin,
   verifyPassword,
   hashPassword,
   deleteOtherAdminSessions,
-} from "../../_lib/auth";
-import { validateData, changePasswordSchema } from "../../_lib/validation";
-import { logAudit } from "../../_lib/audit";
-import type { ApiRequest, ApiResponse } from "../../_lib/types";
+} from "../../_lib/auth.js";
+import { validateData, changePasswordSchema } from "../../_lib/validation.js";
+import { logAudit } from "../../_lib/audit.js";
+import type { ApiRequest, ApiResponse } from "../../_lib/types.js";
 
 export default async function handler(req: ApiRequest, res: ApiResponse): Promise<void> {
   // 1. Enforce cache prevention

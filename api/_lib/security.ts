@@ -1,6 +1,6 @@
 import crypto from "crypto";
-import type { ApiRequest } from "./types";
-import { downloadUrlSchema, validateData } from "./validation";
+import type { ApiRequest } from "./types.js";
+import { downloadUrlSchema, validateData } from "./validation.js";
 
 // =============================================================================
 // 1. DOWNLOAD URL SECURITY VALIDATOR

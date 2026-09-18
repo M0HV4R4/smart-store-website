@@ -1,4 +1,4 @@
-import { db, schema } from "./db";
+import { db, schema } from "./db.js";
 
 // Blacklist of sensitive keys that MUST NEVER enter audit log metadata
 const SENSITIVE_KEYS = new Set([

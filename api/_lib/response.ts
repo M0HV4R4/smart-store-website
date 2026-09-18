@@ -1,4 +1,4 @@
-import type { ApiRequest, ApiResponse, ApiSuccessResponse, ApiErrorResponse } from "./types";
+import type { ApiRequest, ApiResponse, ApiSuccessResponse, ApiErrorResponse } from "./types.js";
 
 /**
  * Sends a standardized JSON success response

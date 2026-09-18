@@ -2,10 +2,10 @@ import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import { parseCookie, stringifySetCookie } from "cookie";
 import { eq, ne, and, gt, lt, or, sql } from "drizzle-orm";
-import { db, schema } from "./db";
-import { verifyCsrfOrigin, validateRequestBodySize } from "./security";
-import { sendError, handleApiError } from "./response";
-import type { ApiRequest, ApiResponse, AuthContext } from "./types";
+import { db, schema } from "./db.js";
+import { verifyCsrfOrigin, validateRequestBodySize } from "./security.js";
+import { sendError, handleApiError } from "./response.js";
+import type { ApiRequest, ApiResponse, AuthContext } from "./types.js";
 
 export const SESSION_COOKIE_NAME = "smartstore_admin_session";
 export const SESSION_TTL_SECONDS = 7 * 24 * 60 * 60; // 7 days

@@ -1,5 +1,5 @@
 import { sql, gte, eq, desc, inArray } from "drizzle-orm";
-import { schema } from "./db";
+import { schema } from "./db.js";
 
 // =============================================================================
 // REPORTING TIMEZONE SPECIFICATION: Africa/Algiers (UTC+1)
