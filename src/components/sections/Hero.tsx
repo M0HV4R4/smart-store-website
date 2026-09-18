@@ -63,12 +63,12 @@ export function Hero() {
     <section
       id="top"
       ref={heroRef}
-      className="relative overflow-hidden pt-6 pb-14 sm:pt-10 sm:pb-20 lg:pt-14 lg:pb-24 border-b border-slate-200/70"
+      className="relative overflow-hidden pt-4 pb-12 sm:pt-10 sm:pb-18 lg:pt-14 lg:pb-22"
     >
       {/* 1. شبكة دقيقة بتدرج ناعم يمنح إحساس SaaS راقياً */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-50 -z-10"
+        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-45 -z-10"
       />
 
       {/* 2. إضاءة محيطية علوية وسفلية متدرجة (Ambient Atmospheric Lighting) */}
@@ -99,8 +99,8 @@ export function Hero() {
             visible: {
               opacity: 1,
               transition: {
-                staggerChildren: reduce ? 0 : 0.12,
-                delayChildren: 0.05,
+                staggerChildren: reduce ? 0 : 0.1,
+                delayChildren: 0.04,
               },
             },
           }}
@@ -108,12 +108,11 @@ export function Hero() {
         >
           <motion.h1
             variants={{
-              hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 28, filter: "blur(6px)" },
+              hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 24 },
               visible: {
                 opacity: 1,
                 y: 0,
-                filter: "blur(0px)",
-                transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+                transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
               },
             }}
             className="font-display flex flex-col items-center text-hero font-extrabold text-balance text-slate-950 tracking-tight leading-[1.12]"
@@ -139,43 +138,19 @@ export function Hero() {
 
           <motion.p
             variants={{
-              hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 24, filter: "blur(4px)" },
+              hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 20 },
               visible: {
                 opacity: 1,
                 y: 0,
-                filter: "blur(0px)",
-                transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
+                transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] },
               },
             }}
-            className="mt-5 max-w-2xl text-lead text-slate-600 text-pretty font-normal leading-relaxed"
+            className="mt-4 sm:mt-5 max-w-2xl text-lead text-slate-600 text-pretty font-normal leading-relaxed"
           >
             {t.hero.subtitle}
           </motion.p>
 
           {/* زر الإجراء الرئيسي CTA */}
-          <motion.div
-            variants={{
-              hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 20, filter: "blur(4px)" },
-              visible: {
-                opacity: 1,
-                y: 0,
-                filter: "blur(0px)",
-                transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-              },
-            }}
-            className="mt-7 flex flex-wrap items-center justify-center gap-4"
-          >
-            <Button
-              href="#download"
-              size="lg"
-              className="rounded-full px-8 py-3.5 text-[15px] font-bold shadow-lg shadow-blue-600/25 hover:shadow-xl hover:shadow-blue-600/35 hover:-translate-y-0.5 transition-all duration-300"
-              icon={<Download className="size-5" aria-hidden />}
-            >
-              {t.hero.ctaPrimary}
-            </Button>
-          </motion.div>
-
-          {/* توافق المنصات والشارات الداعمة */}
           <motion.div
             variants={{
               hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 16 },
@@ -185,17 +160,40 @@ export function Hero() {
                 transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] },
               },
             }}
-            className="mt-5 flex flex-wrap items-center justify-center gap-x-3.5 gap-y-2"
+            whileTap={{ scale: 0.98 }}
+            className="mt-5 sm:mt-7 flex flex-wrap items-center justify-center gap-3.5 sm:gap-4"
           >
-            <span className="text-[12.5px] font-semibold text-slate-500">{t.hero.availableOn}</span>
-            <span className="flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white/95 px-3 py-1 text-[12.5px] font-bold text-slate-800 shadow-2xs">
+            <Button
+              href="#download"
+              size="lg"
+              className="rounded-full px-7 py-3 sm:px-8 sm:py-3.5 text-[14.5px] sm:text-[15px] font-bold shadow-lg shadow-blue-600/25 hover:shadow-xl hover:shadow-blue-600/35 hover:-translate-y-0.5 transition-all duration-300"
+              icon={<Download className="size-5" aria-hidden />}
+            >
+              {t.hero.ctaPrimary}
+            </Button>
+          </motion.div>
+
+          {/* توافق المنصات والشارات الداعمة */}
+          <motion.div
+            variants={{
+              hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 14 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+              },
+            }}
+            className="mt-4 sm:mt-5 flex flex-wrap items-center justify-center gap-x-3.5 gap-y-2"
+          >
+            <span className="text-[12px] sm:text-[12.5px] font-semibold text-slate-500">{t.hero.availableOn}</span>
+            <span className="flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white/95 px-3 py-1 text-[12px] sm:text-[12.5px] font-bold text-slate-800 shadow-2xs">
               <WindowsGlyph className="size-3.5 text-blue-600" /> {t.common.windows}
             </span>
-            <span className="flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white/95 px-3 py-1 text-[12.5px] font-bold text-slate-800 shadow-2xs">
+            <span className="flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white/95 px-3 py-1 text-[12px] sm:text-[12.5px] font-bold text-slate-800 shadow-2xs">
               <AndroidGlyph className="size-3.5 text-emerald-600" /> {t.common.android}
             </span>
             <span className="text-slate-300 hidden sm:inline">•</span>
-            <span className="flex items-center gap-1.5 text-[12.5px] font-semibold text-slate-600">
+            <span className="flex items-center gap-1.5 text-[12px] sm:text-[12.5px] font-semibold text-slate-600">
               <span className="size-1.5 rounded-full bg-emerald-500" />
               {t.hero.trust}
             </span>
@@ -203,11 +201,11 @@ export function Hero() {
         </motion.div>
 
         {/* ------------------------- مسرح عرض المنتج الحقيقي smartstore.png ------------------------- */}
-        <div className="relative mx-auto mt-10 sm:mt-14 lg:mt-16 w-full max-w-[min(1380px,94vw)]">
+        <div className="relative mx-auto mt-7 sm:mt-12 lg:mt-16 w-full max-w-[min(1380px,94vw)]">
           <motion.div
-            initial={reduce ? false : { opacity: 0, y: 80, scale: 0.93, filter: "blur(8px)" }}
-            animate={reduce ? undefined : { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-            transition={{ duration: 1.15, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            initial={reduce ? false : { opacity: 0, y: 50, scale: 0.95 }}
+            animate={reduce ? undefined : { opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
             style={
               reduce || isTouch
                 ? undefined

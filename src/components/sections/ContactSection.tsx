@@ -58,7 +58,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden py-18 sm:py-28 border-t border-blue-200/60 bg-gradient-to-b from-transparent via-blue-50/20 to-slate-50/60"
+      className="relative overflow-hidden py-14 sm:py-20 lg:py-24"
     >
       {/* شبكة خلفية ناعمة مع هالات زرقاء مضيئة تعطي قسماً ختامياً فخماً ومميزاً */}
       <div
@@ -70,17 +70,17 @@ export function ContactSection() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 flex items-center justify-center -z-10"
       >
-        <div className="h-[540px] w-[900px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.18),rgba(14,165,233,0.11)_50%,transparent_75%)] blur-3xl animate-glow-slow" />
+        <div className="h-[540px] w-[900px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.16),rgba(14,165,233,0.09)_50%,transparent_75%)] blur-3xl animate-glow-slow" />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
         {/* الحاوية الزجاجية الفاخرة للقسم */}
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 40, scale: 0.97 }}
+          initial={reduce ? false : { opacity: 0, y: 35, scale: 0.98 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: false, amount: 0.15 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="relative overflow-hidden rounded-3xl border border-blue-200/90 bg-white/95 p-8 sm:p-12 lg:p-14 shadow-saas-stage ring-1 ring-blue-500/10 backdrop-blur-md"
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          className="relative overflow-hidden rounded-3xl border border-blue-200/90 bg-white/95 p-6 sm:p-10 lg:p-14 shadow-saas-stage ring-1 ring-blue-500/10 backdrop-blur-md"
         >
           {/* إضاءات محيطية زاوية أنيقة */}
           <div
@@ -94,16 +94,16 @@ export function ContactSection() {
 
           {/* العناوين والشارات */}
           <div className="text-center max-w-2xl mx-auto">
-            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-950 tracking-tight leading-snug">
+            <h2 className="font-display text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-950 tracking-tight leading-snug">
               {title}
             </h2>
 
-            <p className="mt-3 text-[15px] sm:text-base leading-relaxed text-slate-600 text-pretty font-normal">
+            <p className="mt-2.5 sm:mt-3 text-[14.5px] sm:text-[15.5px] leading-relaxed text-slate-600 text-pretty font-normal">
               {description}
             </p>
 
             {/* شارات الطمأنينة والتواجد */}
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-xs text-slate-600">
+            <div className="mt-4 sm:mt-5 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs text-slate-600">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white/90 px-3.5 py-1.5 font-semibold shadow-2xs">
                 <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>{isAr ? "متواجدون للإجابة على استفساراتكم" : "Disponibles pour répondre à vos questions"}</span>
@@ -118,18 +118,18 @@ export function ContactSection() {
 
           {/* بطاقات قنوات التواصل (Cards Convergent Animation) */}
           {hasAnySocial ? (
-            <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-8 sm:mt-10 grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
               {/* 1. بطاقة WhatsApp الرئيسية الفاخرة */}
               {isWhatsappEnabled && (
                 <motion.a
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={reduce ? false : { opacity: 0, x: isAr ? 30 : -30, y: 20 }}
-                  whileInView={reduce ? undefined : { opacity: 1, x: 0, y: 0 }}
-                  viewport={{ once: false, amount: 0.15 }}
-                  transition={{ type: "spring", stiffness: 90, damping: 15, delay: 0.05 }}
-                  whileHover={reduce ? undefined : { y: -6, scale: 1.012, transition: { type: "spring", stiffness: 350, damping: 25 } }}
+                  initial={reduce ? false : { opacity: 0, y: 20 }}
+                  whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.5, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+                  whileHover={reduce ? undefined : { y: -5, scale: 1.01, transition: { type: "spring", stiffness: 350, damping: 25 } }}
                   whileTap={{ scale: 0.98 }}
                   className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-emerald-500/40 bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800 p-6 sm:p-7 text-white shadow-xl shadow-emerald-600/25 transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-600/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2"
                 >
@@ -169,13 +169,13 @@ export function ContactSection() {
                   href={contactData.facebook.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={reduce ? false : { opacity: 0, y: 30 }}
+                  initial={reduce ? false : { opacity: 0, y: 20 }}
                   whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-                  viewport={{ once: false, amount: 0.15 }}
-                  transition={{ type: "spring", stiffness: 90, damping: 15, delay: 0.1 }}
-                  whileHover={reduce ? undefined : { y: -6, scale: 1.012, transition: { type: "spring", stiffness: 350, damping: 25 } }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.5, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  whileHover={reduce ? undefined : { y: -5, scale: 1.01, transition: { type: "spring", stiffness: 350, damping: 25 } }}
                   whileTap={{ scale: 0.98 }}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-saas-card ring-1 ring-slate-900/[0.03] hover:border-[#1877F2]/60 hover:bg-gradient-to-b hover:from-white hover:to-blue-50/40 hover:shadow-saas-card-hover transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1877F2] focus-visible:ring-offset-2"
+                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-saas-card ring-1 ring-slate-900/[0.03] hover:border-[#1877F2]/60 hover:bg-gradient-to-b hover:from-white hover:to-blue-50/40 hover:shadow-saas-card-hover transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1877F2] focus-visible:ring-offset-2 active:border-[#1877F2]"
                 >
                   <div
                     aria-hidden="true"
@@ -212,13 +212,13 @@ export function ContactSection() {
                   href={contactData.instagram.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={reduce ? false : { opacity: 0, x: isAr ? -30 : 30, y: 20 }}
-                  whileInView={reduce ? undefined : { opacity: 1, x: 0, y: 0 }}
-                  viewport={{ once: false, amount: 0.15 }}
-                  transition={{ type: "spring", stiffness: 90, damping: 15, delay: 0.15 }}
-                  whileHover={reduce ? undefined : { y: -6, scale: 1.012, transition: { type: "spring", stiffness: 350, damping: 25 } }}
+                  initial={reduce ? false : { opacity: 0, y: 20 }}
+                  whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.5, delay: 0.11, ease: [0.16, 1, 0.3, 1] }}
+                  whileHover={reduce ? undefined : { y: -5, scale: 1.01, transition: { type: "spring", stiffness: 350, damping: 25 } }}
                   whileTap={{ scale: 0.98 }}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-saas-card ring-1 ring-slate-900/[0.03] hover:border-rose-300 hover:bg-gradient-to-b hover:from-white hover:to-rose-50/30 hover:shadow-[0_1px_3px_0_rgba(15,23,42,0.06),0_12px_28px_-6px_rgba(244,63,94,0.18),0_24px_48px_-12px_rgba(15,23,42,0.08)] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
+                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-saas-card ring-1 ring-slate-900/[0.03] hover:border-rose-300 hover:bg-gradient-to-b hover:from-white hover:to-rose-50/30 hover:shadow-[0_1px_3px_0_rgba(15,23,42,0.06),0_12px_28px_-6px_rgba(244,63,94,0.18),0_24px_48px_-12px_rgba(15,23,42,0.08)] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 active:border-rose-300"
                 >
                   <div
                     aria-hidden="true"

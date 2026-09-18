@@ -16,7 +16,7 @@ export function FaqSection() {
   return (
     <section
       id="faq"
-      className="relative overflow-hidden py-18 sm:py-28 border-t border-slate-200/80 bg-gradient-to-b from-slate-50/40 via-transparent to-slate-50/50"
+      className="relative overflow-hidden py-14 sm:py-20 lg:py-24"
     >
       {/* شبكة خلفية ناعمة */}
       <div
@@ -27,16 +27,16 @@ export function FaqSection() {
       {/* إضاءة جانبية ناعمة تمنع انطفاء عمق القسم */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -end-20 top-1/4 -z-10 h-[500px] w-[680px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.11),rgba(14,165,233,0.05)_50%,transparent_70%)] blur-3xl"
+        className="pointer-events-none absolute -end-20 top-1/4 -z-10 h-[500px] w-[680px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.10),rgba(14,165,233,0.05)_50%,transparent_70%)] blur-3xl"
       />
 
       <div className="mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.45fr] lg:gap-16 items-start">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.45fr] lg:gap-16 items-start">
           {/* العمود الأيسر: عنوان رئيسي مع خط منحني + نص وصفي */}
           <motion.div
-            initial={reduce ? false : { opacity: 0, y: 30, filter: "blur(3px)" }}
-            whileInView={reduce ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ once: false, amount: 0.15 }}
+            initial={reduce ? false : { opacity: 0, y: 28 }}
+            whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-start lg:sticky lg:top-28"
           >
@@ -59,28 +59,29 @@ export function FaqSection() {
               </span>
             </h2>
 
-            <p className="mt-4 text-[15px] leading-relaxed text-slate-600 sm:text-[16px] max-w-md font-normal">
+            <p className="mt-3.5 text-[15px] leading-relaxed text-slate-600 sm:text-[16px] max-w-md font-normal">
               {t.faq.subtitle}
             </p>
           </motion.div>
 
           {/* العمود الأيمن: الأكورديون مع بطاقات أنيقة وأيقونات دائرية زرقاء */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3.5 sm:gap-4">
             {t.faq.items.map((item, idx) => {
               const isOpen = openIdx === idx;
 
               return (
                 <motion.div
                   key={item.q}
-                  initial={reduce ? false : { opacity: 0, y: 24, filter: "blur(3px)" }}
-                  whileInView={reduce ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
-                  viewport={{ once: false, amount: 0.1 }}
-                  transition={{ duration: 0.45, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                  initial={reduce ? false : { opacity: 0, y: 20 }}
+                  whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.1 }}
+                  transition={{ duration: 0.45, delay: idx * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                  whileTap={{ scale: 0.99 }}
                   className={cn(
                     "group rounded-2xl border bg-white/95 backdrop-blur-sm ring-1 ring-slate-900/[0.03] transition-all duration-300 overflow-hidden",
                     isOpen
                       ? "border-blue-400/90 ring-4 ring-blue-500/10 shadow-saas-card-hover"
-                      : "border-slate-200/90 shadow-saas-card hover:border-blue-300 hover:shadow-md",
+                      : "border-slate-200/80 shadow-saas-card hover:border-blue-300 hover:shadow-md active:border-blue-400",
                   )}
                 >
                   <button

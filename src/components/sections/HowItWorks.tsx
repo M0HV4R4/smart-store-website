@@ -42,7 +42,7 @@ export function HowItWorks() {
   return (
     <section
       id="how"
-      className="relative overflow-hidden py-18 sm:py-28 border-t border-slate-200/80 bg-gradient-to-b from-slate-50/50 via-transparent to-slate-50/40"
+      className="relative overflow-hidden py-14 sm:py-20 lg:py-24"
     >
       {/* مرسى لقسم المميزات لضمان وصول روابط #features و #how معاً */}
       <div id="features" className="absolute -top-24" aria-hidden="true" />
@@ -50,7 +50,7 @@ export function HowItWorks() {
       {/* شبكة خلفية ناعمة مع تلاشٍ دائري خفيف */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-45 -z-10"
+        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-40 -z-10"
       />
 
       {/* مخروط إضاءة محيطية زرقاء موجه خلف بطاقات الخطوات الأربع */}
@@ -58,15 +58,15 @@ export function HowItWorks() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 flex items-center justify-center -z-10"
       >
-        <div className="h-[480px] w-[880px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.12),rgba(14,165,233,0.06)_50%,transparent_70%)] blur-3xl" />
+        <div className="h-[480px] w-[880px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.10),rgba(14,165,233,0.05)_50%,transparent_70%)] blur-3xl" />
       </div>
 
       <div className="mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
         {/* صف العناوين الرئيسي: عنوان واضح وبارز + نص وصفي */}
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 30, filter: "blur(3px)" }}
-          whileInView={reduce ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: false, amount: 0.2 }}
+          initial={reduce ? false : { opacity: 0, y: 28 }}
+          whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col justify-between gap-6 md:flex-row md:items-end"
         >
@@ -89,9 +89,9 @@ export function HowItWorks() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.15 }}
+          viewport={{ once: true, amount: 0.15 }}
           style={{ perspective: 1200 }}
-          className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          className="mt-10 sm:mt-12 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4"
         >
           {t.how.steps.map((step, idx) => {
             const Icon = icons[idx] || Package;
@@ -104,12 +104,13 @@ export function HowItWorks() {
                   reduce
                     ? undefined
                     : {
-                        y: -6,
-                        scale: 1.012,
+                        y: -5,
+                        scale: 1.01,
                         transition: { type: "spring", stiffness: 350, damping: 25 },
                       }
                 }
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-7 shadow-saas-card ring-1 ring-slate-900/[0.03] backdrop-blur-sm hover:border-blue-400/90 hover:shadow-saas-card-hover hover:bg-gradient-to-b hover:from-white hover:to-blue-50/20 transition-all duration-300 will-change-transform"
+                whileTap={{ scale: 0.98 }}
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white/95 p-6 sm:p-7 shadow-saas-card ring-1 ring-slate-900/[0.03] backdrop-blur-sm hover:border-blue-400/90 hover:shadow-saas-card-hover transition-all duration-300 will-change-transform active:border-blue-400"
               >
                 {/* تأثير لمعة ضوئية علوية متدرجة تظهر عند التحويم */}
                 <div
