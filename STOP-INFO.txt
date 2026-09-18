@@ -1,0 +1,10 @@
+SMART STORE - Local Website
+
+To start:
+1. Install Node.js LTS once: https://nodejs.org/
+2. Double-click START-SMART-STORE.bat
+3. On first launch, dependencies will install automatically.
+4. Your browser opens at http://localhost:5173/
+
+To stop:
+Close the black command window, or press Ctrl+C inside it.

@@ -1,0 +1,52 @@
+{
+  "name": "react-vite-tailwind",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "seed:admin": "tsx scripts/seed-admin.ts",
+    "db:seed-admin": "tsx scripts/seed-admin.ts",
+    "start:local": "tsx scripts/start-local.ts"
+  },
+  "engines": {
+    "node": ">=22.12.0",
+    "npm": ">=10.0.0"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
+    "bcryptjs": "^3.0.3",
+    "clsx": "2.1.1",
+    "cookie": "^2.0.1",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
+    "framer-motion": "^13.2.0",
+    "lucide-react": "^1.45.0",
+    "pg": "^8.23.0",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "react-router-dom": "^7.18.4",
+    "tailwind-merge": "3.4.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.1.17",
+    "@types/bcryptjs": "^3.0.0",
+    "@types/cookie": "^1.0.0",
+    "@types/node": "22.19.17",
+    "@types/pg": "^8.23.1",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "5.1.1",
+    "drizzle-kit": "^0.31.10",
+    "playwright-core": "^1.63.0",
+    "tailwindcss": "4.1.17",
+    "tsx": "^4.23.13",
+    "typescript": "5.9.3",
+    "vite": "7.3.2"
+  }
+}
