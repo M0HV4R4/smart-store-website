@@ -16,12 +16,18 @@ export function FaqSection() {
   return (
     <section
       id="faq"
-      className="relative overflow-hidden py-16 sm:py-24 border-t border-slate-200/70"
+      className="relative overflow-hidden py-18 sm:py-28 border-t border-slate-200/80 bg-gradient-to-b from-slate-50/40 via-transparent to-slate-50/50"
     >
       {/* شبكة خلفية ناعمة */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-30 -z-10"
+        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-40 -z-10"
+      />
+
+      {/* إضاءة جانبية ناعمة تمنع انطفاء عمق القسم */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -end-20 top-1/4 -z-10 h-[500px] w-[680px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.11),rgba(14,165,233,0.05)_50%,transparent_70%)] blur-3xl"
       />
 
       <div className="mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
@@ -71,10 +77,10 @@ export function FaqSection() {
                   viewport={{ once: false, amount: 0.1 }}
                   transition={{ duration: 0.45, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
                   className={cn(
-                    "group rounded-2xl border bg-white/95 shadow-xs transition-all duration-300 overflow-hidden",
+                    "group rounded-2xl border bg-white/95 backdrop-blur-sm ring-1 ring-slate-900/[0.03] transition-all duration-300 overflow-hidden",
                     isOpen
-                      ? "border-blue-400/90 ring-4 ring-blue-500/10 shadow-md shadow-blue-500/5"
-                      : "border-slate-200/90 hover:border-blue-300 hover:shadow-sm",
+                      ? "border-blue-400/90 ring-4 ring-blue-500/10 shadow-saas-card-hover"
+                      : "border-slate-200/90 shadow-saas-card hover:border-blue-300 hover:shadow-md",
                   )}
                 >
                   <button

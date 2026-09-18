@@ -42,7 +42,7 @@ export function HowItWorks() {
   return (
     <section
       id="how"
-      className="relative overflow-hidden py-16 sm:py-24 border-t border-slate-200/70"
+      className="relative overflow-hidden py-18 sm:py-28 border-t border-slate-200/80 bg-gradient-to-b from-slate-50/50 via-transparent to-slate-50/40"
     >
       {/* مرسى لقسم المميزات لضمان وصول روابط #features و #how معاً */}
       <div id="features" className="absolute -top-24" aria-hidden="true" />
@@ -50,15 +50,15 @@ export function HowItWorks() {
       {/* شبكة خلفية ناعمة مع تلاشٍ دائري خفيف */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-40 -z-10"
+        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-45 -z-10"
       />
 
-      {/* إضاءة محيطية زرقاء هادئة */}
+      {/* مخروط إضاءة محيطية زرقاء موجه خلف بطاقات الخطوات الأربع */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 flex items-center justify-center -z-10"
       >
-        <div className="size-[620px] rounded-full bg-blue-100/35 blur-3xl" />
+        <div className="h-[480px] w-[880px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.12),rgba(14,165,233,0.06)_50%,transparent_70%)] blur-3xl" />
       </div>
 
       <div className="mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
@@ -104,12 +104,12 @@ export function HowItWorks() {
                   reduce
                     ? undefined
                     : {
-                        y: -8,
-                        scale: 1.015,
-                        transition: { duration: 0.25, ease: "easeOut" },
+                        y: -6,
+                        scale: 1.012,
+                        transition: { type: "spring", stiffness: 350, damping: 25 },
                       }
                 }
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/85 bg-white/95 p-6 sm:p-7 shadow-xs backdrop-blur-xs hover:border-blue-400 hover:bg-gradient-to-b hover:from-white hover:to-blue-50/25 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 will-change-transform"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-7 shadow-saas-card ring-1 ring-slate-900/[0.03] backdrop-blur-sm hover:border-blue-400/90 hover:shadow-saas-card-hover hover:bg-gradient-to-b hover:from-white hover:to-blue-50/20 transition-all duration-300 will-change-transform"
               >
                 {/* تأثير لمعة ضوئية علوية متدرجة تظهر عند التحويم */}
                 <div
@@ -120,7 +120,7 @@ export function HowItWorks() {
                 <div>
                   {/* الشريط العلوي: الأيقونة + مؤشر السهم */}
                   <div className="flex items-center justify-between">
-                    <span className="grid size-12 place-items-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/90 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-110 group-hover:shadow-md group-hover:shadow-blue-500/25">
+                    <span className="grid size-12 place-items-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/90 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105 group-hover:shadow-md group-hover:shadow-blue-500/25">
                       <Icon className="size-5" strokeWidth={1.9} />
                     </span>
 
@@ -131,7 +131,7 @@ export function HowItWorks() {
 
                   {/* رقم الخطوة الواضح والبارز */}
                   <div className="mt-6 flex items-baseline gap-1.5">
-                    <span className="font-display text-[32px] font-extrabold text-slate-950 tabular-nums leading-none tracking-tight">
+                    <span className="font-display text-[34px] font-extrabold text-slate-950 tabular-nums leading-none tracking-tight">
                       {step.n}
                     </span>
                   </div>
@@ -153,7 +153,7 @@ export function HowItWorks() {
                     {step.highlights.map((tag, i) => (
                       <span
                         key={i}
-                        className="rounded-full bg-slate-50 border border-slate-200/80 px-2.5 py-1 text-[11.5px] font-semibold text-slate-700 transition-colors duration-200 group-hover:bg-blue-50/90 group-hover:border-blue-200 group-hover:text-blue-800"
+                        className="rounded-full bg-slate-50/90 border border-slate-200/80 px-2.5 py-1 text-[11.5px] font-semibold text-slate-700 transition-colors duration-200 group-hover:bg-blue-50/90 group-hover:border-blue-200 group-hover:text-blue-800"
                       >
                         {tag}
                       </span>

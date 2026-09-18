@@ -66,11 +66,10 @@ html {
 body {
   background-color: #f8fafc;
   background-image: 
-    radial-gradient(ellipse 100% 55% at 50% -10%, rgba(37, 99, 235, 0.08) 0%, transparent 68%),
-    radial-gradient(ellipse 70% 45% at 95% 18%, rgba(14, 165, 233, 0.05) 0%, transparent 55%),
-    radial-gradient(ellipse 65% 45% at 5% 52%, rgba(37, 99, 235, 0.04) 0%, transparent 55%),
-    radial-gradient(ellipse 90% 50% at 50% 98%, rgba(37, 99, 235, 0.06) 0%, transparent 60%);
-  background-attachment: fixed;
+    radial-gradient(ellipse 100% 60% at 50% -5%, rgba(37, 99, 235, 0.09) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 50% at 95% 25%, rgba(14, 165, 233, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 50% at 5% 55%, rgba(37, 99, 235, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 90% 60% at 50% 85%, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
   color: var(--color-text);
   font-family: "Almarai", "Poppins", ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -290,5 +289,29 @@ html[lang="fr"] body,
 
 .animate-glow-slow {
   animation: pulseGlowSlow 9s ease-in-out infinite;
+}
+
+/* =========================================================================
+   SAAS DEPTH & SHADOW SYSTEM (TACTILE SOFTWARE SURFACES)
+   ========================================================================= */
+@utility shadow-saas-card {
+  box-shadow: 
+    0 1px 2px 0 rgba(15, 23, 42, 0.05),
+    0 4px 12px -2px rgba(15, 23, 42, 0.06),
+    0 16px 32px -8px rgba(37, 99, 235, 0.06);
+}
+
+@utility shadow-saas-card-hover {
+  box-shadow: 
+    0 1px 3px 0 rgba(15, 23, 42, 0.06),
+    0 12px 28px -6px rgba(37, 99, 235, 0.16),
+    0 24px 48px -12px rgba(15, 23, 42, 0.08);
+}
+
+@utility shadow-saas-stage {
+  box-shadow: 
+    0 0 0 1px rgba(15, 23, 42, 0.06),
+    0 12px 32px -8px rgba(37, 99, 235, 0.12),
+    0 28px 72px -16px rgba(15, 23, 42, 0.18);
 }
 

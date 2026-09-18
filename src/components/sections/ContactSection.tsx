@@ -58,19 +58,19 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden py-16 sm:py-24 border-t border-blue-200/60"
+      className="relative overflow-hidden py-18 sm:py-28 border-t border-blue-200/60 bg-gradient-to-b from-transparent via-blue-50/20 to-slate-50/60"
     >
       {/* شبكة خلفية ناعمة مع هالات زرقاء مضيئة تعطي قسماً ختامياً فخماً ومميزاً */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-40 -z-10"
+        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-45 -z-10"
       />
 
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 flex items-center justify-center -z-10"
       >
-        <div className="h-[520px] w-[860px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.16),rgba(14,165,233,0.10)_50%,transparent_75%)] blur-3xl animate-glow-slow" />
+        <div className="h-[540px] w-[900px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.18),rgba(14,165,233,0.11)_50%,transparent_75%)] blur-3xl animate-glow-slow" />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
@@ -80,7 +80,7 @@ export function ContactSection() {
           whileInView={reduce ? undefined : { opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: false, amount: 0.15 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="relative overflow-hidden rounded-3xl border border-blue-200/90 bg-white/95 p-8 sm:p-12 lg:p-14 shadow-2xl shadow-blue-500/8 backdrop-blur-md"
+          className="relative overflow-hidden rounded-3xl border border-blue-200/90 bg-white/95 p-8 sm:p-12 lg:p-14 shadow-saas-stage ring-1 ring-blue-500/10 backdrop-blur-md"
         >
           {/* إضاءات محيطية زاوية أنيقة */}
           <div
@@ -129,9 +129,9 @@ export function ContactSection() {
                   whileInView={reduce ? undefined : { opacity: 1, x: 0, y: 0 }}
                   viewport={{ once: false, amount: 0.15 }}
                   transition={{ type: "spring", stiffness: 90, damping: 15, delay: 0.05 }}
-                  whileHover={reduce ? undefined : { y: -6, scale: 1.015 }}
+                  whileHover={reduce ? undefined : { y: -6, scale: 1.012, transition: { type: "spring", stiffness: 350, damping: 25 } }}
                   whileTap={{ scale: 0.98 }}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-emerald-500/40 bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800 p-6 sm:p-7 text-white shadow-xl shadow-emerald-600/20 transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-600/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2"
+                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-emerald-500/40 bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800 p-6 sm:p-7 text-white shadow-xl shadow-emerald-600/25 transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-600/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2"
                 >
                   {/* لمعة ضوئية علوية */}
                   <div
@@ -141,7 +141,7 @@ export function ContactSection() {
 
                   <div>
                     <div className="flex items-center justify-between">
-                      <span className="grid size-12 place-items-center rounded-xl bg-white/15 text-white backdrop-blur-xs border border-white/20 transition-all duration-300 group-hover:bg-white group-hover:text-emerald-700 group-hover:scale-110">
+                      <span className="grid size-12 place-items-center rounded-xl bg-white/15 text-white backdrop-blur-xs border border-white/20 transition-all duration-300 group-hover:bg-white group-hover:text-emerald-700 group-hover:scale-105">
                         <WhatsAppLogo size={24} />
                       </span>
                       <span className="flex size-8 items-center justify-center rounded-lg text-emerald-200 transition-all duration-300 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 rtl:group-hover:-translate-x-1">
@@ -173,9 +173,9 @@ export function ContactSection() {
                   whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
                   viewport={{ once: false, amount: 0.15 }}
                   transition={{ type: "spring", stiffness: 90, damping: 15, delay: 0.1 }}
-                  whileHover={reduce ? undefined : { y: -6, scale: 1.015 }}
+                  whileHover={reduce ? undefined : { y: -6, scale: 1.012, transition: { type: "spring", stiffness: 350, damping: 25 } }}
                   whileTap={{ scale: 0.98 }}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs hover:border-[#1877F2]/60 hover:bg-gradient-to-b hover:from-white hover:to-blue-50/40 hover:shadow-xl hover:shadow-blue-500/12 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1877F2] focus-visible:ring-offset-2"
+                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-saas-card ring-1 ring-slate-900/[0.03] hover:border-[#1877F2]/60 hover:bg-gradient-to-b hover:from-white hover:to-blue-50/40 hover:shadow-saas-card-hover transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1877F2] focus-visible:ring-offset-2"
                 >
                   <div
                     aria-hidden="true"
@@ -184,7 +184,7 @@ export function ContactSection() {
 
                   <div>
                     <div className="flex items-center justify-between">
-                      <span className="grid size-12 place-items-center rounded-xl bg-blue-50 text-[#1877F2] border border-blue-100 transition-all duration-300 group-hover:bg-[#1877F2] group-hover:text-white group-hover:scale-110">
+                      <span className="grid size-12 place-items-center rounded-xl bg-blue-50 text-[#1877F2] border border-blue-100 transition-all duration-300 group-hover:bg-[#1877F2] group-hover:text-white group-hover:scale-105">
                         <FacebookLogo size={22} />
                       </span>
                       <span className="flex size-8 items-center justify-center rounded-lg text-slate-400 transition-all duration-300 group-hover:text-[#1877F2] group-hover:translate-x-1 group-hover:-translate-y-1 rtl:group-hover:-translate-x-1">
@@ -216,9 +216,9 @@ export function ContactSection() {
                   whileInView={reduce ? undefined : { opacity: 1, x: 0, y: 0 }}
                   viewport={{ once: false, amount: 0.15 }}
                   transition={{ type: "spring", stiffness: 90, damping: 15, delay: 0.15 }}
-                  whileHover={reduce ? undefined : { y: -6, scale: 1.015 }}
+                  whileHover={reduce ? undefined : { y: -6, scale: 1.012, transition: { type: "spring", stiffness: 350, damping: 25 } }}
                   whileTap={{ scale: 0.98 }}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs hover:border-rose-300 hover:bg-gradient-to-b hover:from-white hover:to-rose-50/30 hover:shadow-xl hover:shadow-rose-500/12 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
+                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-saas-card ring-1 ring-slate-900/[0.03] hover:border-rose-300 hover:bg-gradient-to-b hover:from-white hover:to-rose-50/30 hover:shadow-[0_1px_3px_0_rgba(15,23,42,0.06),0_12px_28px_-6px_rgba(244,63,94,0.18),0_24px_48px_-12px_rgba(15,23,42,0.08)] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
                 >
                   <div
                     aria-hidden="true"

@@ -92,12 +92,32 @@ export function Hero() {
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-8">
         {/* ------------------------------- العناوين والنصوص ------------------------------- */}
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 32, filter: "blur(4px)" }}
-          animate={reduce ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: reduce ? 0 : 0.12,
+                delayChildren: 0.05,
+              },
+            },
+          }}
           className="flex flex-col items-center text-center max-w-4xl mx-auto"
         >
-          <h1 className="font-display flex flex-col items-center text-hero font-extrabold text-balance text-slate-950 tracking-tight leading-[1.12]">
+          <motion.h1
+            variants={{
+              hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 28, filter: "blur(6px)" },
+              visible: {
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+                transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+              },
+            }}
+            className="font-display flex flex-col items-center text-hero font-extrabold text-balance text-slate-950 tracking-tight leading-[1.12]"
+          >
             <span>{t.hero.titleLine1}</span>
             <span className="relative mt-1.5 inline-block text-blue-600">
               <span>{t.hero.titleLine2}</span>
@@ -115,14 +135,36 @@ export function Hero() {
                 />
               </svg>
             </span>
-          </h1>
+          </motion.h1>
 
-          <p className="mt-5 max-w-2xl text-lead text-slate-600 text-pretty font-normal leading-relaxed">
+          <motion.p
+            variants={{
+              hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 24, filter: "blur(4px)" },
+              visible: {
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+                transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
+              },
+            }}
+            className="mt-5 max-w-2xl text-lead text-slate-600 text-pretty font-normal leading-relaxed"
+          >
             {t.hero.subtitle}
-          </p>
+          </motion.p>
 
           {/* زر الإجراء الرئيسي CTA */}
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
+          <motion.div
+            variants={{
+              hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 20, filter: "blur(4px)" },
+              visible: {
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+                transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+              },
+            }}
+            className="mt-7 flex flex-wrap items-center justify-center gap-4"
+          >
             <Button
               href="#download"
               size="lg"
@@ -131,10 +173,20 @@ export function Hero() {
             >
               {t.hero.ctaPrimary}
             </Button>
-          </div>
+          </motion.div>
 
           {/* توافق المنصات والشارات الداعمة */}
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-3.5 gap-y-2">
+          <motion.div
+            variants={{
+              hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 16 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] },
+              },
+            }}
+            className="mt-5 flex flex-wrap items-center justify-center gap-x-3.5 gap-y-2"
+          >
             <span className="text-[12.5px] font-semibold text-slate-500">{t.hero.availableOn}</span>
             <span className="flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white/95 px-3 py-1 text-[12.5px] font-bold text-slate-800 shadow-2xs">
               <WindowsGlyph className="size-3.5 text-blue-600" /> {t.common.windows}
@@ -147,15 +199,15 @@ export function Hero() {
               <span className="size-1.5 rounded-full bg-emerald-500" />
               {t.hero.trust}
             </span>
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* ------------------------- مسرح عرض المنتج الحقيقي smartstore.png ------------------------- */}
         <div className="relative mx-auto mt-10 sm:mt-14 lg:mt-16 w-full max-w-[min(1380px,94vw)]">
           <motion.div
-            initial={reduce ? false : { opacity: 0, y: 70, scale: 0.94, filter: "blur(6px)" }}
+            initial={reduce ? false : { opacity: 0, y: 80, scale: 0.93, filter: "blur(8px)" }}
             animate={reduce ? undefined : { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-            transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1.15, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             style={
               reduce || isTouch
                 ? undefined
@@ -171,22 +223,32 @@ export function Hero() {
             onPointerLeave={handlePointerLeave}
             className="relative flex items-center justify-center will-change-transform"
           >
-            {/* إضاءة خلفية حية متدرجة الزرقة والصفاء */}
+            {/* إضاءة خلفية حية متدرجة الزرقة والصفاء واسعة النطاق */}
             <div
               aria-hidden="true"
               className="pointer-events-none absolute -inset-6 sm:-inset-16 lg:-inset-24 -z-10 flex items-center justify-center animate-glow-slow"
             >
-              <div className="h-[400px] w-[660px] sm:h-[540px] sm:w-[1040px] lg:h-[660px] lg:w-[1280px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.22),rgba(6,182,212,0.10)_45%,transparent_72%)] blur-2xl sm:blur-3xl" />
+              <div className="h-[440px] w-[700px] sm:h-[580px] sm:w-[1080px] lg:h-[700px] lg:w-[1320px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.26),rgba(6,182,212,0.12)_45%,transparent_72%)] blur-2xl sm:blur-3xl" />
             </div>
 
-            {/* أرضية المسرح وظل الانعكاس الناعم */}
+            {/* إضاءة محيطية مركزة مباشرة خلف الإطار */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -bottom-4 sm:-bottom-7 lg:-bottom-9 left-1/2 -z-10 h-8 sm:h-12 lg:h-14 w-[92%] -translate-x-1/2 rounded-[100%] bg-slate-950/20 blur-md sm:blur-2xl"
+              className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 -z-10 h-64 w-[75%] rounded-full bg-blue-500/15 blur-3xl"
             />
 
-            {/* إطار العرض الفاخر (SaaS Software Stage Frame) */}
-            <div className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-gradient-to-b from-white/95 via-blue-50/20 to-slate-100/40 p-1.5 sm:p-2.5 shadow-2xl shadow-blue-900/10 ring-1 ring-slate-900/5 backdrop-blur-md">
+            {/* أرضية المسرح: ظل التلامس المباشر وظل الانعكاس الممتد */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -bottom-3 sm:-bottom-4 left-1/2 -z-10 h-6 sm:h-8 w-[88%] -translate-x-1/2 rounded-[100%] bg-slate-950/30 blur-sm sm:blur-md"
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -bottom-7 sm:-bottom-10 lg:-bottom-12 left-1/2 -z-10 h-14 sm:h-20 lg:h-24 w-[96%] -translate-x-1/2 rounded-[100%] bg-blue-950/15 blur-2xl sm:blur-3xl"
+            />
+
+            {/* إطار العرض الفاخر (SaaS Software Stage Frame) مع ظل احترافي وتطويق مزدوج */}
+            <div className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-slate-200/90 bg-gradient-to-b from-white/95 via-blue-50/20 to-slate-100/40 p-2 sm:p-3 shadow-saas-stage backdrop-blur-md">
               <img
                 src={smartstoreImg}
                 alt={altText}

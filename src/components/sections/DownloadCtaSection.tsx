@@ -36,17 +36,17 @@ export function DownloadCtaSection() {
   return (
     <section
       id="download"
-      className="relative overflow-hidden py-16 sm:py-24 border-t border-slate-200/70"
+      className="relative overflow-hidden py-18 sm:py-28 border-t border-slate-200/80 bg-gradient-to-b from-transparent via-blue-50/25 to-slate-50/50"
     >
       {/* شبكة خلفية ناعمة */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-35 -z-10"
+        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-40 -z-10"
       />
 
-      {/* هالة ضوئية زرقاء واسعة خلف بطاقات التحميل */}
+      {/* هالة ضوئية زرقاء وسماوية واسعة خلف بطاقات التحميل */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center -z-10" aria-hidden="true">
-        <div className="size-[720px] rounded-full bg-blue-100/30 blur-3xl" />
+        <div className="h-[520px] w-[940px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.14),rgba(14,165,233,0.07)_50%,transparent_72%)] blur-3xl" />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
@@ -97,12 +97,12 @@ export function DownloadCtaSection() {
               reduce
                 ? undefined
                 : {
-                    y: -8,
-                    scale: 1.015,
-                    transition: { duration: 0.25, ease: "easeOut" },
+                    y: -6,
+                    scale: 1.012,
+                    transition: { type: "spring", stiffness: 350, damping: 25 },
                   }
             }
-            className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-8 shadow-xs backdrop-blur-xs hover:border-blue-400 hover:shadow-xl hover:shadow-blue-500/12 transition-all duration-300 will-change-transform"
+            className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-8 shadow-saas-card ring-1 ring-slate-900/[0.03] backdrop-blur-sm hover:border-blue-400/90 hover:shadow-saas-card-hover transition-all duration-300 will-change-transform"
           >
             {/* لمعة ضوئية زرقاء علوية */}
             <div
@@ -184,12 +184,12 @@ export function DownloadCtaSection() {
               reduce
                 ? undefined
                 : {
-                    y: -8,
-                    scale: 1.015,
-                    transition: { duration: 0.25, ease: "easeOut" },
+                    y: -6,
+                    scale: 1.012,
+                    transition: { type: "spring", stiffness: 350, damping: 25 },
                   }
             }
-            className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-8 shadow-xs backdrop-blur-xs hover:border-emerald-400 hover:shadow-xl hover:shadow-emerald-500/12 transition-all duration-300 will-change-transform"
+            className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-8 shadow-saas-card ring-1 ring-slate-900/[0.03] backdrop-blur-sm hover:border-emerald-400/90 hover:shadow-[0_1px_3px_0_rgba(15,23,42,0.06),0_12px_28px_-6px_rgba(16,185,129,0.18),0_24px_48px_-12px_rgba(15,23,42,0.08)] transition-all duration-300 will-change-transform"
           >
             {/* لمعة ضوئية خضراء علوية */}
             <div
