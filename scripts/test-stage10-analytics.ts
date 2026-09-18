@@ -1,8 +1,8 @@
 import { setMockDb } from "../api/_lib/db";
-import analyticsHandler from "../api/admin/analytics/index";
-import analyticsSummaryHandler from "../api/admin/analytics/summary";
-import analyticsTimeseriesHandler from "../api/admin/analytics/timeseries";
-import analyticsReleasesHandler from "../api/admin/analytics/releases";
+import analyticsHandler from "../api/_routes/admin/analytics/index";
+import analyticsSummaryHandler from "../api/_routes/admin/analytics/summary";
+import analyticsTimeseriesHandler from "../api/_routes/admin/analytics/timeseries";
+import analyticsReleasesHandler from "../api/_routes/admin/analytics/releases";
 import { generateSessionToken, SESSION_COOKIE_NAME } from "../api/_lib/auth";
 import {
   REPORTING_TIMEZONE,

@@ -2,10 +2,10 @@ import bcrypt from "bcryptjs";
 import { setMockDb } from "../api/_lib/db";
 import { hashSessionToken, BCRYPT_WORK_FACTOR } from "../api/_lib/auth";
 import { clearLoginRateLimit, getAnonymizedClientKey } from "../api/_lib/security";
-import loginHandler from "../api/auth/login";
-import logoutHandler from "../api/auth/logout";
-import sessionHandler from "../api/auth/session";
-import changePasswordHandler from "../api/auth/change-password";
+import loginHandler from "../api/_routes/auth/login";
+import logoutHandler from "../api/_routes/auth/logout";
+import sessionHandler from "../api/_routes/auth/session";
+import changePasswordHandler from "../api/_routes/auth/change-password";
 
 function createMockReq(options: {
   method?: string;

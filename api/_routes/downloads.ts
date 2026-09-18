@@ -1,12 +1,12 @@
 import { eq, and } from "drizzle-orm";
-import { db, schema } from "./_lib/db";
+import { db, schema } from "../_lib/db";
 import {
   requireMethod,
   setCacheHeaders,
   sendSuccess,
   handleApiError,
-} from "./_lib/response";
-import type { ApiRequest, ApiResponse } from "./_lib/types";
+} from "../_lib/response";
+import type { ApiRequest, ApiResponse } from "../_lib/types";
 
 export interface PublicPlatformMeta {
   available: boolean;

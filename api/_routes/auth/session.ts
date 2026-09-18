@@ -1,17 +1,17 @@
 import { eq, and, gt } from "drizzle-orm";
-import { db, schema } from "../_lib/db";
+import { db, schema } from "../../_lib/db";
 import {
   requireMethod,
   setCacheHeaders,
   sendSuccess,
   handleApiError,
-} from "../_lib/response";
+} from "../../_lib/response";
 import {
   getSessionTokenFromRequest,
   hashSessionToken,
   createClearSessionCookie,
-} from "../_lib/auth";
-import type { ApiRequest, ApiResponse } from "../_lib/types";
+} from "../../_lib/auth";
+import type { ApiRequest, ApiResponse } from "../../_lib/types";
 
 export default async function handler(req: ApiRequest, res: ApiResponse): Promise<void> {
   // 1. Enforce cache prevention for dynamic session state

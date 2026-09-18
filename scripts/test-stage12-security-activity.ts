@@ -1,8 +1,8 @@
 import { setMockDb } from "../api/_lib/db";
-import securityHandler from "../api/admin/security/index";
-import sessionsHandler from "../api/admin/security/sessions";
-import activityHandler from "../api/admin/activity/index";
-import changePasswordHandler from "../api/auth/change-password";
+import securityHandler from "../api/_routes/admin/security/index";
+import sessionsHandler from "../api/_routes/admin/security/sessions";
+import activityHandler from "../api/_routes/admin/activity/index";
+import changePasswordHandler from "../api/_routes/auth/change-password";
 import {
   generateSessionToken,
   hashSessionToken,

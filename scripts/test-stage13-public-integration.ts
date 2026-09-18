@@ -5,8 +5,8 @@ import { setMockDb } from "../api/_lib/db";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-import publicDownloadsHandler from "../api/downloads";
-import publicContactHandler from "../api/site/contact";
+import publicDownloadsHandler from "../api/_routes/downloads";
+import publicContactHandler from "../api/_routes/site/contact";
 import { ar } from "../src/locales/ar";
 import { fr } from "../src/locales/fr";
 import { siteConfig } from "../src/config/site";

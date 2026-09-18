@@ -1,7 +1,7 @@
 /**
  * Smart Store Local Full-Stack Runtime Server
  * Serves compiled production frontend (dist/) with Vercel security headers & SPA routing,
- * and mounts real Vercel Serverless Function API endpoints connected directly to Neon PostgreSQL.
+ * and mounts the unified Vercel Serverless Function API router connected directly to Neon PostgreSQL.
  */
 
 import * as dotenv from "dotenv";
@@ -12,23 +12,8 @@ import fs from "fs";
 import path from "path";
 import { parseCookie } from "cookie";
 
-// Import real API handlers
-import loginHandler from "../api/auth/login";
-import logoutHandler from "../api/auth/logout";
-import sessionHandler from "../api/auth/session";
-import changePasswordHandler from "../api/auth/change-password";
-import releasesHandler from "../api/admin/releases";
-import downloadsHandler from "../api/admin/downloads";
-import analyticsHandler from "../api/admin/analytics";
-import analyticsSummaryHandler from "../api/admin/analytics/summary";
-import websiteHandler from "../api/admin/website";
-import securityHandler from "../api/admin/security";
-import securitySessionsHandler from "../api/admin/security/sessions";
-import activityHandler from "../api/admin/activity";
-import publicDownloadsMetaHandler from "../api/downloads";
-import winDownloadHandler from "../api/download/windows";
-import androidDownloadHandler from "../api/download/android";
-import contactHandler from "../api/site/contact";
+// Import unified API router
+import routerHandler from "../api/_routes/router";
 import type { ApiRequest, ApiResponse } from "../api/_lib/types";
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
@@ -53,26 +38,6 @@ const mimeTypes: Record<string, string> = {
   ".woff2": "font/woff2",
 };
 
-// Route registry
-const apiRoutes: Record<string, (req: ApiRequest, res: ApiResponse) => Promise<void>> = {
-  "/api/auth/login": loginHandler,
-  "/api/auth/logout": logoutHandler,
-  "/api/auth/session": sessionHandler,
-  "/api/auth/change-password": changePasswordHandler,
-  "/api/admin/releases": releasesHandler,
-  "/api/admin/downloads": downloadsHandler,
-  "/api/admin/analytics/summary": analyticsSummaryHandler,
-  "/api/admin/analytics": analyticsHandler,
-  "/api/admin/website": websiteHandler,
-  "/api/admin/security/sessions": securitySessionsHandler,
-  "/api/admin/security": securityHandler,
-  "/api/admin/activity": activityHandler,
-  "/api/downloads": publicDownloadsMetaHandler,
-  "/api/download/windows": winDownloadHandler,
-  "/api/download/android": androidDownloadHandler,
-  "/api/site/contact": contactHandler,
-};
-
 const server = http.createServer(async (req, res) => {
   // 1. Global Vercel Security Headers
   res.setHeader("X-Content-Type-Options", "nosniff");
@@ -87,18 +52,8 @@ const server = http.createServer(async (req, res) => {
   const url = new URL(req.url || "/", `http://${req.headers.host || `localhost:${PORT}`}`);
   const pathname = url.pathname;
 
-  // 2. Handle API Routes
-  if (pathname.startsWith("/api/")) {
-    const handler = apiRoutes[pathname];
-
-    if (!handler) {
-      res.setHeader("Content-Type", "application/json; charset=utf-8");
-      res.statusCode = 404;
-      res.end(JSON.stringify({ ok: false, error: "API route not found", code: "NOT_FOUND" }));
-      return;
-    }
-
-    // Read request body
+  // 2. Handle API Routes via Unified Router
+  if (pathname === "/api" || pathname.startsWith("/api/")) {
     let rawBody = "";
     req.on("data", (chunk) => {
       rawBody += chunk;
@@ -149,7 +104,7 @@ const server = http.createServer(async (req, res) => {
       };
 
       try {
-        await handler(apiReq, apiRes);
+        await routerHandler(apiReq, apiRes);
       } catch (err: unknown) {
         console.error(`API Error on ${pathname}:`, err);
         if (!res.headersSent) {
@@ -198,4 +153,3 @@ server.listen(PORT, "127.0.0.1", () => {
   console.log(`Database Backend:     Neon PostgreSQL (Connected)`);
   console.log("==================================================");
 });
-

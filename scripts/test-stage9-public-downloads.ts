@@ -1,9 +1,9 @@
 import { setMockDb } from "../api/_lib/db";
-import windowsDownloadHandler from "../api/download/windows";
-import androidDownloadHandler from "../api/download/android";
-import publicDownloadsMetaHandler from "../api/downloads";
-import adminDownloadsHandler from "../api/admin/downloads";
-import adminReleasesHandler from "../api/admin/releases";
+import windowsDownloadHandler from "../api/_routes/download/windows";
+import androidDownloadHandler from "../api/_routes/download/android";
+import publicDownloadsMetaHandler from "../api/_routes/downloads";
+import adminDownloadsHandler from "../api/_routes/admin/downloads";
+import adminReleasesHandler from "../api/_routes/admin/releases";
 import { generateSessionToken, createSessionCookie } from "../api/_lib/auth";
 import fs from "fs";
 import path from "path";

@@ -1,13 +1,13 @@
 import { eq, sql, desc } from "drizzle-orm";
-import { db, schema } from "../_lib/db";
+import { db, schema } from "../../_lib/db";
 import {
   requireMethod,
   setCacheHeaders,
   sendSuccess,
   handleApiError,
-} from "../_lib/response";
-import { requireAdmin } from "../_lib/auth";
-import type { ApiRequest, ApiResponse } from "../_lib/types";
+} from "../../_lib/response";
+import { requireAdmin } from "../../_lib/auth";
+import type { ApiRequest, ApiResponse } from "../../_lib/types";
 
 export interface ReleaseWithStats {
   id: string;

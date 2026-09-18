@@ -1,7 +1,7 @@
 import { setMockDb } from "../api/_lib/db";
 import { generateSessionToken, createSessionCookie } from "../api/_lib/auth";
-import releasesHandler from "../api/admin/releases";
-import downloadsHandler from "../api/admin/downloads";
+import releasesHandler from "../api/_routes/admin/releases";
+import downloadsHandler from "../api/_routes/admin/downloads";
 import { ar } from "../src/locales/ar";
 import { fr } from "../src/locales/fr";
 

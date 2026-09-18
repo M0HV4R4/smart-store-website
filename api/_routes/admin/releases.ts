@@ -1,22 +1,22 @@
 import { eq, and, ne, sql, desc, ilike, inArray } from "drizzle-orm";
-import { db, schema } from "../_lib/db";
+import { db, schema } from "../../_lib/db";
 import {
   requireMethod,
   setCacheHeaders,
   sendSuccess,
   sendError,
   handleApiError,
-} from "../_lib/response";
-import { requireAdmin } from "../_lib/auth";
-import { verifyCsrfOrigin, validateDownloadUrl } from "../_lib/security";
+} from "../../_lib/response";
+import { requireAdmin } from "../../_lib/auth";
+import { verifyCsrfOrigin, validateDownloadUrl } from "../../_lib/security";
 import {
   validateData,
   releaseInputSchema,
   releaseUpdateSchema,
   releaseQuerySchema,
-} from "../_lib/validation";
-import { logAudit } from "../_lib/audit";
-import type { ApiRequest, ApiResponse } from "../_lib/types";
+} from "../../_lib/validation";
+import { logAudit } from "../../_lib/audit";
+import type { ApiRequest, ApiResponse } from "../../_lib/types";
 
 export default async function handler(req: ApiRequest, res: ApiResponse): Promise<void> {
   // 1. Prevent caching

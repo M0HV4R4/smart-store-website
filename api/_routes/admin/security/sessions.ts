@@ -1,20 +1,20 @@
 import { eq, and, gt, desc } from "drizzle-orm";
-import { db, schema } from "../../_lib/db";
+import { db, schema } from "../../../_lib/db";
 import {
   requireMethod,
   setCacheHeaders,
   sendSuccess,
   sendError,
   handleApiError,
-} from "../../_lib/response";
+} from "../../../_lib/response";
 import {
   requireAdmin,
   deleteOtherAdminSessions,
   cleanupExpiredSessions,
-} from "../../_lib/auth";
-import { verifyCsrfOrigin } from "../../_lib/security";
-import { logAudit } from "../../_lib/audit";
-import type { ApiRequest, ApiResponse } from "../../_lib/types";
+} from "../../../_lib/auth";
+import { verifyCsrfOrigin } from "../../../_lib/security";
+import { logAudit } from "../../../_lib/audit";
+import type { ApiRequest, ApiResponse } from "../../../_lib/types";
 
 // UUID format validation regex (standard 32 hex chars with hyphens)
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;

@@ -1,13 +1,13 @@
-import { db } from "../../_lib/db";
+import { db } from "../../../_lib/db";
 import {
   requireMethod,
   setCacheHeaders,
   sendSuccess,
   handleApiError,
-} from "../../_lib/response";
-import { requireAdmin } from "../../_lib/auth";
-import { getTopReleases } from "../../_lib/analytics";
-import type { ApiRequest, ApiResponse } from "../../_lib/types";
+} from "../../../_lib/response";
+import { requireAdmin } from "../../../_lib/auth";
+import { getTopReleases } from "../../../_lib/analytics";
+import type { ApiRequest, ApiResponse } from "../../../_lib/types";
 
 export default async function handler(req: ApiRequest, res: ApiResponse): Promise<void> {
   // 1. Prevent caching

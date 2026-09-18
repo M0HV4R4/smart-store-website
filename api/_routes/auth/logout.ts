@@ -4,15 +4,15 @@ import {
   sendSuccess,
   sendError,
   handleApiError,
-} from "../_lib/response";
+} from "../../_lib/response";
 import {
   getSessionTokenFromRequest,
   deleteSessionByToken,
   createClearSessionCookie,
-} from "../_lib/auth";
-import { verifyCsrfOrigin } from "../_lib/security";
-import { logAudit } from "../_lib/audit";
-import type { ApiRequest, ApiResponse } from "../_lib/types";
+} from "../../_lib/auth";
+import { verifyCsrfOrigin } from "../../_lib/security";
+import { logAudit } from "../../_lib/audit";
+import type { ApiRequest, ApiResponse } from "../../_lib/types";
 
 export default async function handler(req: ApiRequest, res: ApiResponse): Promise<void> {
   // 1. Enforce cache prevention

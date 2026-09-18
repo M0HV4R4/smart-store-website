@@ -1,6 +1,6 @@
 import { setMockDb } from "../api/_lib/db";
-import publicContactHandler from "../api/site/contact";
-import adminWebsiteHandler from "../api/admin/website";
+import publicContactHandler from "../api/_routes/site/contact";
+import adminWebsiteHandler from "../api/_routes/admin/website";
 import { generateSessionToken, SESSION_COOKIE_NAME } from "../api/_lib/auth";
 import {
   normalizeWhatsAppNumber,

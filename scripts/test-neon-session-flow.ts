@@ -11,8 +11,8 @@ dotenv.config();
 import { eq } from "drizzle-orm";
 import { db, schema } from "../api/_lib/db";
 import { createAdminSession, hashSessionToken, SESSION_COOKIE_NAME } from "../api/_lib/auth";
-import sessionHandler from "../api/auth/session";
-import logoutHandler from "../api/auth/logout";
+import sessionHandler from "../api/_routes/auth/session";
+import logoutHandler from "../api/_routes/auth/logout";
 import type { ApiRequest } from "../api/_lib/types";
 
 let passed = 0;
