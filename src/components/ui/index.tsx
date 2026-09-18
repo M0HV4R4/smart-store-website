@@ -80,16 +80,16 @@ type ButtonBase = {
 };
 
 const SIZES = {
-  sm: "h-10 px-4 text-[13.5px] gap-2 rounded-lg",
-  md: "h-11 px-5 text-[14.5px] gap-2.5 rounded-lg",
-  lg: "h-12 px-6 text-[15.5px] gap-2.5 rounded-lg",
+  sm: "h-9.5 px-4 text-[13px] gap-2 rounded-full",
+  md: "h-11 px-5.5 text-[14px] gap-2.5 rounded-full",
+  lg: "h-12.5 px-6.5 text-[15px] gap-2.5 rounded-full",
 };
 
 const VARIANTS = {
-  primary: "text-white bg-blue-600 hover:bg-blue-700 border border-blue-600 shadow-sm",
-  glass: "bg-white text-slate-900 border border-slate-300 hover:bg-slate-50 shadow-sm",
-  ghost: "text-slate-700 hover:text-slate-900 hover:bg-slate-100 border border-transparent",
-  light: "bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200",
+  primary: "text-white bg-blue-600 hover:bg-blue-700 shadow-sm shadow-blue-600/25 hover:shadow-md hover:shadow-blue-600/35 active:scale-[0.98] transition-all duration-200",
+  glass: "bg-white/95 text-slate-800 border border-slate-200/90 hover:bg-white hover:border-slate-300 shadow-xs hover:shadow-sm active:scale-[0.98] transition-all duration-200",
+  ghost: "text-slate-700 hover:text-blue-600 hover:bg-blue-50/60 active:scale-[0.98] transition-all duration-200",
+  light: "bg-blue-50 text-blue-700 hover:bg-blue-100/80 border border-blue-200/80 active:scale-[0.98] transition-all duration-200",
 };
 
 function inner(icon: ReactNode, children: ReactNode, iconEnd: ReactNode) {
@@ -116,7 +116,7 @@ export function Button({
 }: ButtonBase &
   Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> & { href?: string }) {
   const classes = cn(
-    "inline-flex items-center justify-center font-semibold whitespace-nowrap disabled:pointer-events-none disabled:opacity-50",
+    "inline-flex items-center justify-center font-bold tracking-tight whitespace-nowrap select-none disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2",
     SIZES[size],
     VARIANTS[variant],
     fullWidth && "w-full",
@@ -153,8 +153,8 @@ export function Card({
   return (
     <Tag
       className={cn(
-        "relative rounded-card border border-slate-200 bg-white p-6 shadow-sm",
-        interactive && "hover:border-slate-300",
+        "relative rounded-2xl border border-slate-200/85 bg-white/95 p-6 sm:p-7 shadow-xs backdrop-blur-xs transition-all duration-300",
+        interactive && "hover:border-blue-400/80 hover:shadow-xl hover:shadow-blue-500/8 hover:-translate-y-1",
         className,
       )}
     >
@@ -172,7 +172,7 @@ export function IconTile({
   className?: string;
 }) {
   return (
-    <span className={cn("grid size-10 shrink-0 place-items-center rounded-lg bg-blue-50 text-blue-600 border border-blue-100", className)}>
+    <span className={cn("grid size-11 shrink-0 place-items-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/90 shadow-2xs", className)}>
       {children}
     </span>
   );
@@ -180,12 +180,24 @@ export function IconTile({
 
 export function Pill({
   children,
+  tone = "default",
+  className,
 }: {
   children: ReactNode;
-  tone?: string;
+  tone?: "default" | "blue" | "emerald" | "brand" | "danger" | string;
+  className?: string;
 }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-100 px-2.5 py-0.5 text-[11.5px] font-semibold text-slate-700">
+    <span
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[12px] font-semibold transition-colors",
+        (tone === "blue" || tone === "brand") && "bg-blue-50 text-blue-700 border border-blue-200/80",
+        tone === "emerald" && "bg-emerald-50 text-emerald-700 border border-emerald-200/80",
+        tone === "danger" && "bg-rose-50 text-rose-700 border border-rose-200/80",
+        tone === "default" && "bg-slate-100 text-slate-700 border border-slate-200/80",
+        className,
+      )}
+    >
       {children}
     </span>
   );

@@ -42,12 +42,15 @@ export function HowItWorks() {
   return (
     <section
       id="how"
-      className="relative overflow-hidden bg-gradient-to-b from-slate-50/70 via-blue-50/25 to-white py-12 sm:py-18 border-t border-slate-200/60"
+      className="relative overflow-hidden py-16 sm:py-24 border-t border-slate-200/70"
     >
+      {/* مرسى لقسم المميزات لضمان وصول روابط #features و #how معاً */}
+      <div id="features" className="absolute -top-24" aria-hidden="true" />
+
       {/* شبكة خلفية ناعمة مع تلاشٍ دائري خفيف */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-45 -z-10"
+        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-40 -z-10"
       />
 
       {/* إضاءة محيطية زرقاء هادئة */}
@@ -55,44 +58,44 @@ export function HowItWorks() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 flex items-center justify-center -z-10"
       >
-        <div className="size-[580px] rounded-full bg-blue-100/30 blur-3xl" />
+        <div className="size-[620px] rounded-full bg-blue-100/35 blur-3xl" />
       </div>
 
-      <div className="mx-auto w-full max-w-[1240px] px-4 sm:px-6">
+      <div className="mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
         {/* صف العناوين الرئيسي: شارة زرقاء + عنوان واضح + نص وصفي */}
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 24 }}
+          initial={reduce ? false : { opacity: 0, y: 30 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col justify-between gap-5 md:flex-row md:items-end"
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col justify-between gap-6 md:flex-row md:items-end"
         >
           <div className="max-w-xl">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3.5 py-1 text-[12.5px] font-semibold text-blue-700 border border-blue-200/80 shadow-2xs">
-              <span className="size-1.5 rounded-full bg-blue-600" />
+            <span className="inline-flex items-center gap-2 rounded-full bg-blue-50/90 px-3.5 py-1 text-[12.5px] font-bold text-blue-700 border border-blue-200/90 shadow-2xs">
+              <span className="size-2 rounded-full bg-blue-600 animate-pulse" />
               {t.how.eyebrow}
             </span>
-            <h2 className="font-display mt-3 text-h2 font-extrabold text-slate-950">
+            <h2 className="font-display mt-3.5 text-h2 font-extrabold text-slate-950 tracking-tight leading-tight">
               {t.how.titleLine1}{" "}
               <span className="text-blue-600">{t.how.titleLine2}</span>
             </h2>
           </div>
 
           <div className="max-w-md">
-            <p className="text-[15px] leading-relaxed text-slate-600 sm:text-[16px]">
+            <p className="text-[15px] leading-relaxed text-slate-600 sm:text-[16px] font-normal">
               {t.how.subtitle}
             </p>
           </div>
         </motion.div>
 
-        {/* شبكة البطاقات الأربع: حالة راحة موحدة 100% للبطاقات (مع إلغاء أي حالة نشطة دائمة لـ 03) */}
+        {/* شبكة البطاقات الأربع مع دعم التمرير المزدوج والارتفاع السلس */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
+          viewport={{ once: false, amount: 0.15 }}
           style={{ perspective: 1200 }}
-          className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
+          className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
         >
           {t.how.steps.map((step, idx) => {
             const Icon = icons[idx] || Package;
@@ -105,17 +108,17 @@ export function HowItWorks() {
                   reduce
                     ? undefined
                     : {
-                        y: -10,
-                        scale: 1.02,
+                        y: -8,
+                        scale: 1.015,
                         transition: { duration: 0.25, ease: "easeOut" },
                       }
                 }
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/85 bg-white/90 p-6 sm:p-7 shadow-xs backdrop-blur-xs hover:border-blue-400 hover:bg-gradient-to-b hover:from-white hover:to-blue-50/30 hover:shadow-2xl hover:shadow-blue-500/12 transition-all duration-300 will-change-transform"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/85 bg-white/95 p-6 sm:p-7 shadow-xs backdrop-blur-xs hover:border-blue-400 hover:bg-gradient-to-b hover:from-white hover:to-blue-50/25 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 will-change-transform"
               >
-                {/* تأثير لمعة ضوئية علوية أنيقة تظهر عند التمرير */}
+                {/* تأثير لمعة ضوئية علوية متدرجة تظهر عند التحويم */}
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  className="pointer-events-none absolute inset-x-0 top-0 h-[2.5px] bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                 />
 
                 <div>
@@ -130,7 +133,7 @@ export function HowItWorks() {
                     </span>
                   </div>
 
-                  {/* رقم الخطوة المتدرج الواضح */}
+                  {/* رقم الخطوة الواضح والبارز */}
                   <div className="mt-6 flex items-baseline gap-1.5">
                     <span className="font-display text-[32px] font-extrabold text-slate-950 tabular-nums leading-none tracking-tight">
                       {step.n}
@@ -143,7 +146,7 @@ export function HowItWorks() {
                   </h3>
 
                   {/* وصف الخطوة */}
-                  <p className="mt-2 text-[13.5px] leading-relaxed text-slate-600">
+                  <p className="mt-2 text-[13.5px] leading-relaxed text-slate-600 font-normal">
                     {step.desc}
                   </p>
                 </div>
@@ -154,7 +157,7 @@ export function HowItWorks() {
                     {step.highlights.map((tag, i) => (
                       <span
                         key={i}
-                        className="rounded-lg bg-slate-50 border border-slate-200/70 px-2.5 py-1 text-[11.5px] font-medium text-slate-700 transition-colors duration-200 group-hover:bg-blue-50/70 group-hover:border-blue-200 group-hover:text-blue-800"
+                        className="rounded-full bg-slate-50 border border-slate-200/80 px-2.5 py-1 text-[11.5px] font-semibold text-slate-700 transition-colors duration-200 group-hover:bg-blue-50/90 group-hover:border-blue-200 group-hover:text-blue-800"
                       >
                         {tag}
                       </span>

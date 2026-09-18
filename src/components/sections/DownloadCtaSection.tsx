@@ -36,60 +36,65 @@ export function DownloadCtaSection() {
   return (
     <section
       id="download"
-      className="relative overflow-hidden bg-gradient-to-b from-white via-blue-50/25 to-slate-50/70 py-12 sm:py-18 border-t border-slate-200/70"
+      className="relative overflow-hidden py-16 sm:py-24 border-t border-slate-200/70"
     >
       {/* شبكة خلفية ناعمة */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-40 -z-10"
+        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-35 -z-10"
       />
 
       {/* هالة ضوئية زرقاء واسعة خلف بطاقات التحميل */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center -z-10" aria-hidden="true">
-        <div className="size-[680px] rounded-full bg-blue-100/35 blur-3xl" />
+        <div className="size-[720px] rounded-full bg-blue-100/30 blur-3xl" />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1240px] px-4 sm:px-6">
+      <div className="relative z-10 mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
         {/* العناوين التمهيدية */}
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 24 }}
+          initial={reduce ? false : { opacity: 0, y: 30 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: false, amount: 0.15 }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           className="mx-auto max-w-2xl text-center"
         >
-          <h2 className="font-display text-h2 font-extrabold text-slate-950 text-balance">
-            <span>{locale === "ar" ? "تحميل" : "Télécharger"}</span>{" "}
+          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/90 bg-white/95 px-4 py-1.5 text-[12px] font-bold text-blue-700 shadow-2xs backdrop-blur-md mb-3">
+            <span className="size-2 rounded-full bg-blue-600 animate-pulse" />
+            <span>{locale === "ar" ? "التحميل الفوري المجاني" : "Téléchargement Immédiat"}</span>
+          </div>
+
+          <h2 className="font-display text-h2 font-extrabold text-slate-950 text-balance tracking-tight">
+            <span>{locale === "ar" ? "تحميل برنامج" : "Télécharger"}</span>{" "}
             <span className="relative inline-block text-blue-600">
               <span>Smart Store</span>
               <svg
                 aria-hidden="true"
                 viewBox="0 0 100 12"
-                className="absolute -bottom-2.5 start-0 w-full text-blue-600 overflow-visible pointer-events-none"
+                className="absolute -bottom-2.5 start-0 w-full text-blue-600/80 overflow-visible pointer-events-none"
                 fill="none"
               >
                 <path
                   d="M2 9C30 3 70 3 98 8"
                   stroke="currentColor"
-                  strokeWidth="1.5"
+                  strokeWidth="2"
                   strokeLinecap="round"
                 />
               </svg>
             </span>
           </h2>
 
-          <p className="mt-3 text-[15px] leading-relaxed text-slate-600 sm:text-[16px]">
+          <p className="mt-3.5 text-[15px] leading-relaxed text-slate-600 sm:text-[16px] font-normal">
             {t.download.subtitle}
           </p>
         </motion.div>
 
         {/* بطاقتي التحميل: بطاقة Windows وبطاقة Android APK */}
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 32 }}
+          initial={reduce ? false : { opacity: 0, y: 40 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="mx-auto mt-9 grid max-w-4xl grid-cols-1 gap-6 sm:grid-cols-2"
+          viewport={{ once: false, amount: 0.15 }}
+          transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-7 sm:grid-cols-2"
         >
           {/* بطاقة Windows */}
           <motion.div
@@ -97,21 +102,27 @@ export function DownloadCtaSection() {
               reduce
                 ? undefined
                 : {
-                    y: -6,
+                    y: -8,
                     scale: 1.015,
                     transition: { duration: 0.25, ease: "easeOut" },
                   }
             }
-            className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-8 shadow-xs backdrop-blur-xs hover:border-blue-400 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 will-change-transform"
+            className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-8 shadow-xs backdrop-blur-xs hover:border-blue-400 hover:shadow-xl hover:shadow-blue-500/12 transition-all duration-300 will-change-transform"
           >
+            {/* لمعة ضوئية زرقاء علوية */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 top-0 h-[2.5px] bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            />
+
             <div>
               {/* أيقونة المنصة واسمها */}
               <div className="flex items-center justify-between">
-                <span className="grid size-12 place-items-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105 group-hover:shadow-md group-hover:shadow-blue-500/20">
+                <span className="grid size-12 place-items-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/90 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105 group-hover:shadow-md group-hover:shadow-blue-500/20">
                   <WindowsGlyph className="size-6" />
                 </span>
-                <span className="flex items-center gap-1.5 text-[12px] font-medium text-slate-600 bg-slate-50 border border-slate-200/80 rounded-lg px-2.5 py-1">
-                  <Laptop className="size-3.5 text-slate-400" />
+                <span className="flex items-center gap-1.5 text-[12px] font-bold text-slate-700 bg-slate-50 border border-slate-200/90 rounded-full px-3 py-1">
+                  <Laptop className="size-3.5 text-blue-600" />
                   <span>
                     {meta?.windows?.version ? `v${meta.windows.version}` : "Windows 10 / 11"}
                   </span>
@@ -121,7 +132,7 @@ export function DownloadCtaSection() {
               <h3 className="font-display mt-5 text-[20px] font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
                 {t.download.windows.title}
               </h3>
-              <p className="mt-2 text-[13.5px] leading-relaxed text-slate-600">
+              <p className="mt-2 text-[13.5px] leading-relaxed text-slate-600 font-normal">
                 {t.download.windows.desc}
               </p>
 
@@ -140,9 +151,9 @@ export function DownloadCtaSection() {
               )}
 
               {/* قائمة المميزات */}
-              <ul className="mt-5 space-y-2 border-t border-slate-100 pt-4">
+              <ul className="mt-5 space-y-2.5 border-t border-slate-100 pt-4">
                 {t.download.windows.features.map((feat, i) => (
-                  <li key={i} className="flex items-center gap-2 text-[13px] text-slate-600">
+                  <li key={i} className="flex items-center gap-2.5 text-[13px] font-medium text-slate-700">
                     <CheckCircle2 className="size-4 text-blue-600 shrink-0" />
                     <span>{feat}</span>
                   </li>
@@ -151,18 +162,18 @@ export function DownloadCtaSection() {
             </div>
 
             {/* زر التحميل الفعلي */}
-            <div className="mt-6 pt-2">
+            <div className="mt-7 pt-2">
               <a
                 href="/api/download/windows"
                 className={cn(
-                  "relative flex w-full items-center justify-center gap-2.5 rounded-xl px-5 py-3.5 text-[15px] font-bold transition-all duration-200 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2",
+                  "relative flex w-full items-center justify-center gap-2.5 rounded-full px-5 py-3.5 text-[14.5px] font-bold transition-all duration-200 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2",
                   meta?.windows?.available ?? true
-                    ? "bg-blue-600 text-white hover:bg-blue-700 shadow-blue-600/20 hover:shadow-md hover:shadow-blue-600/30"
+                    ? "bg-blue-600 text-white hover:bg-blue-700 shadow-blue-600/20 hover:shadow-md hover:shadow-blue-600/30 active:scale-[0.98]"
                     : "pointer-events-none bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed",
                 )}
                 aria-disabled={!(meta?.windows?.available ?? true)}
               >
-                <ArrowDownToLine className="size-5" />
+                <ArrowDownToLine className="size-4.5" />
                 <span>
                   {(meta?.windows?.available ?? true)
                     ? t.download.windows.cta
@@ -178,21 +189,27 @@ export function DownloadCtaSection() {
               reduce
                 ? undefined
                 : {
-                    y: -6,
+                    y: -8,
                     scale: 1.015,
                     transition: { duration: 0.25, ease: "easeOut" },
                   }
             }
-            className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-8 shadow-xs backdrop-blur-xs hover:border-emerald-400 hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300 will-change-transform"
+            className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white/95 p-6 sm:p-8 shadow-xs backdrop-blur-xs hover:border-emerald-400 hover:shadow-xl hover:shadow-emerald-500/12 transition-all duration-300 will-change-transform"
           >
+            {/* لمعة ضوئية خضراء علوية */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 top-0 h-[2.5px] bg-gradient-to-r from-transparent via-emerald-500 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            />
+
             <div>
               {/* أيقونة المنصة واسمها */}
               <div className="flex items-center justify-between">
-                <span className="grid size-12 place-items-center rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100 transition-all duration-300 group-hover:bg-emerald-600 group-hover:text-white group-hover:scale-105 group-hover:shadow-md group-hover:shadow-emerald-500/20">
+                <span className="grid size-12 place-items-center rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100/90 transition-all duration-300 group-hover:bg-emerald-600 group-hover:text-white group-hover:scale-105 group-hover:shadow-md group-hover:shadow-emerald-500/20">
                   <AndroidGlyph className="size-6" />
                 </span>
-                <span className="flex items-center gap-1.5 text-[12px] font-medium text-slate-600 bg-slate-50 border border-slate-200/80 rounded-lg px-2.5 py-1">
-                  <Smartphone className="size-3.5 text-slate-400" />
+                <span className="flex items-center gap-1.5 text-[12px] font-bold text-slate-700 bg-slate-50 border border-slate-200/90 rounded-full px-3 py-1">
+                  <Smartphone className="size-3.5 text-emerald-600" />
                   <span>
                     {meta?.android?.version ? `v${meta.android.version}` : "Android 7.0+"}
                   </span>
@@ -202,7 +219,7 @@ export function DownloadCtaSection() {
               <h3 className="font-display mt-5 text-[20px] font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">
                 {t.download.android.title}
               </h3>
-              <p className="mt-2 text-[13.5px] leading-relaxed text-slate-600">
+              <p className="mt-2 text-[13.5px] leading-relaxed text-slate-600 font-normal">
                 {t.download.android.desc}
               </p>
 
@@ -221,9 +238,9 @@ export function DownloadCtaSection() {
               )}
 
               {/* قائمة المميزات */}
-              <ul className="mt-5 space-y-2 border-t border-slate-100 pt-4">
+              <ul className="mt-5 space-y-2.5 border-t border-slate-100 pt-4">
                 {t.download.android.features.map((feat, i) => (
-                  <li key={i} className="flex items-center gap-2 text-[13px] text-slate-600">
+                  <li key={i} className="flex items-center gap-2.5 text-[13px] font-medium text-slate-700">
                     <CheckCircle2 className="size-4 text-emerald-600 shrink-0" />
                     <span>{feat}</span>
                   </li>
@@ -232,17 +249,17 @@ export function DownloadCtaSection() {
             </div>
 
             {/* زر التحميل الفعلي أو زر الإشعار عند عدم التوفر */}
-            <div className="mt-6 pt-2">
+            <div className="mt-7 pt-2">
               {meta?.android?.available ? (
                 <a
                   href="/api/download/android"
-                  className="relative flex w-full items-center justify-center gap-2.5 rounded-xl bg-emerald-600 px-5 py-3.5 text-[15px] font-bold text-white shadow-sm shadow-emerald-600/20 hover:bg-emerald-700 hover:shadow-md hover:shadow-emerald-600/30 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2"
+                  className="relative flex w-full items-center justify-center gap-2.5 rounded-full bg-emerald-600 px-5 py-3.5 text-[14.5px] font-bold text-white shadow-sm shadow-emerald-600/20 hover:bg-emerald-700 hover:shadow-md hover:shadow-emerald-600/30 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 active:scale-[0.98]"
                 >
-                  <ArrowDownToLine className="size-5" />
+                  <ArrowDownToLine className="size-4.5" />
                   <span>{t.download.android.cta}</span>
                 </a>
               ) : (
-                <div className="flex w-full items-center justify-center gap-2 rounded-xl bg-slate-100 px-5 py-3.5 text-[14px] font-semibold text-slate-500 border border-slate-200/80">
+                <div className="flex w-full items-center justify-center gap-2 rounded-full bg-slate-100 px-5 py-3.5 text-[13.5px] font-semibold text-slate-500 border border-slate-200/80">
                   <span className="size-2 rounded-full bg-amber-500" />
                   <span>{locale === "ar" ? "قريباً على أجهزة Android" : "Bientôt disponible sur Android"}</span>
                 </div>
@@ -252,7 +269,7 @@ export function DownloadCtaSection() {
         </motion.div>
 
         {/* شارة الأمان والخصوصية في الأسفل */}
-        <div className="mt-8 flex items-center justify-center gap-2 text-xs font-medium text-slate-500">
+        <div className="mt-10 flex items-center justify-center gap-2 text-xs font-semibold text-slate-500">
           <Shield className="size-4 text-emerald-600 shrink-0" />
           <span>{locale === "ar" ? "تنزيل آمن ومباشر خالي من أي برمجيات ضارة" : "Téléchargement sécurisé et direct, sans aucun logiciel indésirable"}</span>
         </div>

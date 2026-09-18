@@ -46,8 +46,10 @@ export const screenshots: Shot[] = [
   { id: "employees", device: "desktop", image: null },
 ];
 
-/** شعار Smart Store — ضع ملفاً حقيقياً هنا عند توفره */
+import logoImg from "@/assets/brand/logo.png";
+
+/** شعار Smart Store — الملف الرسمي المعتمد */
 export const brandAssets = {
-  logo: null as string | null, // TODO: "/smart-store/logos/smart-store.svg"
-  ogImage: "/smart-store/og-image.png", // TODO: أنشئ الصورة
+  logo: logoImg,
+  ogImage: "/smart-store/og-image.png",
 };
