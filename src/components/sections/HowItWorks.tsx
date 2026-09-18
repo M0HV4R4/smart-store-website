@@ -1,7 +1,6 @@
 import { ArrowUpRight, BarChart3, Boxes, Package, ShoppingCart } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
-
 import type { Variants } from "framer-motion";
 
 export function HowItWorks() {
@@ -14,37 +13,63 @@ export function HowItWorks() {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: reduce ? 0 : 0.11,
+        staggerChildren: reduce ? 0 : 0.13,
       },
     },
   };
 
   const cardVariants: Variants = {
-    hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 35, scale: 0.97 },
+    hidden: reduce
+      ? { opacity: 1 }
+      : {
+          opacity: 0,
+          y: 70,
+          scale: 0.92,
+          rotateX: 6,
+        },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
+      rotateX: 0,
       transition: {
-        duration: 0.65,
+        duration: 0.75,
         ease: [0.16, 1, 0.3, 1],
       },
     },
   };
 
   return (
-    <section id="how" className="relative bg-white py-14 sm:py-20 border-t border-slate-100">
-      <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-6">
-        {/* Top Header Row: Left title with badge, Right description text */}
+    <section
+      id="how"
+      className="relative overflow-hidden bg-gradient-to-b from-slate-50/70 via-blue-50/25 to-white py-12 sm:py-18 border-t border-slate-200/60"
+    >
+      {/* شبكة خلفية ناعمة مع تلاشٍ دائري خفيف */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-45 -z-10"
+      />
+
+      {/* إضاءة محيطية زرقاء هادئة */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 flex items-center justify-center -z-10"
+      >
+        <div className="size-[580px] rounded-full bg-blue-100/30 blur-3xl" />
+      </div>
+
+      <div className="mx-auto w-full max-w-[1240px] px-4 sm:px-6">
+        {/* صف العناوين الرئيسي: شارة زرقاء + عنوان واضح + نص وصفي */}
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 24 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col justify-between gap-6 md:flex-row md:items-end"
+          className="flex flex-col justify-between gap-5 md:flex-row md:items-end"
         >
           <div className="max-w-xl">
-            <span className="inline-block rounded-full bg-blue-50 px-3.5 py-1 text-[12.5px] font-semibold text-blue-700 border border-blue-100">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3.5 py-1 text-[12.5px] font-semibold text-blue-700 border border-blue-200/80 shadow-2xs">
+              <span className="size-1.5 rounded-full bg-blue-600" />
               {t.how.eyebrow}
             </span>
             <h2 className="font-display mt-3 text-h2 font-extrabold text-slate-950">
@@ -60,13 +85,14 @@ export function HowItWorks() {
           </div>
         </motion.div>
 
-        {/* Cards Row: All 4 cards have consistent resting state and refined responsive hover motion */}
+        {/* شبكة البطاقات الأربع: حالة راحة موحدة 100% للبطاقات (مع إلغاء أي حالة نشطة دائمة لـ 03) */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
-          className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
+          style={{ perspective: 1200 }}
+          className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
         >
           {t.how.steps.map((step, idx) => {
             const Icon = icons[idx] || Package;
@@ -79,50 +105,56 @@ export function HowItWorks() {
                   reduce
                     ? undefined
                     : {
-                        y: -6,
-                        scale: 1.015,
+                        y: -10,
+                        scale: 1.02,
                         transition: { duration: 0.25, ease: "easeOut" },
                       }
                 }
-                className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs hover:border-blue-400 hover:shadow-xl hover:shadow-blue-500/10 transition-colors transition-shadow duration-300 will-change-transform"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/85 bg-white/90 p-6 sm:p-7 shadow-xs backdrop-blur-xs hover:border-blue-400 hover:bg-gradient-to-b hover:from-white hover:to-blue-50/30 hover:shadow-2xl hover:shadow-blue-500/12 transition-all duration-300 will-change-transform"
               >
+                {/* تأثير لمعة ضوئية علوية أنيقة تظهر عند التمرير */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                />
+
                 <div>
-                  {/* Top Bar with Icon & Arrow Indicator */}
+                  {/* الشريط العلوي: الأيقونة + مؤشر السهم */}
                   <div className="flex items-center justify-between">
-                    <span className="grid size-12 place-items-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/80 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105 group-hover:shadow-md group-hover:shadow-blue-500/20">
+                    <span className="grid size-12 place-items-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/90 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-110 group-hover:shadow-md group-hover:shadow-blue-500/25">
                       <Icon className="size-5" strokeWidth={1.9} />
                     </span>
 
-                    <span className="flex size-8 items-center justify-center rounded-lg text-slate-400 transition-all duration-300 group-hover:text-blue-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:group-hover:-translate-x-0.5">
+                    <span className="flex size-8 items-center justify-center rounded-lg text-slate-400 transition-all duration-300 group-hover:text-blue-600 group-hover:translate-x-1 group-hover:-translate-y-1 rtl:group-hover:-translate-x-1">
                       <ArrowUpRight className="size-4 rtl:-scale-x-100" />
                     </span>
                   </div>
 
-                  {/* Step Number Badge */}
+                  {/* رقم الخطوة المتدرج الواضح */}
                   <div className="mt-6 flex items-baseline gap-1.5">
                     <span className="font-display text-[32px] font-extrabold text-slate-950 tabular-nums leading-none tracking-tight">
                       {step.n}
                     </span>
                   </div>
 
-                  {/* Title */}
+                  {/* عنوان الخطوة */}
                   <h3 className="font-display mt-3 text-[18px] font-bold text-slate-900 group-hover:text-blue-600 transition-colors duration-200">
                     {step.title}
                   </h3>
 
-                  {/* Description */}
+                  {/* وصف الخطوة */}
                   <p className="mt-2 text-[13.5px] leading-relaxed text-slate-600">
                     {step.desc}
                   </p>
                 </div>
 
-                {/* Highlights tags */}
+                {/* وسوم ومميزات الخطوة */}
                 {step.highlights && (
-                  <div className="mt-6 flex flex-wrap gap-1.5 pt-4 border-t border-slate-100">
+                  <div className="mt-6 flex flex-wrap gap-1.5 pt-4 border-t border-slate-100/90">
                     {step.highlights.map((tag, i) => (
                       <span
                         key={i}
-                        className="rounded-lg bg-slate-50 border border-slate-200/70 px-2.5 py-1 text-[11.5px] font-medium text-slate-700 transition-colors group-hover:bg-blue-50/50 group-hover:border-blue-200/60 group-hover:text-blue-800"
+                        className="rounded-lg bg-slate-50 border border-slate-200/70 px-2.5 py-1 text-[11.5px] font-medium text-slate-700 transition-colors duration-200 group-hover:bg-blue-50/70 group-hover:border-blue-200 group-hover:text-blue-800"
                       >
                         {tag}
                       </span>
