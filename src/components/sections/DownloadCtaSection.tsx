@@ -15,6 +15,8 @@ export function DownloadCtaSection() {
 
   // Dynamic public download metadata state
   const [meta, setMeta] = useState<PublicDownloadsMeta | null>(null);
+  // Active selected card for mobile touch (persists until another card is tapped)
+  const [activeCard, setActiveCard] = useState<"windows" | "android">("windows");
 
   useEffect(() => {
     let mounted = true;
@@ -72,7 +74,7 @@ export function DownloadCtaSection() {
           </p>
         </motion.div>
 
-        {/* بطاقتي التحميل: بطاقة Windows وبطاقة Android APK */}
+        {/* بطاقتي التحميل: بطاقة Windows وبطاقة Android APK مع نظام الإضاءة الثنائية */}
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 25 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
@@ -83,16 +85,34 @@ export function DownloadCtaSection() {
           {/* بطاقة Windows */}
           <motion.div
             whileTap={{ scale: 0.98 }}
-            className="group relative flex flex-col justify-between overflow-hidden rounded-2xl p-[1.5px] bg-slate-200/90 shadow-saas-card hover:shadow-saas-card-hover transition-shadow duration-300 will-change-transform"
+            onClick={() => setActiveCard("windows")}
+            className={cn(
+              "group relative flex flex-col justify-between overflow-hidden rounded-2xl p-[2px] bg-slate-200/90 transition-all duration-300 will-change-transform cursor-pointer",
+              activeCard === "windows"
+                ? "shadow-saas-card-hover ring-1 ring-blue-500/20"
+                : "shadow-saas-card hover:shadow-saas-card-hover",
+            )}
           >
-            {/* إضاءة محيطية زرقاء متحركة حول محيط بطاقة ويندوز */}
+            {/* شعاع ضوئي 1: يدور باتجاه عقارب الساعة */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -inset-[150%] animate-border-beam opacity-75 group-hover:opacity-100 transition-opacity duration-300 beam-blue"
+              className={cn(
+                "pointer-events-none absolute -inset-[150%] animate-beam-cw beam-blue-cw transition-opacity duration-500",
+                activeCard === "windows" ? "opacity-90" : "opacity-35 group-hover:opacity-100",
+              )}
+            />
+
+            {/* شعاع ضوئي 2: يدور عكس اتجاه عقارب الساعة لتلاقي سلس للأضواء */}
+            <div
+              aria-hidden="true"
+              className={cn(
+                "pointer-events-none absolute -inset-[150%] animate-beam-ccw beam-blue-ccw transition-opacity duration-500",
+                activeCard === "windows" ? "opacity-90" : "opacity-35 group-hover:opacity-100",
+              )}
             />
 
             {/* الحاوية الداخلية البيضاء */}
-            <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-[calc(1rem-1.5px)] bg-white p-6 sm:p-8">
+            <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-[calc(1rem-2px)] bg-white p-6 sm:p-8">
               <div>
                 {/* أيقونة المنصة واسمها */}
                 <div className="flex items-center justify-between">
@@ -165,16 +185,34 @@ export function DownloadCtaSection() {
           {/* بطاقة Android APK */}
           <motion.div
             whileTap={{ scale: 0.98 }}
-            className="group relative flex flex-col justify-between overflow-hidden rounded-2xl p-[1.5px] bg-slate-200/90 shadow-saas-card hover:shadow-saas-card-hover transition-shadow duration-300 will-change-transform"
+            onClick={() => setActiveCard("android")}
+            className={cn(
+              "group relative flex flex-col justify-between overflow-hidden rounded-2xl p-[2px] bg-slate-200/90 transition-all duration-300 will-change-transform cursor-pointer",
+              activeCard === "android"
+                ? "shadow-saas-card-hover ring-1 ring-emerald-500/20"
+                : "shadow-saas-card hover:shadow-saas-card-hover",
+            )}
           >
-            {/* إضاءة محيطية زمردية متحركة حول محيط بطاقة أندرويد */}
+            {/* شعاع ضوئي 1: يدور باتجاه عقارب الساعة بالأخضر الزمردي */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -inset-[150%] animate-border-beam opacity-75 group-hover:opacity-100 transition-opacity duration-300 beam-green"
+              className={cn(
+                "pointer-events-none absolute -inset-[150%] animate-beam-cw beam-green-cw transition-opacity duration-500",
+                activeCard === "android" ? "opacity-90" : "opacity-35 group-hover:opacity-100",
+              )}
+            />
+
+            {/* شعاع ضوئي 2: يدور عكس عقارب الساعة */}
+            <div
+              aria-hidden="true"
+              className={cn(
+                "pointer-events-none absolute -inset-[150%] animate-beam-ccw beam-green-ccw transition-opacity duration-500",
+                activeCard === "android" ? "opacity-90" : "opacity-35 group-hover:opacity-100",
+              )}
             />
 
             {/* الحاوية الداخلية البيضاء */}
-            <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-[calc(1rem-1.5px)] bg-white p-6 sm:p-8">
+            <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-[calc(1rem-2px)] bg-white p-6 sm:p-8">
               <div>
                 {/* أيقونة المنصة واسمها */}
                 <div className="flex items-center justify-between">

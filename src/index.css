@@ -314,9 +314,9 @@ html[lang="fr"] body,
 }
 
 /* =========================================================================
-   PREMIUM ANIMATED SAAS CARD BORDER BEAM SYSTEM
+   PREMIUM DUAL ANIMATED SAAS CARD BORDER BEAM SYSTEM
    ========================================================================= */
-@keyframes borderBeamRotate {
+@keyframes borderBeamClockwise {
   0% {
     transform: rotate(0deg);
   }
@@ -325,53 +325,101 @@ html[lang="fr"] body,
   }
 }
 
-.animate-border-beam {
-  animation: borderBeamRotate 9s linear infinite;
+@keyframes borderBeamCounterClockwise {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
-.animate-border-beam-slow {
-  animation: borderBeamRotate 12s linear infinite;
+.animate-beam-cw {
+  animation: borderBeamClockwise 9s linear infinite;
 }
 
-.beam-blue {
+.animate-beam-ccw {
+  animation: borderBeamCounterClockwise 11s linear infinite;
+}
+
+/* Windows Blue: Dual passing strokes */
+.beam-blue-cw {
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
-    transparent 280deg,
-    rgba(37, 99, 235, 0.2) 310deg,
-    #2563eb 335deg,
+    transparent 270deg,
+    rgba(37, 99, 235, 0.25) 305deg,
+    #2563eb 330deg,
     #60a5fa 350deg,
     transparent 360deg
   );
 }
 
-.beam-green {
+.beam-blue-ccw {
+  background: conic-gradient(
+    from 180deg,
+    transparent 0deg,
+    transparent 270deg,
+    rgba(14, 165, 233, 0.25) 305deg,
+    #0284c7 330deg,
+    #38bdf8 350deg,
+    transparent 360deg
+  );
+}
+
+/* Android Green: Dual passing strokes */
+.beam-green-cw {
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
-    transparent 280deg,
-    rgba(16, 185, 129, 0.2) 310deg,
-    #059669 335deg,
+    transparent 270deg,
+    rgba(16, 185, 129, 0.25) 305deg,
+    #059669 330deg,
     #34d399 350deg,
     transparent 360deg
   );
 }
 
-.beam-subtle-blue {
+.beam-green-ccw {
+  background: conic-gradient(
+    from 180deg,
+    transparent 0deg,
+    transparent 270deg,
+    rgba(5, 150, 105, 0.25) 305deg,
+    #10b981 330deg,
+    #6ee7b7 350deg,
+    transparent 360deg
+  );
+}
+
+/* Workflow Cards: Dual soft professional blue strokes */
+.beam-subtle-blue-cw {
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
-    transparent 290deg,
-    rgba(37, 99, 235, 0.15) 325deg,
-    #3b82f6 345deg,
+    transparent 280deg,
+    rgba(37, 99, 235, 0.2) 315deg,
+    #3b82f6 338deg,
     #93c5fd 355deg,
     transparent 360deg
   );
 }
 
+.beam-subtle-blue-ccw {
+  background: conic-gradient(
+    from 180deg,
+    transparent 0deg,
+    transparent 280deg,
+    rgba(14, 165, 233, 0.2) 315deg,
+    #0284c7 338deg,
+    #7dd3fc 355deg,
+    transparent 360deg
+  );
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-border-beam,
-  .animate-border-beam-slow {
+  .animate-beam-cw,
+  .animate-beam-ccw {
     animation: none !important;
   }
 }

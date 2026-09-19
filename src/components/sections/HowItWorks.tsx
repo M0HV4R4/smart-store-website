@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
+import { cn } from "@/utils/cn";
 import type { Variants } from "framer-motion";
 
 interface CardDetail {
@@ -121,11 +122,14 @@ export function HowItWorks() {
   const { t, locale } = useI18n();
   const reduce = useReducedMotion();
   const [flippedCards, setFlippedCards] = useState<Record<number, boolean>>({});
+  // Active selected card for mobile touch (persists until another card is tapped)
+  const [activeCardIdx, setActiveCardIdx] = useState<number>(0);
 
   const isAr = locale === "ar";
   const icons = [Package, Boxes, ShoppingCart, BarChart3];
 
-  const toggleFlip = (idx: number) => {
+  const handleCardClick = (idx: number) => {
+    setActiveCardIdx(idx);
     setFlippedCards((prev) => ({
       ...prev,
       [idx]: !prev[idx],
@@ -217,11 +221,11 @@ export function HowItWorks() {
                     WebkitTransformStyle: "preserve-3d",
                   }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => toggleFlip(idx)}
+                  onClick={() => handleCardClick(idx)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {
                       e.preventDefault();
-                      toggleFlip(idx);
+                      handleCardClick(idx);
                     }
                   }}
                   role="button"
@@ -229,21 +233,42 @@ export function HowItWorks() {
                   aria-expanded={isFlipped}
                   className="group relative h-full w-full cursor-pointer select-none rounded-2xl will-change-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
                 >
-                  {/* -------------------- 1. FRONT SIDE (Clean White SaaS Surface with Animated Blue Stroke) -------------------- */}
+                  {/* -------------------- 1. FRONT SIDE (Clean White SaaS Surface with Dual Animated Blue Strokes) -------------------- */}
                   <div
                     style={{
                       backfaceVisibility: "hidden",
                       WebkitBackfaceVisibility: "hidden",
                     }}
-                    className="absolute inset-0 overflow-hidden rounded-2xl p-[1.5px] bg-slate-200/90 shadow-saas-card group-hover:shadow-saas-card-hover transition-shadow duration-300"
+                    className={cn(
+                      "absolute inset-0 overflow-hidden rounded-2xl p-[2px] bg-slate-200/90 transition-shadow duration-300",
+                      activeCardIdx === idx
+                        ? "shadow-saas-card-hover ring-1 ring-blue-500/20"
+                        : "shadow-saas-card group-hover:shadow-saas-card-hover",
+                    )}
                   >
-                    {/* هالة ضوئية زرقاء ناعمة تدور حول محيط البطاقة عند التحويم أو اللمس */}
+                    {/* شعاع ضوئي 1: يدور باتجاه عقارب الساعة */}
                     <div
                       aria-hidden="true"
-                      className="pointer-events-none absolute -inset-[150%] animate-border-beam opacity-0 group-hover:opacity-85 group-active:opacity-100 transition-opacity duration-400 beam-subtle-blue"
+                      className={cn(
+                        "pointer-events-none absolute -inset-[150%] animate-beam-cw beam-subtle-blue-cw transition-opacity duration-400",
+                        activeCardIdx === idx
+                          ? "opacity-90"
+                          : "opacity-0 group-hover:opacity-85",
+                      )}
                     />
 
-                    <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-[calc(1rem-1.5px)] bg-white p-6 sm:p-7">
+                    {/* شعاع ضوئي 2: يدور عكس اتجاه عقارب الساعة لتلاقي سلس للأضواء */}
+                    <div
+                      aria-hidden="true"
+                      className={cn(
+                        "pointer-events-none absolute -inset-[150%] animate-beam-ccw beam-subtle-blue-ccw transition-opacity duration-400",
+                        activeCardIdx === idx
+                          ? "opacity-90"
+                          : "opacity-0 group-hover:opacity-85",
+                      )}
+                    />
+
+                    <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-[calc(1rem-2px)] bg-white p-6 sm:p-7">
                       {/* لمعة ضوئية علوية تظهر عند التحويم */}
                       <div
                         aria-hidden="true"
@@ -308,15 +333,19 @@ export function HowItWorks() {
                       WebkitBackfaceVisibility: "hidden",
                       transform: "rotateY(180deg)",
                     }}
-                    className="absolute inset-0 overflow-hidden rounded-2xl p-[1.5px] bg-slate-800/90 shadow-saas-card ring-1 ring-blue-500/20"
+                    className="absolute inset-0 overflow-hidden rounded-2xl p-[2px] bg-slate-800/90 shadow-saas-card ring-1 ring-blue-500/20"
                   >
-                    {/* هالة ضوئية زرقاء متحركة للوجه الخلفي */}
+                    {/* شعاع ضوئي مزدوج للوجه الخلفي */}
                     <div
                       aria-hidden="true"
-                      className="pointer-events-none absolute -inset-[150%] animate-border-beam opacity-60 beam-subtle-blue"
+                      className="pointer-events-none absolute -inset-[150%] animate-beam-cw opacity-60 beam-subtle-blue-cw"
+                    />
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute -inset-[150%] animate-beam-ccw opacity-60 beam-subtle-blue-ccw"
                     />
 
-                    <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-[calc(1rem-1.5px)] bg-[#090e1a] p-6 sm:p-7 text-white">
+                    <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-[calc(1rem-2px)] bg-[#090e1a] p-6 sm:p-7 text-white">
                       {/* لمعة زرقاء علوية للوجه الخلفي */}
                       <div
                         aria-hidden="true"
