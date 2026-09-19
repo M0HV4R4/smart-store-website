@@ -392,28 +392,34 @@ html[lang="fr"] body,
   );
 }
 
-/* Workflow Cards: Dual soft professional blue strokes */
-.beam-subtle-blue-cw {
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg,
-    transparent 280deg,
-    rgba(37, 99, 235, 0.2) 315deg,
-    #3b82f6 338deg,
-    #93c5fd 355deg,
-    transparent 360deg
+/* =========================================================================
+   STATIC PREMIUM SAAS GRADIENT BORDERS (WORKFLOW CARDS)
+   Soft Blue, Cyan, Subtle Violet — Apple & Linear hardware edge lighting
+   ========================================================================= */
+.border-gradient-saas {
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.35) 0%,
+    rgba(6, 182, 212, 0.22) 50%,
+    rgba(139, 92, 246, 0.22) 100%
   );
 }
 
-.beam-subtle-blue-ccw {
-  background: conic-gradient(
-    from 180deg,
-    transparent 0deg,
-    transparent 280deg,
-    rgba(14, 165, 233, 0.2) 315deg,
-    #0284c7 338deg,
-    #7dd3fc 355deg,
-    transparent 360deg
+.border-gradient-saas-active {
+  background: linear-gradient(
+    135deg,
+    rgba(37, 99, 235, 0.65) 0%,
+    rgba(6, 182, 212, 0.45) 50%,
+    rgba(124, 58, 237, 0.48) 100%
+  );
+}
+
+.border-gradient-saas-dark {
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.45) 0%,
+    rgba(6, 182, 212, 0.30) 50%,
+    rgba(139, 92, 246, 0.35) 100%
   );
 }
 

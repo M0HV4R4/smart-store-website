@@ -114,7 +114,7 @@ export function DownloadCtaSection() {
               className={cn(
                 "pointer-events-none absolute -inset-[150%] animate-beam-cw beam-blue-cw transition-opacity duration-500",
                 shouldAnimate ? "beam-running" : "beam-paused",
-                activeCard === "windows" ? "opacity-90" : "opacity-35 group-hover:opacity-100",
+                activeCard === "windows" ? "opacity-80" : "opacity-25 group-hover:opacity-85",
               )}
             />
 
@@ -124,7 +124,7 @@ export function DownloadCtaSection() {
               className={cn(
                 "pointer-events-none absolute -inset-[150%] animate-beam-ccw beam-blue-ccw transition-opacity duration-500",
                 shouldAnimate ? "beam-running" : "beam-paused",
-                activeCard === "windows" ? "opacity-90" : "opacity-35 group-hover:opacity-100",
+                activeCard === "windows" ? "opacity-80" : "opacity-25 group-hover:opacity-85",
               )}
             />
 
@@ -216,7 +216,7 @@ export function DownloadCtaSection() {
               className={cn(
                 "pointer-events-none absolute -inset-[150%] animate-beam-cw beam-green-cw transition-opacity duration-500",
                 shouldAnimate ? "beam-running" : "beam-paused",
-                activeCard === "android" ? "opacity-90" : "opacity-35 group-hover:opacity-100",
+                activeCard === "android" ? "opacity-80" : "opacity-25 group-hover:opacity-85",
               )}
             />
 
@@ -226,7 +226,7 @@ export function DownloadCtaSection() {
               className={cn(
                 "pointer-events-none absolute -inset-[150%] animate-beam-ccw beam-green-ccw transition-opacity duration-500",
                 shouldAnimate ? "beam-running" : "beam-paused",
-                activeCard === "android" ? "opacity-90" : "opacity-35 group-hover:opacity-100",
+                activeCard === "android" ? "opacity-80" : "opacity-25 group-hover:opacity-85",
               )}
             />
 
