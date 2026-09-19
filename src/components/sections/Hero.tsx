@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { Download } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { Button } from "@/components/ui";
 import { WindowsGlyph, AndroidGlyph } from "./glyphs";
@@ -8,6 +9,43 @@ import smartstoreImg from "../../../smartstore (2).webp";
 export function Hero() {
   const { t, locale } = useI18n();
   const reduce = useReducedMotion();
+
+  // Desktop-only subtle mouse parallax motion values (max 3-5px)
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Smooth damped spring for calm, organic motion (zero abrupt jumps)
+  const springX = useSpring(mouseX, { stiffness: 100, damping: 30, mass: 0.5 });
+  const springY = useSpring(mouseY, { stiffness: 100, damping: 30, mass: 0.5 });
+
+  useEffect(() => {
+    if (reduce) return;
+    // Parallax is strictly desktop-only (disabled on mobile / touch devices)
+    const isDesktop = typeof window !== "undefined" && window.matchMedia("(pointer: fine)").matches;
+    if (!isDesktop) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      // Normalized offset from window center [-1, 1]
+      const nx = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+      const ny = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+      // Subtle 4px maximum range (strictly translational, no 3D tilt or distortion)
+      mouseX.set(nx * 4);
+      mouseY.set(ny * 4);
+    };
+
+    const handleMouseLeave = () => {
+      mouseX.set(0);
+      mouseY.set(0);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("mouseleave", handleMouseLeave, { passive: true });
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, [reduce, mouseX, mouseY]);
 
   const altText =
     locale === "ar"
@@ -132,73 +170,83 @@ export function Hero() {
 
         {/* ------------------------- مسرح عرض المنتج العائم الفاخر Floating SaaS Showcase ------------------------- */}
         <div className="relative mx-auto mt-4 sm:mt-6 lg:mt-7 w-full max-w-[min(1480px,96vw)]">
+          {/* 1. طبقة الظهور السينمائي الفاخر (Entrance Animation) */}
           <motion.div
             initial={
               reduce
-                ? false
+                ? { opacity: 0, y: 15 }
                 : {
                     opacity: 0,
                     scale: 0.96,
-                    y: 30,
+                    y: 35,
                   }
             }
-            animate={
-              reduce
-                ? undefined
-                : {
-                    opacity: 1,
-                    scale: 1,
-                    y: 0,
-                  }
-            }
+            animate={{
+              opacity: 1,
+              scale: 1,
+              y: 0,
+            }}
             transition={{
               duration: 0.8,
               ease: [0.16, 1, 0.3, 1],
             }}
             className="relative flex items-center justify-center"
           >
-            {/* 1. هالة زرقاء ناعمة جداً وخفيفة خلف المنتج */}
+            {/* إضاءة محيطية زرقاء ناعمة جداً وخفيفة خلف المنتج (Subtle Blue Ambient Halo) */}
             <div
               aria-hidden="true"
               className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] sm:w-[82%] h-[55%] sm:h-[65%] rounded-full bg-blue-500/[0.06] blur-2xl sm:blur-3xl -z-10"
             />
 
-            {/* 2. ظل طبيعي واقعي خفيف أسفل المنتج يعطي إحساس الطفو الفعلي في الفضاء */}
+            {/* ظل طبيعي واقعي خفيف أسفل المنتج يعطي إحساس الطفو الفعلي في الفضاء (Realistic Ground Shadow) */}
             <div
               aria-hidden="true"
               className="pointer-events-none absolute -bottom-4 sm:-bottom-8 left-1/2 -translate-x-1/2 w-[80%] sm:w-[86%] h-8 sm:h-16 rounded-full bg-slate-900/[0.07] blur-xl sm:blur-2xl -z-10"
             />
 
-            {/* 3. حركة تنفسية خفيفة جداً (3-4px حركة بطيئة غير ملحوظة بعد الظهور) */}
+            {/* 2. استجابة البارالاكس الخفيفة لحركة الفأرة (Desktop-Only Mouse Parallax max 3-5px) */}
             <motion.div
-              animate={
+              style={
                 reduce
                   ? undefined
                   : {
-                      y: [0, -3.5, 0],
-                    }
-              }
-              transition={
-                reduce
-                  ? undefined
-                  : {
-                      duration: 7,
-                      repeat: Infinity,
-                      ease: "easeInOut",
+                      x: springX,
+                      y: springY,
                     }
               }
               className="relative w-full flex items-center justify-center"
             >
-              <img
-                src={smartstoreImg}
-                alt={altText}
-                width={4096}
-                height={2286}
-                className="h-auto w-full object-contain select-none pointer-events-none drop-shadow-[0_16px_36px_rgba(15,23,42,0.08)] sm:drop-shadow-[0_24px_54px_rgba(15,23,42,0.11)]"
-                loading="eager"
-                decoding="async"
-                fetchPriority="high"
-              />
+              {/* 3. تأثير الطفو والتنفس فائق النعومة (Subtle Floating Depth: 0 -> -5px -> 0 over 7s) */}
+              <motion.div
+                animate={
+                  reduce
+                    ? undefined
+                    : {
+                        y: [0, -5, 0],
+                      }
+                }
+                transition={
+                  reduce
+                    ? undefined
+                    : {
+                        duration: 7,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }
+                }
+                className="relative w-full flex items-center justify-center"
+              >
+                <img
+                  src={smartstoreImg}
+                  alt={altText}
+                  width={4096}
+                  height={2286}
+                  className="h-auto w-full object-contain select-none pointer-events-none drop-shadow-[0_16px_36px_rgba(15,23,42,0.08)] sm:drop-shadow-[0_24px_54px_rgba(15,23,42,0.11)]"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                />
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>
