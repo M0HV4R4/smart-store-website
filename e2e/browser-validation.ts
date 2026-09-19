@@ -40,6 +40,8 @@ function startProductionServer(port = 4173): Promise<http.Server> {
     ".png": "image/png",
     ".jpg": "image/jpeg",
     ".svg": "image/svg+xml",
+    ".ico": "image/x-icon",
+    ".webp": "image/webp",
     ".json": "application/json",
   };
 
@@ -126,7 +128,8 @@ function startProductionServer(port = 4173): Promise<http.Server> {
     }
 
     // Static Asset Serving from dist/
-    let filePath = path.join(distDir, pathname);
+    const decodedPath = decodeURIComponent(pathname);
+    let filePath = path.join(distDir, decodedPath);
     if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
       filePath = path.join(filePath, "index.html");
     }
