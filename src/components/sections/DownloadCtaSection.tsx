@@ -38,23 +38,12 @@ export function DownloadCtaSection() {
       id="download"
       className="relative overflow-hidden py-14 sm:py-20 lg:py-24"
     >
-      {/* شبكة خلفية ناعمة */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-40 -z-10"
-      />
-
-      {/* هالة ضوئية زرقاء وسماوية واسعة خلف بطاقات التحميل */}
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center -z-10" aria-hidden="true">
-        <div className="h-[520px] w-[940px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.12),rgba(14,165,233,0.06)_50%,transparent_72%)] blur-3xl" />
-      </div>
-
       <div className="relative z-10 mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
         {/* العناوين التمهيدية */}
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 28 }}
+          initial={reduce ? false : { opacity: 0, y: 25 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           className="mx-auto max-w-2xl text-center"
         >
@@ -85,9 +74,9 @@ export function DownloadCtaSection() {
 
         {/* بطاقتي التحميل: بطاقة Windows وبطاقة Android APK */}
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 30 }}
+          initial={reduce ? false : { opacity: 0, y: 25 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.65, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
           className="mx-auto mt-10 sm:mt-12 grid max-w-4xl grid-cols-1 gap-6 sm:gap-7 sm:grid-cols-2"
         >
@@ -97,13 +86,13 @@ export function DownloadCtaSection() {
               reduce
                 ? undefined
                 : {
-                    y: -5,
-                    scale: 1.01,
-                    transition: { type: "spring", stiffness: 350, damping: 25 },
+                    y: -3,
+                    scale: 1.02,
+                    transition: { duration: 0.2, ease: "easeOut" },
                   }
             }
             whileTap={{ scale: 0.98 }}
-            className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/80 bg-white/95 p-6 sm:p-8 shadow-saas-card ring-1 ring-slate-900/[0.03] backdrop-blur-sm hover:border-blue-400/90 hover:shadow-saas-card-hover transition-all duration-300 will-change-transform active:border-blue-400"
+            className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-saas-card ring-1 ring-slate-900/[0.02] hover:border-blue-400/80 hover:shadow-saas-card-hover transition-all duration-300 will-change-transform active:border-blue-400"
           >
             {/* لمعة ضوئية زرقاء علوية */}
             <div
@@ -185,13 +174,13 @@ export function DownloadCtaSection() {
               reduce
                 ? undefined
                 : {
-                    y: -5,
-                    scale: 1.01,
-                    transition: { type: "spring", stiffness: 350, damping: 25 },
+                    y: -3,
+                    scale: 1.02,
+                    transition: { duration: 0.2, ease: "easeOut" },
                   }
             }
             whileTap={{ scale: 0.98 }}
-            className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/80 bg-white/95 p-6 sm:p-8 shadow-saas-card ring-1 ring-slate-900/[0.03] backdrop-blur-sm hover:border-emerald-400/90 hover:shadow-[0_1px_3px_0_rgba(15,23,42,0.06),0_12px_28px_-6px_rgba(16,185,129,0.18),0_24px_48px_-12px_rgba(15,23,42,0.08)] transition-all duration-300 will-change-transform active:border-emerald-400"
+            className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-saas-card ring-1 ring-slate-900/[0.02] hover:border-emerald-400/80 hover:shadow-saas-card-hover transition-all duration-300 will-change-transform active:border-emerald-400"
           >
             {/* لمعة ضوئية خضراء علوية */}
             <div

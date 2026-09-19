@@ -13,7 +13,7 @@ export function HowItWorks() {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: reduce ? 0 : 0.13,
+        staggerChildren: reduce ? 0 : 0.08,
       },
     },
   };
@@ -23,17 +23,13 @@ export function HowItWorks() {
       ? { opacity: 1 }
       : {
           opacity: 0,
-          y: 45,
-          scale: 0.95,
-          filter: "blur(4px)",
+          y: 25,
         },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
-      filter: "blur(0px)",
       transition: {
-        duration: 0.7,
+        duration: 0.65,
         ease: [0.16, 1, 0.3, 1],
       },
     },
@@ -47,24 +43,10 @@ export function HowItWorks() {
       {/* مرسى لقسم المميزات لضمان وصول روابط #features و #how معاً */}
       <div id="features" className="absolute -top-24" aria-hidden="true" />
 
-      {/* شبكة خلفية ناعمة مع تلاشٍ دائري خفيف */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-40 -z-10"
-      />
-
-      {/* مخروط إضاءة محيطية زرقاء موجه خلف بطاقات الخطوات الأربع */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 flex items-center justify-center -z-10"
-      >
-        <div className="h-[480px] w-[880px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.10),rgba(14,165,233,0.05)_50%,transparent_70%)] blur-3xl" />
-      </div>
-
       <div className="mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
         {/* صف العناوين الرئيسي: عنوان واضح وبارز + نص وصفي */}
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 28 }}
+          initial={reduce ? false : { opacity: 0, y: 25 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
@@ -84,13 +66,12 @@ export function HowItWorks() {
           </div>
         </motion.div>
 
-        {/* شبكة البطاقات الأربع مع دعم التمرير المزدوج والارتفاع السلس */}
+        {/* شبكة البطاقات الأربع مع دعم التمرير السلس والارتفاع الخفيف */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-          style={{ perspective: 1200 }}
+          viewport={{ once: true, amount: 0.2 }}
           className="mt-10 sm:mt-12 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4"
         >
           {t.how.steps.map((step, idx) => {
@@ -104,13 +85,13 @@ export function HowItWorks() {
                   reduce
                     ? undefined
                     : {
-                        y: -5,
-                        scale: 1.01,
-                        transition: { type: "spring", stiffness: 350, damping: 25 },
+                        y: -3,
+                        scale: 1.02,
+                        transition: { duration: 0.2, ease: "easeOut" },
                       }
                 }
                 whileTap={{ scale: 0.98 }}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white/95 p-6 sm:p-7 shadow-saas-card ring-1 ring-slate-900/[0.03] backdrop-blur-sm hover:border-blue-400/90 hover:shadow-saas-card-hover transition-all duration-300 will-change-transform active:border-blue-400"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-saas-card ring-1 ring-slate-900/[0.02] hover:border-blue-400/80 hover:shadow-saas-card-hover transition-all duration-300 will-change-transform active:border-blue-400"
               >
                 {/* تأثير لمعة ضوئية علوية متدرجة تظهر عند التحويم */}
                 <div

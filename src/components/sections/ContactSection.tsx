@@ -60,38 +60,15 @@ export function ContactSection() {
       id="contact"
       className="relative overflow-hidden py-14 sm:py-20 lg:py-24"
     >
-      {/* شبكة خلفية ناعمة مع هالات زرقاء مضيئة تعطي قسماً ختامياً فخماً ومميزاً */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-45 -z-10"
-      />
-
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 flex items-center justify-center -z-10"
-      >
-        <div className="h-[540px] w-[900px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.16),rgba(14,165,233,0.09)_50%,transparent_75%)] blur-3xl animate-glow-slow" />
-      </div>
-
       <div className="relative z-10 mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
-        {/* الحاوية الزجاجية الفاخرة للقسم */}
+        {/* الحاوية البيضاء النقية الفاخرة للقسم */}
         <motion.div
-          initial={reduce ? false : { opacity: 0, y: 35, scale: 0.98 }}
-          whileInView={reduce ? undefined : { opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true, amount: 0.15 }}
+          initial={reduce ? false : { opacity: 0, y: 25 }}
+          whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="relative overflow-hidden rounded-3xl border border-blue-200/90 bg-white/95 p-6 sm:p-10 lg:p-14 shadow-saas-stage ring-1 ring-blue-500/10 backdrop-blur-md"
+          className="relative overflow-hidden rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-10 lg:p-14 shadow-saas-card ring-1 ring-slate-900/[0.02]"
         >
-          {/* إضاءات محيطية زاوية أنيقة */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -top-24 -end-24 size-80 rounded-full bg-blue-500/10 blur-3xl"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -bottom-24 -start-24 size-80 rounded-full bg-cyan-500/10 blur-3xl"
-          />
-
           {/* العناوين والشارات */}
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="font-display text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-950 tracking-tight leading-snug">
@@ -104,12 +81,12 @@ export function ContactSection() {
 
             {/* شارات الطمأنينة والتواجد */}
             <div className="mt-4 sm:mt-5 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs text-slate-600">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white/90 px-3.5 py-1.5 font-semibold shadow-2xs">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white px-3.5 py-1.5 font-semibold shadow-2xs">
                 <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>{isAr ? "متواجدون للإجابة على استفساراتكم" : "Disponibles pour répondre à vos questions"}</span>
               </span>
 
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white/90 px-3.5 py-1.5 font-semibold shadow-2xs">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white px-3.5 py-1.5 font-semibold shadow-2xs">
                 <Sparkles className="size-3.5 text-blue-600" />
                 <span>{isAr ? "مرافقة وإرشاد في الاستخدام" : "Accompagnement et conseils d'utilisation"}</span>
               </span>
@@ -127,9 +104,9 @@ export function ContactSection() {
                   rel="noopener noreferrer"
                   initial={reduce ? false : { opacity: 0, y: 20 }}
                   whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
+                  viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.5, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-                  whileHover={reduce ? undefined : { y: -5, scale: 1.01, transition: { type: "spring", stiffness: 350, damping: 25 } }}
+                  whileHover={reduce ? undefined : { y: -3, scale: 1.02, transition: { duration: 0.2, ease: "easeOut" } }}
                   whileTap={{ scale: 0.98 }}
                   className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-emerald-500/40 bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800 p-6 sm:p-7 text-white shadow-xl shadow-emerald-600/25 transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-600/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2"
                 >
@@ -141,7 +118,7 @@ export function ContactSection() {
 
                   <div>
                     <div className="flex items-center justify-between">
-                      <span className="grid size-12 place-items-center rounded-xl bg-white/15 text-white backdrop-blur-xs border border-white/20 transition-all duration-300 group-hover:bg-white group-hover:text-emerald-700 group-hover:scale-105">
+                      <span className="grid size-12 place-items-center rounded-xl bg-white/15 text-white border border-white/20 transition-all duration-300 group-hover:bg-white group-hover:text-emerald-700 group-hover:scale-105">
                         <WhatsAppLogo size={24} />
                       </span>
                       <span className="flex size-8 items-center justify-center rounded-lg text-emerald-200 transition-all duration-300 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 rtl:group-hover:-translate-x-1">
@@ -171,11 +148,11 @@ export function ContactSection() {
                   rel="noopener noreferrer"
                   initial={reduce ? false : { opacity: 0, y: 20 }}
                   whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
+                  viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.5, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-                  whileHover={reduce ? undefined : { y: -5, scale: 1.01, transition: { type: "spring", stiffness: 350, damping: 25 } }}
+                  whileHover={reduce ? undefined : { y: -3, scale: 1.02, transition: { duration: 0.2, ease: "easeOut" } }}
                   whileTap={{ scale: 0.98 }}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-saas-card ring-1 ring-slate-900/[0.03] hover:border-[#1877F2]/60 hover:bg-gradient-to-b hover:from-white hover:to-blue-50/40 hover:shadow-saas-card-hover transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1877F2] focus-visible:ring-offset-2 active:border-[#1877F2]"
+                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-saas-card ring-1 ring-slate-900/[0.02] hover:border-[#1877F2]/60 hover:shadow-saas-card-hover transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1877F2] focus-visible:ring-offset-2 active:border-[#1877F2]"
                 >
                   <div
                     aria-hidden="true"
@@ -214,11 +191,11 @@ export function ContactSection() {
                   rel="noopener noreferrer"
                   initial={reduce ? false : { opacity: 0, y: 20 }}
                   whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
+                  viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.5, delay: 0.11, ease: [0.16, 1, 0.3, 1] }}
-                  whileHover={reduce ? undefined : { y: -5, scale: 1.01, transition: { type: "spring", stiffness: 350, damping: 25 } }}
+                  whileHover={reduce ? undefined : { y: -3, scale: 1.02, transition: { duration: 0.2, ease: "easeOut" } }}
                   whileTap={{ scale: 0.98 }}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-saas-card ring-1 ring-slate-900/[0.03] hover:border-rose-300 hover:bg-gradient-to-b hover:from-white hover:to-rose-50/30 hover:shadow-[0_1px_3px_0_rgba(15,23,42,0.06),0_12px_28px_-6px_rgba(244,63,94,0.18),0_24px_48px_-12px_rgba(15,23,42,0.08)] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 active:border-rose-300"
+                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-saas-card ring-1 ring-slate-900/[0.02] hover:border-rose-300 hover:shadow-saas-card-hover transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 active:border-rose-300"
                 >
                   <div
                     aria-hidden="true"

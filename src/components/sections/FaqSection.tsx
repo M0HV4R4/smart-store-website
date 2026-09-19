@@ -18,25 +18,13 @@ export function FaqSection() {
       id="faq"
       className="relative overflow-hidden py-14 sm:py-20 lg:py-24"
     >
-      {/* شبكة خلفية ناعمة */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-grid-pattern mask-radial-fade opacity-40 -z-10"
-      />
-
-      {/* إضاءة جانبية ناعمة تمنع انطفاء عمق القسم */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -end-20 top-1/4 -z-10 h-[500px] w-[680px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.10),rgba(14,165,233,0.05)_50%,transparent_70%)] blur-3xl"
-      />
-
       <div className="mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.45fr] lg:gap-16 items-start">
           {/* العمود الأيسر: عنوان رئيسي مع خط منحني + نص وصفي */}
           <motion.div
-            initial={reduce ? false : { opacity: 0, y: 28 }}
+            initial={reduce ? false : { opacity: 0, y: 25 }}
             whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-start lg:sticky lg:top-28"
           >
@@ -74,14 +62,14 @@ export function FaqSection() {
                   key={item.q}
                   initial={reduce ? false : { opacity: 0, y: 20 }}
                   whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  transition={{ duration: 0.45, delay: idx * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: idx * 0.03, ease: [0.16, 1, 0.3, 1] }}
                   whileTap={{ scale: 0.99 }}
                   className={cn(
-                    "group rounded-2xl border bg-white/95 backdrop-blur-sm ring-1 ring-slate-900/[0.03] transition-all duration-300 overflow-hidden",
+                    "group rounded-2xl border bg-white ring-1 ring-slate-900/[0.02] transition-all duration-300 overflow-hidden",
                     isOpen
                       ? "border-blue-400/90 ring-4 ring-blue-500/10 shadow-saas-card-hover"
-                      : "border-slate-200/80 shadow-saas-card hover:border-blue-300 hover:shadow-md active:border-blue-400",
+                      : "border-slate-200/80 shadow-saas-card hover:border-blue-300 hover:shadow-saas-card-hover active:border-blue-400",
                   )}
                 >
                   <button
