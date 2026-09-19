@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { Button } from "@/components/ui";
 import { WindowsGlyph, AndroidGlyph } from "./glyphs";
-import smartstoreImg from "../../../smartstore.webp";
+import smartstoreImg from "../../../smartstore (2).webp";
 
 export function Hero() {
   const { t, locale } = useI18n();
@@ -130,35 +130,76 @@ export function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* ------------------------- مسرح عرض المنتج الحقيقي smartstore.png ------------------------- */}
-        <div className="relative mx-auto mt-6 sm:mt-8 lg:mt-10 w-full max-w-[min(1380px,94vw)]">
+        {/* ------------------------- مسرح عرض المنتج العائم الفاخر Floating SaaS Showcase ------------------------- */}
+        <div className="relative mx-auto mt-4 sm:mt-6 lg:mt-7 w-full max-w-[min(1480px,96vw)]">
           <motion.div
-            initial={reduce ? false : { opacity: 0, y: 25 }}
-            animate={reduce ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            initial={
+              reduce
+                ? false
+                : {
+                    opacity: 0,
+                    scale: 0.96,
+                    y: 30,
+                  }
+            }
+            animate={
+              reduce
+                ? undefined
+                : {
+                    opacity: 1,
+                    scale: 1,
+                    y: 0,
+                  }
+            }
+            transition={{
+              duration: 0.8,
+              ease: [0.16, 1, 0.3, 1],
+            }}
             className="relative flex items-center justify-center"
           >
-            {/* إضاءة محيطية ثابتة وخفيفة جداً تعطي عمقاً راقياً دون استهلاك موارد المعالج */}
+            {/* 1. هالة زرقاء ناعمة جداً وخفيفة خلف المنتج */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -inset-4 sm:-inset-8 -z-10 flex items-center justify-center opacity-60 sm:opacity-70"
-            >
-              <div className="h-44 sm:h-64 w-[85%] rounded-full bg-blue-500/10 blur-xl sm:blur-2xl" />
-            </div>
+              className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] sm:w-[82%] h-[55%] sm:h-[65%] rounded-full bg-blue-500/[0.06] blur-2xl sm:blur-3xl -z-10"
+            />
 
-            {/* إطار العرض الفاخر الأبيض النقي مع ظل المسرح */}
-            <div className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-slate-200/80 bg-white p-2 sm:p-3 shadow-saas-stage">
+            {/* 2. ظل طبيعي واقعي خفيف أسفل المنتج يعطي إحساس الطفو الفعلي في الفضاء */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -bottom-4 sm:-bottom-8 left-1/2 -translate-x-1/2 w-[80%] sm:w-[86%] h-8 sm:h-16 rounded-full bg-slate-900/[0.07] blur-xl sm:blur-2xl -z-10"
+            />
+
+            {/* 3. حركة تنفسية خفيفة جداً (3-4px حركة بطيئة غير ملحوظة بعد الظهور) */}
+            <motion.div
+              animate={
+                reduce
+                  ? undefined
+                  : {
+                      y: [0, -3.5, 0],
+                    }
+              }
+              transition={
+                reduce
+                  ? undefined
+                  : {
+                      duration: 7,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }
+              }
+              className="relative w-full flex items-center justify-center"
+            >
               <img
                 src={smartstoreImg}
                 alt={altText}
-                width={2542}
-                height={1419}
-                className="h-auto w-full rounded-xl sm:rounded-2xl object-contain select-none pointer-events-none rtl:transform-none ltr:transform-none"
+                width={4096}
+                height={2286}
+                className="h-auto w-full object-contain select-none pointer-events-none drop-shadow-[0_16px_36px_rgba(15,23,42,0.08)] sm:drop-shadow-[0_24px_54px_rgba(15,23,42,0.11)]"
                 loading="eager"
                 decoding="async"
                 fetchPriority="high"
               />
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
