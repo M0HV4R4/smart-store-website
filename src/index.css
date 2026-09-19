@@ -424,3 +424,19 @@ html[lang="fr"] body,
   }
 }
 
+/* Optimization: Pausing beam animations when offscreen or inactive */
+.beam-paused {
+  animation-play-state: paused !important;
+}
+
+.beam-running {
+  animation-play-state: running !important;
+}
+
+/* GPU Composite layer containment for animated border cards */
+.saas-card-container {
+  contain: paint;
+  isolation: isolate;
+}
+
+

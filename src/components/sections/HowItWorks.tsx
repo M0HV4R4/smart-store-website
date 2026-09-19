@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   ArrowUpRight,
   BarChart3,
@@ -8,7 +8,7 @@ import {
   RotateCw,
   ShoppingCart,
 } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/utils/cn";
 import type { Variants } from "framer-motion";
@@ -121,6 +121,8 @@ const cardDetails: CardDetail[] = [
 export function HowItWorks() {
   const { t, locale } = useI18n();
   const reduce = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { margin: "150px" });
   const [flippedCards, setFlippedCards] = useState<Record<number, boolean>>({});
   // Active selected card for mobile touch (persists until another card is tapped)
   const [activeCardIdx, setActiveCardIdx] = useState<number>(0);
@@ -164,6 +166,7 @@ export function HowItWorks() {
 
   return (
     <section
+      ref={sectionRef}
       id="how"
       className="relative overflow-hidden py-10 sm:py-14 lg:py-16"
     >
@@ -231,7 +234,7 @@ export function HowItWorks() {
                   role="button"
                   tabIndex={0}
                   aria-expanded={isFlipped}
-                  className="group relative h-full w-full cursor-pointer select-none rounded-2xl will-change-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+                  className="group relative h-full w-full cursor-pointer select-none rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
                 >
                   {/* -------------------- 1. FRONT SIDE (Clean White SaaS Surface with Dual Animated Blue Strokes) -------------------- */}
                   <div
@@ -240,31 +243,31 @@ export function HowItWorks() {
                       WebkitBackfaceVisibility: "hidden",
                     }}
                     className={cn(
-                      "absolute inset-0 overflow-hidden rounded-2xl p-[2px] bg-slate-200/90 transition-shadow duration-300",
+                      "saas-card-container absolute inset-0 overflow-hidden rounded-2xl p-[2px] bg-slate-200/90 transition-shadow duration-300",
                       activeCardIdx === idx
                         ? "shadow-saas-card-hover ring-1 ring-blue-500/20"
                         : "shadow-saas-card group-hover:shadow-saas-card-hover",
                     )}
                   >
-                    {/* شعاع ضوئي 1: يدور باتجاه عقارب الساعة */}
+                    {/* شعاع ضوئي 1: يدور باتجاه عقارب الساعة - مفعل فقط عند التحويم أو التحديد الفعلي */}
                     <div
                       aria-hidden="true"
                       className={cn(
-                        "pointer-events-none absolute -inset-[150%] animate-beam-cw beam-subtle-blue-cw transition-opacity duration-400",
-                        activeCardIdx === idx
-                          ? "opacity-90"
-                          : "opacity-0 group-hover:opacity-85",
+                        "pointer-events-none absolute -inset-[150%] beam-subtle-blue-cw transition-opacity duration-400",
+                        isInView && activeCardIdx === idx
+                          ? "opacity-90 animate-beam-cw"
+                          : "opacity-0 md:group-hover:opacity-85 md:group-hover:animate-beam-cw",
                       )}
                     />
 
-                    {/* شعاع ضوئي 2: يدور عكس اتجاه عقارب الساعة لتلاقي سلس للأضواء */}
+                    {/* شعاع ضوئي 2: يدور عكس اتجاه عقارب الساعة - مفعل فقط عند التحويم أو التحديد الفعلي */}
                     <div
                       aria-hidden="true"
                       className={cn(
-                        "pointer-events-none absolute -inset-[150%] animate-beam-ccw beam-subtle-blue-ccw transition-opacity duration-400",
-                        activeCardIdx === idx
-                          ? "opacity-90"
-                          : "opacity-0 group-hover:opacity-85",
+                        "pointer-events-none absolute -inset-[150%] beam-subtle-blue-ccw transition-opacity duration-400",
+                        isInView && activeCardIdx === idx
+                          ? "opacity-90 animate-beam-ccw"
+                          : "opacity-0 md:group-hover:opacity-85 md:group-hover:animate-beam-ccw",
                       )}
                     />
 
@@ -333,17 +336,21 @@ export function HowItWorks() {
                       WebkitBackfaceVisibility: "hidden",
                       transform: "rotateY(180deg)",
                     }}
-                    className="absolute inset-0 overflow-hidden rounded-2xl p-[2px] bg-slate-800/90 shadow-saas-card ring-1 ring-blue-500/20"
+                    className="saas-card-container absolute inset-0 overflow-hidden rounded-2xl p-[2px] bg-slate-800/90 shadow-saas-card ring-1 ring-blue-500/20"
                   >
-                    {/* شعاع ضوئي مزدوج للوجه الخلفي */}
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none absolute -inset-[150%] animate-beam-cw opacity-60 beam-subtle-blue-cw"
-                    />
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none absolute -inset-[150%] animate-beam-ccw opacity-60 beam-subtle-blue-ccw"
-                    />
+                    {/* شعاع ضوئي مزدوج للوجه الخلفي - يعمل فقط عند قلب البطاقة ورؤيتها */}
+                    {isFlipped && isInView && (
+                      <>
+                        <div
+                          aria-hidden="true"
+                          className="pointer-events-none absolute -inset-[150%] animate-beam-cw opacity-60 beam-subtle-blue-cw"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className="pointer-events-none absolute -inset-[150%] animate-beam-ccw opacity-60 beam-subtle-blue-ccw"
+                        />
+                      </>
+                    )}
 
                     <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-[calc(1rem-2px)] bg-[#090e1a] p-6 sm:p-7 text-white">
                       {/* لمعة زرقاء علوية للوجه الخلفي */}

@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowDownToLine, CheckCircle2, Laptop, Shield, Smartphone } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/utils/cn";
 import {
@@ -12,11 +12,25 @@ import { WindowsGlyph, AndroidGlyph } from "./glyphs";
 export function DownloadCtaSection() {
   const { t, locale } = useI18n();
   const reduce = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { margin: "150px" });
 
   // Dynamic public download metadata state
   const [meta, setMeta] = useState<PublicDownloadsMeta | null>(null);
   // Active selected card for mobile touch (persists until another card is tapped)
   const [activeCard, setActiveCard] = useState<"windows" | "android">("windows");
+  // Page visibility state: pause beam animations when browser tab is inactive
+  const [isTabVisible, setIsTabVisible] = useState(true);
+
+  useEffect(() => {
+    const handleVisibility = () => {
+      setIsTabVisible(document.visibilityState === "visible");
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => document.removeEventListener("visibilitychange", handleVisibility);
+  }, []);
+
+  const shouldAnimate = isInView && isTabVisible;
 
   useEffect(() => {
     let mounted = true;
@@ -37,6 +51,7 @@ export function DownloadCtaSection() {
 
   return (
     <section
+      ref={sectionRef}
       id="download"
       className="relative overflow-hidden py-10 sm:py-14 lg:py-16"
     >
@@ -87,7 +102,7 @@ export function DownloadCtaSection() {
             whileTap={{ scale: 0.98 }}
             onClick={() => setActiveCard("windows")}
             className={cn(
-              "group relative flex flex-col justify-between overflow-hidden rounded-2xl p-[2px] bg-slate-200/90 transition-all duration-300 will-change-transform cursor-pointer",
+              "saas-card-container group relative flex flex-col justify-between overflow-hidden rounded-2xl p-[2px] bg-slate-200/90 transition-all duration-300 cursor-pointer",
               activeCard === "windows"
                 ? "shadow-saas-card-hover ring-1 ring-blue-500/20"
                 : "shadow-saas-card hover:shadow-saas-card-hover",
@@ -98,6 +113,7 @@ export function DownloadCtaSection() {
               aria-hidden="true"
               className={cn(
                 "pointer-events-none absolute -inset-[150%] animate-beam-cw beam-blue-cw transition-opacity duration-500",
+                shouldAnimate ? "beam-running" : "beam-paused",
                 activeCard === "windows" ? "opacity-90" : "opacity-35 group-hover:opacity-100",
               )}
             />
@@ -107,6 +123,7 @@ export function DownloadCtaSection() {
               aria-hidden="true"
               className={cn(
                 "pointer-events-none absolute -inset-[150%] animate-beam-ccw beam-blue-ccw transition-opacity duration-500",
+                shouldAnimate ? "beam-running" : "beam-paused",
                 activeCard === "windows" ? "opacity-90" : "opacity-35 group-hover:opacity-100",
               )}
             />
@@ -187,7 +204,7 @@ export function DownloadCtaSection() {
             whileTap={{ scale: 0.98 }}
             onClick={() => setActiveCard("android")}
             className={cn(
-              "group relative flex flex-col justify-between overflow-hidden rounded-2xl p-[2px] bg-slate-200/90 transition-all duration-300 will-change-transform cursor-pointer",
+              "saas-card-container group relative flex flex-col justify-between overflow-hidden rounded-2xl p-[2px] bg-slate-200/90 transition-all duration-300 cursor-pointer",
               activeCard === "android"
                 ? "shadow-saas-card-hover ring-1 ring-emerald-500/20"
                 : "shadow-saas-card hover:shadow-saas-card-hover",
@@ -198,6 +215,7 @@ export function DownloadCtaSection() {
               aria-hidden="true"
               className={cn(
                 "pointer-events-none absolute -inset-[150%] animate-beam-cw beam-green-cw transition-opacity duration-500",
+                shouldAnimate ? "beam-running" : "beam-paused",
                 activeCard === "android" ? "opacity-90" : "opacity-35 group-hover:opacity-100",
               )}
             />
@@ -207,6 +225,7 @@ export function DownloadCtaSection() {
               aria-hidden="true"
               className={cn(
                 "pointer-events-none absolute -inset-[150%] animate-beam-ccw beam-green-ccw transition-opacity duration-500",
+                shouldAnimate ? "beam-running" : "beam-paused",
                 activeCard === "android" ? "opacity-90" : "opacity-35 group-hover:opacity-100",
               )}
             />

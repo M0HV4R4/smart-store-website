@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { Button } from "@/components/ui";
 import { WindowsGlyph, AndroidGlyph } from "./glyphs";
-import smartstoreImg from "../../../smartstore.png";
+import smartstoreImg from "../../../smartstore.webp";
 
 export function Hero() {
   const { t, locale } = useI18n();
@@ -141,9 +141,9 @@ export function Hero() {
             {/* إضاءة محيطية ثابتة وخفيفة جداً تعطي عمقاً راقياً دون استهلاك موارد المعالج */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -inset-4 sm:-inset-8 -z-10 flex items-center justify-center opacity-70"
+              className="pointer-events-none absolute -inset-4 sm:-inset-8 -z-10 flex items-center justify-center opacity-60 sm:opacity-70"
             >
-              <div className="h-44 sm:h-64 w-[85%] rounded-full bg-blue-500/10 blur-2xl" />
+              <div className="h-44 sm:h-64 w-[85%] rounded-full bg-blue-500/10 blur-xl sm:blur-2xl" />
             </div>
 
             {/* إطار العرض الفاخر الأبيض النقي مع ظل المسرح */}
@@ -156,6 +156,7 @@ export function Hero() {
                 className="h-auto w-full rounded-xl sm:rounded-2xl object-contain select-none pointer-events-none rtl:transform-none ltr:transform-none"
                 loading="eager"
                 decoding="async"
+                fetchPriority="high"
               />
             </div>
           </motion.div>

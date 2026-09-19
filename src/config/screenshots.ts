@@ -46,7 +46,7 @@ export const screenshots: Shot[] = [
   { id: "employees", device: "desktop", image: null },
 ];
 
-import logoImg from "@/assets/brand/logo.png";
+import logoImg from "@/assets/brand/logo.webp";
 
 /** شعار Smart Store — الملف الرسمي المعتمد */
 export const brandAssets = {
