@@ -313,3 +313,66 @@ html[lang="fr"] body,
     0 24px 60px -12px rgba(15, 23, 42, 0.12);
 }
 
+/* =========================================================================
+   PREMIUM ANIMATED SAAS CARD BORDER BEAM SYSTEM
+   ========================================================================= */
+@keyframes borderBeamRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-border-beam {
+  animation: borderBeamRotate 9s linear infinite;
+}
+
+.animate-border-beam-slow {
+  animation: borderBeamRotate 12s linear infinite;
+}
+
+.beam-blue {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 280deg,
+    rgba(37, 99, 235, 0.2) 310deg,
+    #2563eb 335deg,
+    #60a5fa 350deg,
+    transparent 360deg
+  );
+}
+
+.beam-green {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 280deg,
+    rgba(16, 185, 129, 0.2) 310deg,
+    #059669 335deg,
+    #34d399 350deg,
+    transparent 360deg
+  );
+}
+
+.beam-subtle-blue {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 290deg,
+    rgba(37, 99, 235, 0.15) 325deg,
+    #3b82f6 345deg,
+    #93c5fd 355deg,
+    transparent 360deg
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-border-beam,
+  .animate-border-beam-slow {
+    animation: none !important;
+  }
+}
+

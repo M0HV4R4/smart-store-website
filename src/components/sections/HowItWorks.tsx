@@ -216,14 +216,6 @@ export function HowItWorks() {
                     transformStyle: "preserve-3d",
                     WebkitTransformStyle: "preserve-3d",
                   }}
-                  whileHover={
-                    reduce
-                      ? undefined
-                      : {
-                          y: -3,
-                          transition: { duration: 0.2, ease: "easeOut" },
-                        }
-                  }
                   whileTap={{ scale: 0.98 }}
                   onClick={() => toggleFlip(idx)}
                   onKeyDown={(e) => {
@@ -237,125 +229,141 @@ export function HowItWorks() {
                   aria-expanded={isFlipped}
                   className="group relative h-full w-full cursor-pointer select-none rounded-2xl will-change-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
                 >
-                  {/* -------------------- 1. FRONT SIDE (Clean White SaaS Surface) -------------------- */}
+                  {/* -------------------- 1. FRONT SIDE (Clean White SaaS Surface with Animated Blue Stroke) -------------------- */}
                   <div
                     style={{
                       backfaceVisibility: "hidden",
                       WebkitBackfaceVisibility: "hidden",
                     }}
-                    className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-saas-card ring-1 ring-slate-900/[0.02] group-hover:border-blue-400/80 group-hover:shadow-saas-card-hover transition-colors"
+                    className="absolute inset-0 overflow-hidden rounded-2xl p-[1.5px] bg-slate-200/90 shadow-saas-card group-hover:shadow-saas-card-hover transition-shadow duration-300"
                   >
-                    {/* لمعة ضوئية علوية تظهر عند التحويم */}
+                    {/* هالة ضوئية زرقاء ناعمة تدور حول محيط البطاقة عند التحويم أو اللمس */}
                     <div
                       aria-hidden="true"
-                      className="pointer-events-none absolute inset-x-0 top-0 h-[2.5px] bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      className="pointer-events-none absolute -inset-[150%] animate-border-beam opacity-0 group-hover:opacity-85 group-active:opacity-100 transition-opacity duration-400 beam-subtle-blue"
                     />
 
-                    <div>
-                      {/* الشريط العلوي: الأيقونة + مؤشر القلب التفاعلي */}
-                      <div className="flex items-center justify-between">
-                        <span className="grid size-12 place-items-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/90 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105 group-hover:shadow-md group-hover:shadow-blue-500/25">
-                          <Icon className="size-5" strokeWidth={1.9} />
-                        </span>
+                    <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-[calc(1rem-1.5px)] bg-white p-6 sm:p-7">
+                      {/* لمعة ضوئية علوية تظهر عند التحويم */}
+                      <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-x-0 top-0 h-[2.5px] bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      />
 
-                        <span className="flex size-8 items-center justify-center rounded-lg text-slate-400 transition-all duration-300 group-hover:text-blue-600">
-                          <ArrowUpRight className="size-4 rtl:-scale-x-100" />
-                        </span>
-                      </div>
-
-                      {/* رقم الخطوة البارز */}
-                      <div className="mt-5 flex items-baseline gap-1.5">
-                        <span className="font-display text-[32px] font-extrabold text-slate-950 tabular-nums leading-none tracking-tight">
-                          {step.n}
-                        </span>
-                      </div>
-
-                      {/* عنوان الخطوة */}
-                      <h3 className="font-display mt-2.5 text-[17.5px] font-bold text-slate-900 group-hover:text-blue-600 transition-colors duration-200">
-                        {step.title}
-                      </h3>
-
-                      {/* وصف الخطوة */}
-                      <p className="mt-1.5 text-[13px] leading-relaxed text-slate-600 font-normal line-clamp-3">
-                        {step.desc}
-                      </p>
-                    </div>
-
-                    {/* وسوم الخطوة مع زر التبديل الدوار التفاعلي */}
-                    <div className="mt-4 pt-3.5 border-t border-slate-100/90 flex items-center justify-between gap-2">
-                      <div className="flex flex-wrap gap-1">
-                        {step.highlights?.slice(0, 2).map((tag, i) => (
-                          <span
-                            key={i}
-                            className="rounded-full bg-slate-50 border border-slate-200/80 px-2 py-0.5 text-[11px] font-semibold text-slate-600"
-                          >
-                            {tag}
+                      <div>
+                        {/* الشريط العلوي: الأيقونة + مؤشر القلب التفاعلي */}
+                        <div className="flex items-center justify-between">
+                          <span className="grid size-12 place-items-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/90 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105 group-hover:shadow-md group-hover:shadow-blue-500/25">
+                            <Icon className="size-5" strokeWidth={1.9} />
                           </span>
-                        ))}
+
+                          <span className="flex size-8 items-center justify-center rounded-lg text-slate-400 transition-all duration-300 group-hover:text-blue-600">
+                            <ArrowUpRight className="size-4 rtl:-scale-x-100" />
+                          </span>
+                        </div>
+
+                        {/* رقم الخطوة البارز */}
+                        <div className="mt-5 flex items-baseline gap-1.5">
+                          <span className="font-display text-[32px] font-extrabold text-slate-950 tabular-nums leading-none tracking-tight">
+                            {step.n}
+                          </span>
+                        </div>
+
+                        {/* عنوان الخطوة */}
+                        <h3 className="font-display mt-2.5 text-[17.5px] font-bold text-slate-900 group-hover:text-blue-600 transition-colors duration-200">
+                          {step.title}
+                        </h3>
+
+                        {/* وصف الخطوة */}
+                        <p className="mt-1.5 text-[13px] leading-relaxed text-slate-600 font-normal line-clamp-3">
+                          {step.desc}
+                        </p>
                       </div>
 
-                      <span className="inline-flex items-center gap-1 text-[11.5px] font-bold text-blue-600 shrink-0">
-                        <span>{isAr ? "تفاصيل" : "Détails"}</span>
-                        <RotateCw className="size-3 transition-transform group-hover:rotate-45" />
-                      </span>
+                      {/* وسوم الخطوة مع زر التبديل الدوار التفاعلي */}
+                      <div className="mt-4 pt-3.5 border-t border-slate-100/90 flex items-center justify-between gap-2">
+                        <div className="flex flex-wrap gap-1">
+                          {step.highlights?.slice(0, 2).map((tag, i) => (
+                            <span
+                              key={i}
+                              className="rounded-full bg-slate-50 border border-slate-200/80 px-2 py-0.5 text-[11px] font-semibold text-slate-600"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+
+                        <span className="inline-flex items-center gap-1 text-[11.5px] font-bold text-blue-600 shrink-0">
+                          <span>{isAr ? "تفاصيل" : "Détails"}</span>
+                          <RotateCw className="size-3 transition-transform group-hover:rotate-45" />
+                        </span>
+                      </div>
                     </div>
                   </div>
 
-                  {/* -------------------- 2. BACK SIDE (Deep Navy / Dark SaaS Surface) -------------------- */}
+                  {/* -------------------- 2. BACK SIDE (Deep Navy / Dark SaaS Surface with Perimeter Light) -------------------- */}
                   <div
                     style={{
                       backfaceVisibility: "hidden",
                       WebkitBackfaceVisibility: "hidden",
                       transform: "rotateY(180deg)",
                     }}
-                    className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-800/90 bg-[#090e1a] p-6 sm:p-7 text-white shadow-saas-card ring-1 ring-blue-500/20"
+                    className="absolute inset-0 overflow-hidden rounded-2xl p-[1.5px] bg-slate-800/90 shadow-saas-card ring-1 ring-blue-500/20"
                   >
-                    {/* لمعة زرقاء علوية للوجه الخلفي */}
+                    {/* هالة ضوئية زرقاء متحركة للوجه الخلفي */}
                     <div
                       aria-hidden="true"
-                      className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-80"
+                      className="pointer-events-none absolute -inset-[150%] animate-border-beam opacity-60 beam-subtle-blue"
                     />
 
-                    <div>
-                      {/* رأس الوجه الخلفي */}
-                      <div className="flex items-center justify-between">
-                        <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-950/80 border border-blue-500/30 px-3 py-1 text-[11.5px] font-bold text-blue-400">
-                          <Icon className="size-3.5" />
-                          <span>{step.n}</span>
-                        </span>
+                    <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-[calc(1rem-1.5px)] bg-[#090e1a] p-6 sm:p-7 text-white">
+                      {/* لمعة زرقاء علوية للوجه الخلفي */}
+                      <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-80"
+                      />
 
-                        <span className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-400">
-                          <CheckCircle2 className="size-3.5 text-blue-400" />
-                        </span>
+                      <div>
+                        {/* رأس الوجه الخلفي */}
+                        <div className="flex items-center justify-between">
+                          <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-950/80 border border-blue-500/30 px-3 py-1 text-[11.5px] font-bold text-blue-400">
+                            <Icon className="size-3.5" />
+                            <span>{step.n}</span>
+                          </span>
+
+                          <span className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-400">
+                            <CheckCircle2 className="size-3.5 text-blue-400" />
+                          </span>
+                        </div>
+
+                        {/* عنوان الوجه الخلفي المخصص */}
+                        <h4 className="font-display mt-4 text-[17px] font-bold text-white tracking-tight">
+                          {detail.title[isAr ? "ar" : "fr"]}
+                        </h4>
+
+                        {/* وصف تفصيلي للوجه الخلفي */}
+                        <p className="mt-1.5 text-[12.5px] leading-relaxed text-slate-300 font-normal">
+                          {detail.desc[isAr ? "ar" : "fr"]}
+                        </p>
+
+                        {/* قائمة المميزات التفصيلية */}
+                        <ul className="mt-3.5 space-y-1.5">
+                          {detail.features[isAr ? "ar" : "fr"].map((feat, fIdx) => (
+                            <li key={fIdx} className="flex items-center gap-2 text-[12px] text-slate-200">
+                              <span className="size-1.5 rounded-full bg-blue-400 shrink-0" />
+                              <span>{feat}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
 
-                      {/* عنوان الوجه الخلفي المخصص */}
-                      <h4 className="font-display mt-4 text-[17px] font-bold text-white tracking-tight">
-                        {detail.title[isAr ? "ar" : "fr"]}
-                      </h4>
-
-                      {/* وصف تفصيلي للوجه الخلفي */}
-                      <p className="mt-1.5 text-[12.5px] leading-relaxed text-slate-300 font-normal">
-                        {detail.desc[isAr ? "ar" : "fr"]}
-                      </p>
-
-                      {/* قائمة المميزات التفصيلية */}
-                      <ul className="mt-3.5 space-y-1.5">
-                        {detail.features[isAr ? "ar" : "fr"].map((feat, fIdx) => (
-                          <li key={fIdx} className="flex items-center gap-2 text-[12px] text-slate-200">
-                            <span className="size-1.5 rounded-full bg-blue-400 shrink-0" />
-                            <span>{feat}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* تذييل الوجه الخلفي: زر العودة */}
-                    <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-[11.5px] text-slate-400">
-                      <span className="font-medium text-slate-400">Smart Store</span>
-                      <span className="inline-flex items-center gap-1 font-bold text-blue-400 hover:text-blue-300 transition-colors">
-                        <span>{isAr ? "رجوع ↺" : "Retour ↺"}</span>
-                      </span>
+                      {/* تذييل الوجه الخلفي: زر العودة */}
+                      <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-[11.5px] text-slate-400">
+                        <span className="font-medium text-slate-400">Smart Store</span>
+                        <span className="inline-flex items-center gap-1 font-bold text-blue-400 hover:text-blue-300 transition-colors">
+                          <span>{isAr ? "رجوع ↺" : "Retour ↺"}</span>
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </motion.div>

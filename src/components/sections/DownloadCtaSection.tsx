@@ -82,174 +82,162 @@ export function DownloadCtaSection() {
         >
           {/* بطاقة Windows */}
           <motion.div
-            whileHover={
-              reduce
-                ? undefined
-                : {
-                    y: -3,
-                    scale: 1.02,
-                    transition: { duration: 0.2, ease: "easeOut" },
-                  }
-            }
             whileTap={{ scale: 0.98 }}
-            className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-saas-card ring-1 ring-slate-900/[0.02] hover:border-blue-400/80 hover:shadow-saas-card-hover transition-all duration-300 will-change-transform active:border-blue-400"
+            className="group relative flex flex-col justify-between overflow-hidden rounded-2xl p-[1.5px] bg-slate-200/90 shadow-saas-card hover:shadow-saas-card-hover transition-shadow duration-300 will-change-transform"
           >
-            {/* لمعة ضوئية زرقاء علوية */}
+            {/* إضاءة محيطية زرقاء متحركة حول محيط بطاقة ويندوز */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-x-0 top-0 h-[2.5px] bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              className="pointer-events-none absolute -inset-[150%] animate-border-beam opacity-75 group-hover:opacity-100 transition-opacity duration-300 beam-blue"
             />
 
-            <div>
-              {/* أيقونة المنصة واسمها */}
-              <div className="flex items-center justify-between">
-                <span className="grid size-12 place-items-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/90 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105 group-hover:shadow-md group-hover:shadow-blue-500/20">
-                  <WindowsGlyph className="size-6" />
-                </span>
-                <span className="flex items-center gap-1.5 text-[12px] font-bold text-slate-700 bg-slate-50 border border-slate-200/90 rounded-full px-3 py-1">
-                  <Laptop className="size-3.5 text-blue-600" />
-                  <span>
-                    {meta?.windows?.version ? `v${meta.windows.version}` : "Windows 10 / 11"}
+            {/* الحاوية الداخلية البيضاء */}
+            <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-[calc(1rem-1.5px)] bg-white p-6 sm:p-8">
+              <div>
+                {/* أيقونة المنصة واسمها */}
+                <div className="flex items-center justify-between">
+                  <span className="grid size-12 place-items-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/90 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105 group-hover:shadow-md group-hover:shadow-blue-500/20">
+                    <WindowsGlyph className="size-6" />
                   </span>
-                </span>
+                  <span className="flex items-center gap-1.5 text-[12px] font-bold text-slate-700 bg-slate-50 border border-slate-200/90 rounded-full px-3 py-1">
+                    <Laptop className="size-3.5 text-blue-600" />
+                    <span>
+                      {meta?.windows?.version ? `v${meta.windows.version}` : "Windows 10 / 11"}
+                    </span>
+                  </span>
+                </div>
+
+                <h3 className="font-display mt-5 text-[20px] font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                  {t.download.windows.title}
+                </h3>
+                <p className="mt-2 text-[13.5px] leading-relaxed text-slate-600 font-normal">
+                  {t.download.windows.desc}
+                </p>
+
+                {/* تفاصيل الإصدار إن وجدت */}
+                {meta?.windows?.fileSize && (
+                  <div className="mt-3 flex items-center gap-2 text-xs font-mono text-slate-500" dir="ltr">
+                    <span className="rounded-md bg-slate-100 px-2 py-0.5 text-slate-700 font-semibold">
+                      {meta.windows.fileSize}
+                    </span>
+                    {meta.windows.releaseDate && (
+                      <span className="text-[11.5px] text-slate-400">
+                        • {meta.windows.releaseDate}
+                      </span>
+                    )}
+                  </div>
+                )}
+
+                {/* قائمة المميزات */}
+                <ul className="mt-5 space-y-2.5 border-t border-slate-100 pt-4">
+                  {t.download.windows.features.map((feat, i) => (
+                    <li key={i} className="flex items-center gap-2.5 text-[13px] font-medium text-slate-700">
+                      <CheckCircle2 className="size-4 text-blue-600 shrink-0" />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              <h3 className="font-display mt-5 text-[20px] font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                {t.download.windows.title}
-              </h3>
-              <p className="mt-2 text-[13.5px] leading-relaxed text-slate-600 font-normal">
-                {t.download.windows.desc}
-              </p>
-
-              {/* تفاصيل الإصدار إن وجدت */}
-              {meta?.windows?.fileSize && (
-                <div className="mt-3 flex items-center gap-2 text-xs font-mono text-slate-500" dir="ltr">
-                  <span className="rounded-md bg-slate-100 px-2 py-0.5 text-slate-700 font-semibold">
-                    {meta.windows.fileSize}
-                  </span>
-                  {meta.windows.releaseDate && (
-                    <span className="text-[11.5px] text-slate-400">
-                      • {meta.windows.releaseDate}
-                    </span>
+              {/* زر التحميل الفعلي */}
+              <div className="mt-7 pt-2">
+                <a
+                  href="/api/download/windows"
+                  className={cn(
+                    "relative flex w-full items-center justify-center gap-2.5 rounded-full px-5 py-3.5 text-[14.5px] font-bold transition-all duration-200 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2",
+                    meta?.windows?.available ?? true
+                      ? "bg-blue-600 text-white hover:bg-blue-700 shadow-blue-600/20 hover:shadow-md hover:shadow-blue-600/30 active:scale-[0.98]"
+                      : "pointer-events-none bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed",
                   )}
-                </div>
-              )}
-
-              {/* قائمة المميزات */}
-              <ul className="mt-5 space-y-2.5 border-t border-slate-100 pt-4">
-                {t.download.windows.features.map((feat, i) => (
-                  <li key={i} className="flex items-center gap-2.5 text-[13px] font-medium text-slate-700">
-                    <CheckCircle2 className="size-4 text-blue-600 shrink-0" />
-                    <span>{feat}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* زر التحميل الفعلي */}
-            <div className="mt-7 pt-2">
-              <a
-                href="/api/download/windows"
-                className={cn(
-                  "relative flex w-full items-center justify-center gap-2.5 rounded-full px-5 py-3.5 text-[14.5px] font-bold transition-all duration-200 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2",
-                  meta?.windows?.available ?? true
-                    ? "bg-blue-600 text-white hover:bg-blue-700 shadow-blue-600/20 hover:shadow-md hover:shadow-blue-600/30 active:scale-[0.98]"
-                    : "pointer-events-none bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed",
-                )}
-                aria-disabled={!(meta?.windows?.available ?? true)}
-              >
-                <ArrowDownToLine className="size-4.5" />
-                <span>
-                  {(meta?.windows?.available ?? true)
-                    ? t.download.windows.cta
-                    : (locale === "ar" ? "الإصدار غير متوفر حالياً" : "Version non disponible")}
-                </span>
-              </a>
+                  aria-disabled={!(meta?.windows?.available ?? true)}
+                >
+                  <ArrowDownToLine className="size-4.5" />
+                  <span>
+                    {(meta?.windows?.available ?? true)
+                      ? t.download.windows.cta
+                      : (locale === "ar" ? "الإصدار غير متوفر حالياً" : "Version non disponible")}
+                  </span>
+                </a>
+              </div>
             </div>
           </motion.div>
 
           {/* بطاقة Android APK */}
           <motion.div
-            whileHover={
-              reduce
-                ? undefined
-                : {
-                    y: -3,
-                    scale: 1.02,
-                    transition: { duration: 0.2, ease: "easeOut" },
-                  }
-            }
             whileTap={{ scale: 0.98 }}
-            className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-saas-card ring-1 ring-slate-900/[0.02] hover:border-emerald-400/80 hover:shadow-saas-card-hover transition-all duration-300 will-change-transform active:border-emerald-400"
+            className="group relative flex flex-col justify-between overflow-hidden rounded-2xl p-[1.5px] bg-slate-200/90 shadow-saas-card hover:shadow-saas-card-hover transition-shadow duration-300 will-change-transform"
           >
-            {/* لمعة ضوئية خضراء علوية */}
+            {/* إضاءة محيطية زمردية متحركة حول محيط بطاقة أندرويد */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-x-0 top-0 h-[2.5px] bg-gradient-to-r from-transparent via-emerald-500 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              className="pointer-events-none absolute -inset-[150%] animate-border-beam opacity-75 group-hover:opacity-100 transition-opacity duration-300 beam-green"
             />
 
-            <div>
-              {/* أيقونة المنصة واسمها */}
-              <div className="flex items-center justify-between">
-                <span className="grid size-12 place-items-center rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100/90 transition-all duration-300 group-hover:bg-emerald-600 group-hover:text-white group-hover:scale-105 group-hover:shadow-md group-hover:shadow-emerald-500/20">
-                  <AndroidGlyph className="size-6" />
-                </span>
-                <span className="flex items-center gap-1.5 text-[12px] font-bold text-slate-700 bg-slate-50 border border-slate-200/90 rounded-full px-3 py-1">
-                  <Smartphone className="size-3.5 text-emerald-600" />
-                  <span>
-                    {meta?.android?.version ? `v${meta.android.version}` : "Android 7.0+"}
+            {/* الحاوية الداخلية البيضاء */}
+            <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-[calc(1rem-1.5px)] bg-white p-6 sm:p-8">
+              <div>
+                {/* أيقونة المنصة واسمها */}
+                <div className="flex items-center justify-between">
+                  <span className="grid size-12 place-items-center rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100/90 transition-all duration-300 group-hover:bg-emerald-600 group-hover:text-white group-hover:scale-105 group-hover:shadow-md group-hover:shadow-emerald-500/20">
+                    <AndroidGlyph className="size-6" />
                   </span>
-                </span>
+                  <span className="flex items-center gap-1.5 text-[12px] font-bold text-slate-700 bg-slate-50 border border-slate-200/90 rounded-full px-3 py-1">
+                    <Smartphone className="size-3.5 text-emerald-600" />
+                    <span>
+                      {meta?.android?.version ? `v${meta.android.version}` : "Android 7.0+"}
+                    </span>
+                  </span>
+                </div>
+
+                <h3 className="font-display mt-5 text-[20px] font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">
+                  {t.download.android.title}
+                </h3>
+                <p className="mt-2 text-[13.5px] leading-relaxed text-slate-600 font-normal">
+                  {t.download.android.desc}
+                </p>
+
+                {/* تفاصيل الإصدار إن وجدت */}
+                {meta?.android?.fileSize && (
+                  <div className="mt-3 flex items-center gap-2 text-xs font-mono text-slate-500" dir="ltr">
+                    <span className="rounded-md bg-slate-100 px-2 py-0.5 text-slate-700 font-semibold">
+                      {meta.android.fileSize}
+                    </span>
+                    {meta.android.releaseDate && (
+                      <span className="text-[11.5px] text-slate-400">
+                        • {meta.android.releaseDate}
+                      </span>
+                    )}
+                  </div>
+                )}
+
+                {/* قائمة المميزات */}
+                <ul className="mt-5 space-y-2.5 border-t border-slate-100 pt-4">
+                  {t.download.android.features.map((feat, i) => (
+                    <li key={i} className="flex items-center gap-2.5 text-[13px] font-medium text-slate-700">
+                      <CheckCircle2 className="size-4 text-emerald-600 shrink-0" />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              <h3 className="font-display mt-5 text-[20px] font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">
-                {t.download.android.title}
-              </h3>
-              <p className="mt-2 text-[13.5px] leading-relaxed text-slate-600 font-normal">
-                {t.download.android.desc}
-              </p>
-
-              {/* تفاصيل الإصدار إن وجدت */}
-              {meta?.android?.fileSize && (
-                <div className="mt-3 flex items-center gap-2 text-xs font-mono text-slate-500" dir="ltr">
-                  <span className="rounded-md bg-slate-100 px-2 py-0.5 text-slate-700 font-semibold">
-                    {meta.android.fileSize}
-                  </span>
-                  {meta.android.releaseDate && (
-                    <span className="text-[11.5px] text-slate-400">
-                      • {meta.android.releaseDate}
-                    </span>
-                  )}
-                </div>
-              )}
-
-              {/* قائمة المميزات */}
-              <ul className="mt-5 space-y-2.5 border-t border-slate-100 pt-4">
-                {t.download.android.features.map((feat, i) => (
-                  <li key={i} className="flex items-center gap-2.5 text-[13px] font-medium text-slate-700">
-                    <CheckCircle2 className="size-4 text-emerald-600 shrink-0" />
-                    <span>{feat}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* زر التحميل الفعلي أو زر الإشعار عند عدم التوفر */}
-            <div className="mt-7 pt-2">
-              {meta?.android?.available ? (
-                <a
-                  href="/api/download/android"
-                  className="relative flex w-full items-center justify-center gap-2.5 rounded-full bg-emerald-600 px-5 py-3.5 text-[14.5px] font-bold text-white shadow-sm shadow-emerald-600/20 hover:bg-emerald-700 hover:shadow-md hover:shadow-emerald-600/30 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 active:scale-[0.98]"
-                >
-                  <ArrowDownToLine className="size-4.5" />
-                  <span>{t.download.android.cta}</span>
-                </a>
-              ) : (
-                <div className="flex w-full items-center justify-center gap-2 rounded-full bg-slate-100 px-5 py-3.5 text-[13.5px] font-semibold text-slate-500 border border-slate-200/80">
-                  <span className="size-2 rounded-full bg-amber-500" />
-                  <span>{locale === "ar" ? "قريباً على أجهزة Android" : "Bientôt disponible sur Android"}</span>
-                </div>
-              )}
+              {/* زر التحميل الفعلي أو زر الإشعار عند عدم التوفر */}
+              <div className="mt-7 pt-2">
+                {meta?.android?.available ? (
+                  <a
+                    href="/api/download/android"
+                    className="relative flex w-full items-center justify-center gap-2.5 rounded-full bg-emerald-600 px-5 py-3.5 text-[14.5px] font-bold text-white shadow-sm shadow-emerald-600/20 hover:bg-emerald-700 hover:shadow-md hover:shadow-emerald-600/30 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 active:scale-[0.98]"
+                  >
+                    <ArrowDownToLine className="size-4.5" />
+                    <span>{t.download.android.cta}</span>
+                  </a>
+                ) : (
+                  <div className="flex w-full items-center justify-center gap-2 rounded-full bg-slate-100 px-5 py-3.5 text-[13.5px] font-semibold text-slate-500 border border-slate-200/80">
+                    <span className="size-2 rounded-full bg-amber-500" />
+                    <span>{locale === "ar" ? "قريباً على أجهزة Android" : "Bientôt disponible sur Android"}</span>
+                  </div>
+                )}
+              </div>
             </div>
           </motion.div>
         </motion.div>
