@@ -16,7 +16,7 @@ export function FaqSection() {
   return (
     <section
       id="faq"
-      className="relative overflow-hidden py-14 sm:py-20 lg:py-24"
+      className="relative overflow-hidden py-10 sm:py-14 lg:py-16"
     >
       <div className="mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.45fr] lg:gap-16 items-start">

@@ -9,7 +9,7 @@ export function Footer() {
   const hasContact = Boolean(contact.email || contact.phone || contact.address);
 
   return (
-    <footer className="border-t border-slate-200/80 bg-slate-50/70 py-12 sm:py-14 backdrop-blur-sm">
+    <footer className="border-t border-slate-200/80 bg-slate-50/70 py-8 sm:py-10 backdrop-blur-sm">
       <div className="mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
           <div className="flex flex-col items-center gap-2.5 md:items-start">

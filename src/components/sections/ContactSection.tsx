@@ -58,7 +58,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden py-14 sm:py-20 lg:py-24"
+      className="relative overflow-hidden py-10 sm:py-14 lg:py-16"
     >
       <div className="relative z-10 mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
         {/* الحاوية البيضاء النقية الفاخرة للقسم */}
@@ -67,7 +67,7 @@ export function ContactSection() {
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="relative overflow-hidden rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-10 lg:p-14 shadow-saas-card ring-1 ring-slate-900/[0.02]"
+          className="relative overflow-hidden rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-8 lg:p-10 shadow-saas-card ring-1 ring-slate-900/[0.02]"
         >
           {/* العناوين والشارات */}
           <div className="text-center max-w-2xl mx-auto">

@@ -17,7 +17,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden pt-4 pb-12 sm:pt-10 sm:pb-18 lg:pt-14 lg:pb-22"
+      className="relative overflow-hidden pt-3 pb-8 sm:pt-8 sm:pb-12 lg:pt-10 lg:pb-14"
     >
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-8">
         {/* ------------------------------- العناوين والنصوص ------------------------------- */}
@@ -131,7 +131,7 @@ export function Hero() {
         </motion.div>
 
         {/* ------------------------- مسرح عرض المنتج الحقيقي smartstore.png ------------------------- */}
-        <div className="relative mx-auto mt-7 sm:mt-12 lg:mt-16 w-full max-w-[min(1380px,94vw)]">
+        <div className="relative mx-auto mt-6 sm:mt-8 lg:mt-10 w-full max-w-[min(1380px,94vw)]">
           <motion.div
             initial={reduce ? false : { opacity: 0, y: 25 }}
             animate={reduce ? undefined : { opacity: 1, y: 0 }}

@@ -36,7 +36,7 @@ export function DownloadCtaSection() {
   return (
     <section
       id="download"
-      className="relative overflow-hidden py-14 sm:py-20 lg:py-24"
+      className="relative overflow-hidden py-10 sm:py-14 lg:py-16"
     >
       <div className="relative z-10 mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-8">
         {/* العناوين التمهيدية */}
@@ -78,7 +78,7 @@ export function DownloadCtaSection() {
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.65, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-          className="mx-auto mt-10 sm:mt-12 grid max-w-4xl grid-cols-1 gap-6 sm:gap-7 sm:grid-cols-2"
+          className="mx-auto mt-8 sm:mt-10 grid max-w-4xl grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2"
         >
           {/* بطاقة Windows */}
           <motion.div

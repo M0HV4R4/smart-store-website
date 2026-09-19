@@ -1,13 +1,136 @@
-import { ArrowUpRight, BarChart3, Boxes, Package, ShoppingCart } from "lucide-react";
+import { useState } from "react";
+import {
+  ArrowUpRight,
+  BarChart3,
+  Boxes,
+  CheckCircle2,
+  Package,
+  RotateCw,
+  ShoppingCart,
+} from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import type { Variants } from "framer-motion";
 
-export function HowItWorks() {
-  const { t } = useI18n();
-  const reduce = useReducedMotion();
+interface CardDetail {
+  title: { ar: string; fr: string };
+  desc: { ar: string; fr: string };
+  features: { ar: string[]; fr: string[] };
+}
 
+const cardDetails: CardDetail[] = [
+  {
+    title: {
+      ar: "إدارة المنتجات",
+      fr: "Gestion des Produits",
+    },
+    desc: {
+      ar: "تنظيم كامل للمنتجات مع دعم الباركود، التصنيفات، الصور، ووحدات البيع.",
+      fr: "Organisation complète des articles avec code-barres, catégories, photos et unités de vente.",
+    },
+    features: {
+      ar: [
+        "إنشاء المنتجات بسهولة",
+        "إدارة الباركود",
+        "تنظيم التصنيفات",
+        "متابعة الأسعار",
+      ],
+      fr: [
+        "Création simple des articles",
+        "Gestion des codes-barres",
+        "Organisation des catégories",
+        "Suivi des prix de vente",
+      ],
+    },
+  },
+  {
+    title: {
+      ar: "إدارة المخزون",
+      fr: "Gestion des Stocks",
+    },
+    desc: {
+      ar: "مراقبة حركة السلع والكميات بدقة وتفادي نفاد المنتجات أو تلفها.",
+      fr: "Contrôle précis des mouvements de stocks et alertes d'épuisement en temps réel.",
+    },
+    features: {
+      ar: [
+        "مراقبة حركة السلع",
+        "متابعة الكميات",
+        "تنبيهات المخزون",
+        "تقليل نفاد المنتجات",
+      ],
+      fr: [
+        "Mouvements des marchandises",
+        "Suivi des quantités en stock",
+        "Alertes de stock critique",
+        "Réduction des ruptures",
+      ],
+    },
+  },
+  {
+    title: {
+      ar: "المبيعات والفواتير",
+      fr: "Ventes et Facturation",
+    },
+    desc: {
+      ar: "نقطة بيع سريعة، إصدار فوري للفواتير، ومتابعة دقيقة لديون وعملاء المتجر.",
+      fr: "Point de vente rapide, édition instantanée des factures et suivi des créances.",
+    },
+    features: {
+      ar: [
+        "نقطة البيع",
+        "إصدار الفواتير",
+        "إدارة العملاء",
+        "متابعة الديون",
+      ],
+      fr: [
+        "Point de vente (POS) rapide",
+        "Émission des factures",
+        "Gestion des clients",
+        "Suivi des dettes et créances",
+      ],
+    },
+  },
+  {
+    title: {
+      ar: "التقارير والتحليل",
+      fr: "Rapports et Analyse",
+    },
+    desc: {
+      ar: "تحليلات مالية وتجارية ذكية لاتخاذ قرارات دقيقة ترفع من أرباح متجرك.",
+      fr: "Analyses financières intelligentes pour prendre des décisions rentables.",
+    },
+    features: {
+      ar: [
+        "تحليل الأرباح",
+        "أداء المنتجات",
+        "تقارير المبيعات",
+        "قرارات تجارية أفضل",
+      ],
+      fr: [
+        "Analyse des bénéfices",
+        "Performance des produits",
+        "Rapports des ventes",
+        "Meilleures décisions",
+      ],
+    },
+  },
+];
+
+export function HowItWorks() {
+  const { t, locale } = useI18n();
+  const reduce = useReducedMotion();
+  const [flippedCards, setFlippedCards] = useState<Record<number, boolean>>({});
+
+  const isAr = locale === "ar";
   const icons = [Package, Boxes, ShoppingCart, BarChart3];
+
+  const toggleFlip = (idx: number) => {
+    setFlippedCards((prev) => ({
+      ...prev,
+      [idx]: !prev[idx],
+    }));
+  };
 
   const containerVariants: Variants = {
     hidden: {},
@@ -38,7 +161,7 @@ export function HowItWorks() {
   return (
     <section
       id="how"
-      className="relative overflow-hidden py-14 sm:py-20 lg:py-24"
+      className="relative overflow-hidden py-10 sm:py-14 lg:py-16"
     >
       {/* مرسى لقسم المميزات لضمان وصول روابط #features و #how معاً */}
       <div id="features" className="absolute -top-24" aria-hidden="true" />
@@ -66,82 +189,176 @@ export function HowItWorks() {
           </div>
         </motion.div>
 
-        {/* شبكة البطاقات الأربع مع دعم التمرير السلس والارتفاع الخفيف */}
+        {/* شبكة البطاقات التفاعلية مع ميزة الدوران ثلاثي الأبعاد 3D Flip */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="mt-10 sm:mt-12 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          className="mt-8 sm:mt-10 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4"
         >
           {t.how.steps.map((step, idx) => {
             const Icon = icons[idx] || Package;
+            const detail = cardDetails[idx] || cardDetails[0];
+            const isFlipped = Boolean(flippedCards[idx]);
 
             return (
               <motion.div
                 key={step.n}
                 variants={cardVariants}
-                whileHover={
-                  reduce
-                    ? undefined
-                    : {
-                        y: -3,
-                        scale: 1.02,
-                        transition: { duration: 0.2, ease: "easeOut" },
-                      }
-                }
-                whileTap={{ scale: 0.98 }}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-saas-card ring-1 ring-slate-900/[0.02] hover:border-blue-400/80 hover:shadow-saas-card-hover transition-all duration-300 will-change-transform active:border-blue-400"
+                style={{ perspective: 1000 }}
+                className="h-[370px] sm:h-[390px] w-full"
               >
-                {/* تأثير لمعة ضوئية علوية متدرجة تظهر عند التحويم */}
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-x-0 top-0 h-[2.5px] bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                />
+                <motion.div
+                  animate={{ rotateY: isFlipped ? 180 : 0 }}
+                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  style={{
+                    transformStyle: "preserve-3d",
+                    WebkitTransformStyle: "preserve-3d",
+                  }}
+                  whileHover={
+                    reduce
+                      ? undefined
+                      : {
+                          y: -3,
+                          transition: { duration: 0.2, ease: "easeOut" },
+                        }
+                  }
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => toggleFlip(idx)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      toggleFlip(idx);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={isFlipped}
+                  className="group relative h-full w-full cursor-pointer select-none rounded-2xl will-change-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+                >
+                  {/* -------------------- 1. FRONT SIDE (Clean White SaaS Surface) -------------------- */}
+                  <div
+                    style={{
+                      backfaceVisibility: "hidden",
+                      WebkitBackfaceVisibility: "hidden",
+                    }}
+                    className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-7 shadow-saas-card ring-1 ring-slate-900/[0.02] group-hover:border-blue-400/80 group-hover:shadow-saas-card-hover transition-colors"
+                  >
+                    {/* لمعة ضوئية علوية تظهر عند التحويم */}
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-x-0 top-0 h-[2.5px] bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    />
 
-                <div>
-                  {/* الشريط العلوي: الأيقونة + مؤشر السهم */}
-                  <div className="flex items-center justify-between">
-                    <span className="grid size-12 place-items-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/90 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105 group-hover:shadow-md group-hover:shadow-blue-500/25">
-                      <Icon className="size-5" strokeWidth={1.9} />
-                    </span>
+                    <div>
+                      {/* الشريط العلوي: الأيقونة + مؤشر القلب التفاعلي */}
+                      <div className="flex items-center justify-between">
+                        <span className="grid size-12 place-items-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100/90 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-105 group-hover:shadow-md group-hover:shadow-blue-500/25">
+                          <Icon className="size-5" strokeWidth={1.9} />
+                        </span>
 
-                    <span className="flex size-8 items-center justify-center rounded-lg text-slate-400 transition-all duration-300 group-hover:text-blue-600 group-hover:translate-x-1 group-hover:-translate-y-1 rtl:group-hover:-translate-x-1">
-                      <ArrowUpRight className="size-4 rtl:-scale-x-100" />
-                    </span>
-                  </div>
+                        <span className="flex size-8 items-center justify-center rounded-lg text-slate-400 transition-all duration-300 group-hover:text-blue-600">
+                          <ArrowUpRight className="size-4 rtl:-scale-x-100" />
+                        </span>
+                      </div>
 
-                  {/* رقم الخطوة الواضح والبارز */}
-                  <div className="mt-6 flex items-baseline gap-1.5">
-                    <span className="font-display text-[34px] font-extrabold text-slate-950 tabular-nums leading-none tracking-tight">
-                      {step.n}
-                    </span>
-                  </div>
+                      {/* رقم الخطوة البارز */}
+                      <div className="mt-5 flex items-baseline gap-1.5">
+                        <span className="font-display text-[32px] font-extrabold text-slate-950 tabular-nums leading-none tracking-tight">
+                          {step.n}
+                        </span>
+                      </div>
 
-                  {/* عنوان الخطوة */}
-                  <h3 className="font-display mt-3 text-[18px] font-bold text-slate-900 group-hover:text-blue-600 transition-colors duration-200">
-                    {step.title}
-                  </h3>
+                      {/* عنوان الخطوة */}
+                      <h3 className="font-display mt-2.5 text-[17.5px] font-bold text-slate-900 group-hover:text-blue-600 transition-colors duration-200">
+                        {step.title}
+                      </h3>
 
-                  {/* وصف الخطوة */}
-                  <p className="mt-2 text-[13.5px] leading-relaxed text-slate-600 font-normal">
-                    {step.desc}
-                  </p>
-                </div>
+                      {/* وصف الخطوة */}
+                      <p className="mt-1.5 text-[13px] leading-relaxed text-slate-600 font-normal line-clamp-3">
+                        {step.desc}
+                      </p>
+                    </div>
 
-                {/* وسوم ومميزات الخطوة */}
-                {step.highlights && (
-                  <div className="mt-6 flex flex-wrap gap-1.5 pt-4 border-t border-slate-100/90">
-                    {step.highlights.map((tag, i) => (
-                      <span
-                        key={i}
-                        className="rounded-full bg-slate-50/90 border border-slate-200/80 px-2.5 py-1 text-[11.5px] font-semibold text-slate-700 transition-colors duration-200 group-hover:bg-blue-50/90 group-hover:border-blue-200 group-hover:text-blue-800"
-                      >
-                        {tag}
+                    {/* وسوم الخطوة مع زر التبديل الدوار التفاعلي */}
+                    <div className="mt-4 pt-3.5 border-t border-slate-100/90 flex items-center justify-between gap-2">
+                      <div className="flex flex-wrap gap-1">
+                        {step.highlights?.slice(0, 2).map((tag, i) => (
+                          <span
+                            key={i}
+                            className="rounded-full bg-slate-50 border border-slate-200/80 px-2 py-0.5 text-[11px] font-semibold text-slate-600"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      <span className="inline-flex items-center gap-1 text-[11.5px] font-bold text-blue-600 shrink-0">
+                        <span>{isAr ? "تفاصيل" : "Détails"}</span>
+                        <RotateCw className="size-3 transition-transform group-hover:rotate-45" />
                       </span>
-                    ))}
+                    </div>
                   </div>
-                )}
+
+                  {/* -------------------- 2. BACK SIDE (Deep Navy / Dark SaaS Surface) -------------------- */}
+                  <div
+                    style={{
+                      backfaceVisibility: "hidden",
+                      WebkitBackfaceVisibility: "hidden",
+                      transform: "rotateY(180deg)",
+                    }}
+                    className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-800/90 bg-[#090e1a] p-6 sm:p-7 text-white shadow-saas-card ring-1 ring-blue-500/20"
+                  >
+                    {/* لمعة زرقاء علوية للوجه الخلفي */}
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-80"
+                    />
+
+                    <div>
+                      {/* رأس الوجه الخلفي */}
+                      <div className="flex items-center justify-between">
+                        <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-950/80 border border-blue-500/30 px-3 py-1 text-[11.5px] font-bold text-blue-400">
+                          <Icon className="size-3.5" />
+                          <span>{step.n}</span>
+                        </span>
+
+                        <span className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-400">
+                          <CheckCircle2 className="size-3.5 text-blue-400" />
+                        </span>
+                      </div>
+
+                      {/* عنوان الوجه الخلفي المخصص */}
+                      <h4 className="font-display mt-4 text-[17px] font-bold text-white tracking-tight">
+                        {detail.title[isAr ? "ar" : "fr"]}
+                      </h4>
+
+                      {/* وصف تفصيلي للوجه الخلفي */}
+                      <p className="mt-1.5 text-[12.5px] leading-relaxed text-slate-300 font-normal">
+                        {detail.desc[isAr ? "ar" : "fr"]}
+                      </p>
+
+                      {/* قائمة المميزات التفصيلية */}
+                      <ul className="mt-3.5 space-y-1.5">
+                        {detail.features[isAr ? "ar" : "fr"].map((feat, fIdx) => (
+                          <li key={fIdx} className="flex items-center gap-2 text-[12px] text-slate-200">
+                            <span className="size-1.5 rounded-full bg-blue-400 shrink-0" />
+                            <span>{feat}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* تذييل الوجه الخلفي: زر العودة */}
+                    <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-[11.5px] text-slate-400">
+                      <span className="font-medium text-slate-400">Smart Store</span>
+                      <span className="inline-flex items-center gap-1 font-bold text-blue-400 hover:text-blue-300 transition-colors">
+                        <span>{isAr ? "رجوع ↺" : "Retour ↺"}</span>
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
               </motion.div>
             );
           })}
